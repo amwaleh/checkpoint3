@@ -8,6 +8,7 @@ from app.serializers import UserSerializer, BucketlistSerializer, BucketitemSeri
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 from rest_framework import permissions
 
 class UserList(APIView):
@@ -32,7 +33,8 @@ class Bucketlists(APIView):
 		List bucket list and items handle GET and POST request 
 	'''
 	# Add permission to class
-	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+	authentication_classes = (TokenAuthentication,)
+	permission_classes = (permissions.IsAuthenticated,)
 	
 	def get(self, request, format=None):
 	    blist = Bucketlist.objects.filter(creator=request.user.id)
@@ -52,7 +54,8 @@ class EditBucketlists(APIView):
 		List bucket list and items handle GET and POST request 
 	'''
 	# Add permissiion to class
-	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+	authentication_classes = (TokenAuthentication,)
+	permission_classes = (permissions.IsAuthenticated,)
 	def get_blist(self, userid, pk):
 	    try:
 	    	return Bucketlist.objects.get(pk=pk, creator=userid)
@@ -78,6 +81,7 @@ class EditBucketlists(APIView):
 	    return Response(status=status.HTTP_204_NO_CONTENT)
 
 class BucketitemsView(APIView):
+	authentication_classes = (TokenAuthentication,)
 	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 	
 	def check_user(self, pk, userid):
@@ -109,6 +113,7 @@ class BucketitemsView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class EditBucketitemsView(APIView):
+	authentication_classes = (TokenAuthentication,)
 	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 	def check_user(self, pk, userid):
 		try: 
