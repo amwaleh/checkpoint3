@@ -16,7 +16,7 @@ class Bucketitems(models.Model):
 	"""
 		Model contain bucketitem data
     """
-	blist = models.ForeignKey(Bucketlist)
+	blist = models.ForeignKey(Bucketlist, related_name='items')
 	name = models.CharField(blank=False, max_length=255)
 	done = models.BooleanField()
 	created_on = models.DateTimeField(auto_now_add=True)

@@ -16,6 +16,7 @@ class BuckeitemSerializer(serializers.ModelSerializer):
 		fileds = ('blist', 'name', 'done', 'created_on', 'modified_on')
 
 class BucketlistSerializer(serializers.ModelSerializer):
+	
 	class Meta:
 		model = Bucketlist
-		fields = ('id','name','created_on', 'modified_on')
+		fields = ('id','name','created_on', 'modified_on','creator','items')
