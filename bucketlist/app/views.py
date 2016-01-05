@@ -56,37 +56,40 @@ class EditBucketlists(APIView):
 	# Add permissiion to class
 	authentication_classes = (TokenAuthentication,)
 	permission_classes = (permissions.IsAuthenticated,)
-	def get_blist(self, userid, pk):
+	def get_blist(self, userid, id):
 	    try:
-	    	return Bucketlist.objects.get(pk=pk, creator=userid)
+	    	return Bucketlist.objects.get(id=id, creator=userid)
 	    except Bucketlist.DoesNotExist:
 	        raise Http404
 
-	def get(self, request, pk, format=None):
-	   	blist = self.get_blist(request.user.id, pk)
+	def get(self, request, id, format=None):
+	   	blist = self.get_blist(request.user.id, id)
 		serializer = BucketlistSerializer(blist)
 		return Response(serializer.data)
 
-	def put(self, request, pk, format=None):
-	    blist = self.get_blist(request.user.id, pk)
+	def put(self, request, id, format=None):
+	    blist = self.get_blist(request.user.id, id)
 	    serializer = BucketlistSerializer(blist, data=request.data)
 	    if serializer.is_valid():
 	        serializer.save()
 	        return Response(serializer.data)
 	    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-	def delete(self, request, pk, format=None):
-	    blist = self.get_blist(request.user.id, pk)
+	def delete(self, request, id, format=None):
+	    blist = self.get_blist(request.user.id, id)
 	    blist.delete()
 	    return Response(status=status.HTTP_204_NO_CONTENT)
 
 class BucketitemsView(APIView):
+	'''
+		Handles POST and GET request for Editing bucketlist items
+	'''
 	authentication_classes = (TokenAuthentication,)
 	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 	
-	def check_user(self, pk, userid):
+	def check_user(self, id, userid):
 		try: 
-			return Bucketlist.objects.get(pk=pk, creator=userid)
+			return Bucketlist.objects.get(id=id, creator=userid)
 		except Bucketlist.DoesNotExist:
 			raise Http404
 	
@@ -96,15 +99,15 @@ class BucketitemsView(APIView):
 	    except Bucketitems.DoesNotExist:
 	        raise Http404
 
-	def get (self, request, pk, format=None):
-		self.check_user(pk, request.user.id) 
-		item = self.get_items(pk)
+	def get (self, request, id, format=None):
+		self.check_user(id, request.user.id) 
+		item = self.get_items(id)
 		serializer = BucketitemSerializer(item, many=True)
 		return Response(serializer.data)
 
-	def post(self, request, pk, format=None):
-		self.check_user(pk, request.user.id) 
-		request.data['blist'] = pk
+	def post(self, request, id, format=None):
+		self.check_user(id, request.user.id) 
+		request.data['blist'] = id
 		request.data['done'] = False
 		serializer = BucketitemSerializer(data=request.data)
 		if serializer.is_valid():
@@ -113,38 +116,41 @@ class BucketitemsView(APIView):
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class EditBucketitemsView(APIView):
+	'''
+		Handles PUT and DELETE request for Editing an item in a Bucketlist
+	'''
 	authentication_classes = (TokenAuthentication,)
 	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-	def check_user(self, pk, userid):
+	def check_user(self, id, userid):
 		try: 
-			return Bucketlist.objects.get(pk=pk, creator=userid)
+			return Bucketlist.objects.get(id=id, creator=userid)
 		except Bucketlist.DoesNotExist:
 			raise Http404
 	
 	def get_items(self, list_id, item_id):
 	    try:
-	    	return Bucketitems.objects.get(blist=list_id, pk=item_id)
+	    	return Bucketitems.objects.get(blist=list_id, id=item_id)
 	    except Bucketitems.DoesNotExist:
 	        raise Http404
 
-	def get (self, request, pk, item_id, format=None):
-		self.check_user(pk, request.user.id) 
-		item = self.get_items(pk, item_id)
+	def get (self, request, id, item_id, format=None):
+		self.check_user(id, request.user.id) 
+		item = self.get_items(id, item_id)
 		serializer = BucketitemSerializer(item)
 		return Response(serializer.data)
 
-	def put (self,request, pk, item_id, format=None):
-		self.check_user(pk, request.user.id) 
-		item = self.get_items(pk, item_id)
+	def put (self,request, id, item_id, format=None):
+		self.check_user(id, request.user.id) 
+		item = self.get_items(id, item_id)
 		serializer = BucketitemSerializer(item, request.data)	
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-	def delete (self,request, pk, item_id, format=None):
-		self.check_user(pk, request.user.id) 
-		item = self.get_items(pk, item_id)
+	def delete (self,request, id, item_id, format=None):
+		self.check_user(id, request.user.id) 
+		item = self.get_items(id, item_id)
 		item.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
