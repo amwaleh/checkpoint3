@@ -26,8 +26,15 @@ admin.autodiscover()
 urlpatterns = patterns('',
 url(r'^admin/', include(admin.site.urls)),
 url(r'^users/', views.UserList.as_view()),
+
+url(r'^bucketlist/(?P<pk>[0-9]+)/items/$', views.BucketitemsView.as_view()),
+
 url(r'^bucketlist/(?P<pk>[0-9]+)/$', views.EditBucketlists.as_view()),
 url(r'^bucketlist', views.Bucketlists.as_view()),
 url(r'^api-token', 'rest_framework.authtoken.views.obtain_auth_token'),
 )
 
+urlpatterns += [
+    url(r'^auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
+]

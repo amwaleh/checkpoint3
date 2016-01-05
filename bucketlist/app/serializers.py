@@ -10,13 +10,13 @@ class UserSerializer(serializers.ModelSerializer):
 		model = User
 		fields = ('id', 'username', 'first_name', 'last_name', 'email')
 
-class BuckeitemSerializer(serializers.ModelSerializer):
+class BucketitemSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Bucketitems
-		fileds = ('blist', 'name', 'done', 'created_on', 'modified_on')
+		fileds = ('id', 'blist', 'name', 'done', 'created_on', 'modified_on')
 
 class BucketlistSerializer(serializers.ModelSerializer):
-	
+	items = BucketitemSerializer(many=True, required=False)
 	class Meta:
 		model = Bucketlist
 		fields = ('id','name','created_on', 'modified_on','creator','items')
