@@ -21,7 +21,7 @@ branches:
 env:
   global:
     - TRAVIS_BUILD=true
-# script: 
-#   coverage run --omit="*env*","migrations*","static","templates" -m unittest discover tests
-# after_success: 
-#   coveralls
+script: 
+   python manage.py test
+after_success: 
+  coveralls
