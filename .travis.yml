@@ -22,6 +22,6 @@ env:
   global:
     - TRAVIS_BUILD=true
 script: 
-   python manage.py test
+   python bucketlist/manage.py test
 after_success: 
   coveralls
