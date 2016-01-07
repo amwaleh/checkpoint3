@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from models import Bucketlist, Bucketitems
+from app.models import Bucketlist, Bucketitems
 from django.contrib.auth.models import User
 from django.http import Http404
 from app.serializers import UserSerializer, BucketlistSerializer, BucketitemSerializer

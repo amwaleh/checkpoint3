@@ -22,6 +22,7 @@ env:
   global:
     - TRAVIS_BUILD=true
 script: 
-   python bucketlist/manage.py test app
+   coverage run --omit="*env*","migrations*","static","templates" bucketlist/manage.py test app
 after_success: 
   coveralls
+  #coverage run --omit="*env*","migrations*","static","templates" -m
