@@ -89,14 +89,14 @@ class EditBucketlists(APIView):
         serializer = BucketlistSerializer(blist, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
             # Handles Delete Request
         blist = self.get_blist(request.user.id, id)
         blist.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"info":"List Deleted"},status=status.HTTP_204_NO_CONTENT)
 
 
 class BucketitemsView(APIView):
@@ -175,11 +175,11 @@ class EditBucketitemsView(APIView):
         serializer = BucketitemSerializer(item, request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, item_id, format=None):
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
         item.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('Item Deleted',status=status.HTTP_204_NO_CONTENT)
