@@ -1,0 +1,14 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+
+    {% for list in lists%}
+    {% with  s=lists %}
+    	{{s.}}
+    {% endwith %}
+
+
+{% endfor %}
+hello----
+
+{% endblock %}
