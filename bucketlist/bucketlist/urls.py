@@ -18,7 +18,8 @@ Including another URLconf
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework.authtoken import views
-from app import views
+import app.urls 
+import web.urls
 #from app import viewsets
 
 from rest_framework.routers import DefaultRouter
@@ -30,13 +31,10 @@ admin.autodiscover()
 # urlpatterns = router.urls
 urlpatterns = patterns('',
 url(r'^admin/', include(admin.site.urls)),
-url(r'^users/', views.UserList.as_view()),
-url(r'^bucketlists/(?P<id>\d+)/items/(?P<item_id>\d+)/$', views.EditBucketitemsView.as_view()),
-url(r'^bucketlists/(?P<id>[0-9]+)/items/$', views.BucketitemsView.as_view()),
-url(r'^bucketlists/(?P<id>[0-9]+)/$', views.EditBucketlists.as_view()),
-url(r'^bucketlists/$', views.Bucketlists.as_view()),
-url(r'^api-token', 'rest_framework.authtoken.views.obtain_auth_token'),
-url(r'^docs/', include('rest_framework_swagger.urls')),
+# Urls for web 
+url(r'^web/', include('web.urls')),
+# urls for api
+url(r'^api/', include('app.urls')),
 )
 
 urlpatterns += [

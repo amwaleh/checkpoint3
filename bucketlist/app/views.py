@@ -1,13 +1,14 @@
+
 from django.shortcuts import render
-from app.models import Bucketlist, Bucketitems
 from django.contrib.auth.models import User
 from django.http import Http404
-from app.serializers import UserSerializer, BucketlistSerializer, BucketitemSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
+from models import Bucketlist, Bucketitems
+from serializers import UserSerializer, BucketlistSerializer, BucketitemSerializer
 
 class StandardResultsSetPagination(PageNumberPagination):
 	django_paginator_class ='django.core.paginator.Paginator'
