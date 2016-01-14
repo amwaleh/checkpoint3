@@ -1,0 +1,46 @@
+.centered {
+    width: 400px;
+    min-width: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.centered2 {
+  margin-left: auto ;
+  margin-right: auto ;
+
+  
+    }
+.dropdown-content {
+	font-size: 1em;
+	opacity: 0.1;
+}
+.card{
+	width:80%;
+}
+
+@media (min-width:992px) {
+   .tabs-wrapper {
+        width:250px;
+    }
+}
+
+@media (max-width:992px) {
+    .tabs-wrapper.pinned, #aside.pin-bottom {
+        #position:static !important;
+        top: auto !important;
+        float: right;
+    }
+}
+.modal{
+	max-width: 450px;
+}
+.tooltipped data-tooltip {
+	font-size: 9px;
+
+}
+.backdrop{
+	font-size: small;
+       background-color: grey;
+     }

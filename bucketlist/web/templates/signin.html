@@ -2,20 +2,27 @@
 
 {% block content %}
 
-   <div class=" row l6">
+   <div class=" row centered">
 
    	<form method ='POST' action='/web/login/'class="card col s12 l6 ">
    	  {% csrf_token %}
+
    		<div class="row">
    		<div class="row">
+         <div class="error"> {% for r, k in form.items%}
+             {{k}}
+
+             {% endfor %}</div>
    			<div class="input-field col s12">
-   				<input id="username" type="text" class="validate">
+             
+         
+   				<input id="username" type="text" class="validate" name='username'>
    				<label for="username">username</label>
    			</div>
    		</div>
    		<div class="row">
    			<div class="input-field col s12">
-   				<input id="password" type="password" class="validate">
+   				<input id="password" type="password" class="validate" name="password">
    				<label for="password">password</label>
    			</div>
    		</div>

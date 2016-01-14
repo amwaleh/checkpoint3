@@ -69,7 +69,7 @@ class BucketlistTest(TestCase):
     def test_5_bucketlist(self):
     	# Test Bucketlist creation
     	self._get_token()
-    	data = {'name':'bucketlist1'}
+    	data = {'name':'bucketlist1' , 'creator':self.user.id}
     	response = self.client.post("/api/bucketlists/", data,format='json')
     	self.bucketlist = Bucketlist.objects.first()
     	self.assertEqual(response.status_code,201)
@@ -91,7 +91,7 @@ class BucketlistTest(TestCase):
 
     def test_6_add_edit_item(self):
     	self._get_token()
-    	data ={'name':'bucketlist1'}
+    	data ={'name':'bucketlist1','creator':self.user.id}
     	item = {'name':'item'}
     	response = self.client.post("/api/bucketlists/", data,format='json')
     	

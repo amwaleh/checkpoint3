@@ -13,6 +13,10 @@ class Bucketlist(models.Model):
 	created_on = models.DateTimeField(auto_now_add=True)
 	modified_on = models.DateTimeField(auto_now=True)
 
+	def __str__(self):
+		return self.name
+
+
 class Bucketitems(models.Model):
 	"""
 		Model contain bucketitem data
@@ -22,3 +26,6 @@ class Bucketitems(models.Model):
 	done = models.BooleanField()
 	created_on = models.DateTimeField(auto_now_add=True)
 	modified_on = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return self.name

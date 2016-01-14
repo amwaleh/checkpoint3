@@ -22,7 +22,7 @@ class BucketitemSerializer(serializers.ModelSerializer):
 
 
 class BucketlistSerializer(serializers.ModelSerializer):
-	items = BucketitemSerializer(many=True, required=False, write_only=True)
+	items = BucketitemSerializer(many=True, required=False, read_only=True)
 	class Meta:
 		model = Bucketlist
 		fields = ('id','name','created_on', 'modified_on','creator','items')

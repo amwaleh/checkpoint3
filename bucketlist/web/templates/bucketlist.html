@@ -1,14 +1,143 @@
-{% extends 'partials/base.html' %}
-
+{% extends 'partials/base.html' %} 
 {% block content %}
 
-    {% for list in lists%}
-    {% with  s=lists %}
-    	{{s.}}
-    {% endwith %}
+ 
 
 
-{% endfor %}
-hello----
+<div class="row ">
+    <div class="col m8 l8 s10 offset-l2 ">
+        <div class="card  centered2 darken-1">
+            <div class="card-content blue-grey-text text-lighten-5">
 
+                <span class="card-title center">
+                 <a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger" href="#modal1" ><i class=" large material-icons">add</i></a>BucketList</span> 
+                {% for key in lists%}
+                <div class="">
+                    <ul class="collapsible popout " data-collapsible="accordion">
+                        <li>
+                        <div class="white lighten-1 hoverable">&nbsp;{% if key.items|length > 0 %} 
+                            <span class="amber  lighten-4 badge z-depth-1 hoverable"> {{key.items|length}} <i class="tiny material-icons circle cyan-text">toc</i> 
+                            
+
+                            </span> 
+                            {%endif%}
+<a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist">delete</i></a>
+                                 <a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist">mode_edit</i></a>
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                            <div class="collapsible-header blue lighten-1"> {{key.name }}
+                            
+                                <a class="dropdown-button white" href="#!" data-activates="dropdown1"><i class="material-icons left circle white-text"> arrow_drop_down</i></a>
+                                <ul id="dropdown1" class="dropdown-content ">
+                                   
+                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i>id : {{key.id }}</li>
+                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i> created on : {{key.created_on }}</li>
+                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i> modified on : {{key.modified_on}}</li>
+                                </ul>
+                                
+                                
+                                
+                            
+                                
+
+
+
+
+
+                            </div>
+                            <div class="collapsible-body">
+                                <ul class="collection">
+                                    
+                                    {%if key.items%}
+                                   
+                                            {% for item in key.items%} 
+                                            <div class=" s12 l3 col">
+                                              <i class="material-icons align-right large blue-grey-text text-lighten-1">shopping_basket</i>
+                                            <a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete item">delete</i></a>
+                                 <a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit item">mode_edit</i></a>
+                                          
+                                             
+                                           </div>
+                                            <ul class="collection with-header"> 
+                                            
+                                            <div class='s12'>
+                                            <li class="collection-item blue-grey-text">
+                                            {% if item.done %} 
+                                            <i class="material-icons circle blue-text medium text-lighten-1">done_all</i>
+                                            {%else%}
+                                        
+											 <i class="material-icons circle red-text tiny">assignment</i>
+											{% endif%}
+											<label for="">Name </label>{{item.name}}
+                                              
+                                             
+
+                                              </li>
+											
+                                            <li class="collection-item blue-grey-text"><i class="material-icons circle blue-text text-lighten-1">work</i> <label for="">Completed </label>
+ {{item.done}}</li>
+                                            </div></ul>
+                                            <br>
+                                            <hr>
+                                            {%endfor%}
+                                           
+                                        
+                                    </li> {%endif%}
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+  <div id="modal1" class="modal">
+  <div class="blue">&nbsp;<label class='white-text'> Add a Bucketlist</label></div>
+    <div class="modal-content">
+      
+      {% include 'addbucketlist.html' %}
+    </div>
+    
+  </div>
+
+
+<script>
+$('.dropdown-button').dropdown({
+    inDuration: 300,
+    outDuration: 225,
+    constrain_width: false, // Does not change width of dropdown to that of the activator
+    hover: true, // Activate on hover
+    gutter: 0, // Spacing from edge
+    belowOrigin: true, // Displays dropdown below the button
+    alignment: 'right' // Displays dropdown with edge aligned to the left of button
+});
+$(document).ready(function() {
+    $('.collapsible').collapsible({
+        accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+
+  $('.modal-trigger').leanModal();
+    
+});
+
+
+
+</script>
 {% endblock %}

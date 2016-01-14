@@ -14,7 +14,6 @@ class StandardResultsSetPagination(PageNumberPagination):
 	django_paginator_class ='django.core.paginator.Paginator'
 	page_size = 1
 	paginate_by_param = 'page_size'
-   
 	max_page_size = 2
 
 class UserList(APIView):
@@ -38,7 +37,6 @@ class UserList(APIView):
 
 
 class Bucketlists(APIView):
-
     '''
             List bucket list and items handle GET and POST request 
     '''
@@ -53,7 +51,6 @@ class Bucketlists(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        request.data['creator'] = request.user.id
         serializer = BucketlistSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
