@@ -49,8 +49,10 @@ class Bucketlists(APIView):
         blist = Bucketlist.objects.filter(creator=request.user.id)
         serializer = BucketlistSerializer(blist, many=True)
         return Response(serializer.data)
-
     def post(self, request, format=None):
+        request.POST._mutable=True
+        request.data['creator'] = request.user.id
+
         serializer = BucketlistSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -125,11 +127,13 @@ class BucketitemsView(APIView):
         self.check_user(id, request.user.id)
         item = self.get_items(id)
         serializer = BucketitemSerializer(item, many=True)
-        return Response(serializer.data)
+        re#turn Response(serializer.data)
 
     def post(self, request, id, format=None):
         # Handles the POST request
+     
         self.check_user(id, request.user.id)
+        request.POST._mutable=True
         request.data['blist'] = id
         request.data['done'] = False
         serializer = BucketitemSerializer(data=request.data)
@@ -170,6 +174,7 @@ class EditBucketitemsView(APIView):
     def put(self, request, id, item_id, format=None):
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
+       
         serializer = BucketitemSerializer(item, request.data)
         if serializer.is_valid():
             serializer.save()

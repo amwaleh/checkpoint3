@@ -1,34 +1,67 @@
-{% extends 'partials/base.html' %}
+
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+{% load staticfiles %}
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+   <link rel="stylesheet" href="{% static "css/style.css" %}">
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="{% static "js/materialize.min.js" %}"></script>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
+   <title>bucketlist</title>
+</head>
+
+<div class="intro  light-blue accent-4 z-depth-1">
+  <h1 class="grey-text text-lighten-5">Bucketlist </h1>
+  
 
 {% block content %}
 
-   <div class=" row centered">
+   <div class=" centered z-depth-3">
+  <h5 class="grey lighten-4 grey-text text-darken-1">Plan with Pride Ω</h5>
 
-   	<form method ='POST' action='/web/login/'class="card col s12 l6 ">
+   	<form method ='POST' action='/web/login/'class="z-depth-2 valign card col s12  offset-s6">
    	  {% csrf_token %}
 
-   		<div class="row">
-   		<div class="row">
+   		<div>
+   		<div > <div class="light-blue"><i class="material-icons large white-text">account_circle</i><h4></h4></div>
          <div class="error"> {% for r, k in form.items%}
              {{k}}
 
              {% endfor %}</div>
    			<div class="input-field col s12">
-             
-         
+            <i class="material-icons large blue-text prefix">account_circle</i>
    				<input id="username" type="text" class="validate" name='username'>
    				<label for="username">username</label>
    			</div>
    		</div>
    		<div class="row">
+
    			<div class="input-field col s12">
+            <i class="material-icons blue-text prefix">lock_outline</i>
    				<input id="password" type="password" class="validate" name="password">
    				<label for="password">password</label>
    			</div>
    		</div>
    		
-   		<button type="submit" class="btn waves-effect waves-light"><i class="material-icons right">send</i></button>
+   		<button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button>
    	</form>
    </div>
+</div>
+
+<div class="parallax"> <img src="{% static "images/skate.jpeg" %}"> 
+
+</div>
+<script>
+
+
+   
+   $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+</script>
 
 {% endblock %}

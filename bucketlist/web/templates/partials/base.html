@@ -1,56 +1,111 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-{% load staticfiles %}
-	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
-	<link rel="stylesheet" href="{% static "css/style.css" %}">
-	<!-- Compiled and minified JavaScript -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="{% static "js/materialize.min.js" %}"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
-	<title>bucketlist</title>
+    <meta charset="UTF-8"> {% load staticfiles %}
+     <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon'/ >
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "js/materialize.min.js" %}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>bucketlist</title>
 </head>
+
 <body>
-	
-
-    <div>    <!-- Navbar goes here -->
-<nav>
-	<div class="nav-wrapper blue darken-3">
-		<a href="#!" class="brand-logo">Logo</a>
-		<ul class="right hide-on-med-and-down">
-			<li><a href="sass.html"><i class="mdi-action-search left"></i>Link with Left Icon</a></li>
-			<li><a href="components.html"><i class="mdi-action-view-module right"></i>Link with Right Icon</a></li>
-		</ul>
-	</div>
-</nav>
-</div>
-    <!-- Page Layout here -->
     <div class="row">
+        <div class="navbar-fixed">
+            <!-- Navbar goes here -->
+            <nav class="blue z-depth-6 fixed">
+                <div class="logo l12 s12">
+                    <img src="{% static "images/logo.png" %}" width="64" alt="">
+                    bucketlist
+                </div>
+            </nav>
+        </div>
+        <!-- side -->
+        <div class='col  sidemenu z-depth-5 hide-on-med-and-down'>
+            <div class="nav-wrapper ">
 
-      
-
-      <div class="col s9 ">
-        <div>
+                <a href="#!" class=""><img src="{% static "images/logo.png" %}" width="64" alt=""> </a>
+                <div class="divider"></div>
+                <ul class="right hide-on-med-and-down">
+                    
+                    <li><a href="!" class="grey-text">Make Hay while the sunshines</a></li>
+                </ul>
+            </div>
+            >
+            <a class="waves-effect waves-light btn light-blue modal-trigger " href="#modal1"><i class="material-icons left">list</i>make list</a>
+        </div>
+        <!-- end side -->
+        <!-- Page Layout here -->
+        <div class="main">
+            <div class="parallax-container z-depth-3">
+                <div class="parallax"> <img src="{% static "images/evening.jpeg" %}">
+                </div>
+            </div>
             {% block content %}{% endblock %}
         </div>
-      </div>
-
     </div>
-          
 </body>
 <script>
 // Initialize collapse button
 $('.button-collapse').sideNav({
-	menuWidth: 300, // Default is 240
-	edge: 'left', // Choose the horizontal origin
-	closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
-}
-);
+    menuWidth: 300, // Default is 240
+    edge: 'left', // Choose the horizontal origin
+    closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+});
 // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 $('.collapsible').collapsible();
 </script>
+<script>
+$('.dropdown-button').dropdown({
+    inDuration: 300,
+    outDuration: 225,
+    constrain_width: false, // Does not change width of dropdown to that of the activator
+    hover: true, // Activate on hover
+    gutter: 0, // Spacing from edge
+    belowOrigin: false, // Displays dropdown below the button
+    alignment: 'left' // Displays dropdown with edge aligned to the left of button
+});
+
+$(document).ready(function() {
+    $('.collapsible').collapsible({
+        accordion: true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+
+    });
+
+    $('.modal-trigger').leanModal();
+
+});
+
+function additem(id) {
+    document.form_additem.action = "/web/bucketlists/" + id + "/items/"
+};
+
+function editbucketlist(id, sname) {
+    document.form_editbucketlist.name.value = sname
+    document.form_editbucketlist.action = "/web/bucketlists/" + id + "/?edit=1"
+}
+
+function edititem(id, item, name, done) {
+    document.form_edititem.name.value = name
+    $('#textarea1').val(name);
+    $('#textarea1').trigger('autoresize');
+    var checked = 2
+    if (done == 'True') {
+        checked = 1
+    }
+    document.form_edititem.done.selectedIndex = checked
+    document.form_edititem.action = "/web/bucketlists/" + id + "/items/" + item + "/?edit=1"
+
+}
+
+$(document).ready(function() {
+    $('.carousel').carousel();
+});
+</script>
+
 </html>

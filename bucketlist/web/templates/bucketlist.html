@@ -1,143 +1,161 @@
-{% extends 'partials/base.html' %} 
-{% block content %}
+{% extends 'partials/base.html' %} {% block content %}{{list}}
+{% load staticfiles %}
+<div class="row ">
+
+    <div class="col m8 l10 s12 offset-l3 ">
+      
+            <div class="card-content blue-grey-text text-lighten-5">
+               
+<h4 class="card-content blue-grey-text text-lighten-3" >Lists</h4>
+<div class="pagination chip center">
+
+    <span class="step-links">
+        {% if lists.has_previous %}
+            <a href="?page={{ lists.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ lists.number }} of {{ lists.paginator.num_pages }}.
+        </span>
+
+        {% if lists.has_next %}
+            <a href="?page={{ lists.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+
+
+
+
+</div>
+
+
+
+
+
+
+                  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large blue">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text " href="#modal1" ><i class=" large material-icons">add</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">search</i></a></li>
+     
+    </ul>
+  </div>
+                <!-- collapsible bucket list start -->
+                {% for key in lists%}
+                <div class="gg l6 s12 m6 " onload='random_imglink(img-{{forloop.counter0}})'>
+    <ul class="collapsible popout s12 m6 l6 " data-collapsible="accordion">
+        <li>
+            <!-- check if the bucketlist has any items in it and create a notifictation -->
+            
+            <div class=" indigo lighten-1 hoverable ">&nbsp;{% if key.items|length > 0 %}
+                <span class=" right amber  lighten-4   hoverable "> <a   href="#!">{{key.items|length}} <i class="tiny material-icons circle cyan-text">toc</i> </a>
+                            
+
+                            </span> {%endif%}
+                <!-- create icon menu to edit bucketlist -->
+                <a href="/web/bucketlists/?delete={{key.id}}"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist">clear</i></a>
+                <a href="#modal3" class="modal-trigger" onclick="editbucketlist({{key.id}}, '{{key.name}}')"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist">mode_edit</i></a>
+                <!-- end icon menu --> 
+
+            <div class="img-collapsible  blue lighten-1   z-depth-2" id="img-{{forloop.counter0}}">
+           
+
+<div class=" waves-effect waves-light kello center circle cyan-text  accent-1 white z-depth-3 ">
+  {{key.name.0 }} 
+</div>
+            
+            </div>
+            </div>
+            <!-- bucketlist headaer -->
+            <div class="collapsible-header blue-text white darken-1 z-depth-5">
+            <span class="card-title center"> {{key.name }}</span>
 
  
-
-
-<div class="row ">
-    <div class="col m8 l8 s10 offset-l2 ">
-        <div class="card  centered2 darken-1">
-            <div class="card-content blue-grey-text text-lighten-5">
-
-                <span class="card-title center">
-                 <a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger" href="#modal1" ><i class=" large material-icons">add</i></a>BucketList</span> 
-                {% for key in lists%}
-                <div class="">
-                    <ul class="collapsible popout " data-collapsible="accordion">
-                        <li>
-                        <div class="white lighten-1 hoverable">&nbsp;{% if key.items|length > 0 %} 
-                            <span class="amber  lighten-4 badge z-depth-1 hoverable"> {{key.items|length}} <i class="tiny material-icons circle cyan-text">toc</i> 
-                            
-
-                            </span> 
-                            {%endif%}
-<a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist">delete</i></a>
-                                 <a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist">mode_edit</i></a>
-
-
-
-
-
-
-
-
-
-
+           
+                <!-- Icon for adding item to bucketlist -->
+                <a href="#modal2" id='additem' class="modal-trigger" onclick='additem({{key.id}})'><i class="tiny material-icons blue darken-2 hoverable right  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add_box</i></a>
+                <!-- drop down display for bucketlist properties -->
+                <a class="dropdown-button white" href="#!" data-activates="dropdown1"><i class="material-icons left circle white-text"> arrow_drop_down</i></a>
+                <ul id="dropdown1 collection" class="dropdown-content ">
+                    <li class="collection-item "><i class="material-icons circle blue-text">info_outline</i>
+                        <label class="cyan-text">id : {{key.id }}</label>
+                    </li>
+                    <li class="collection-item">
+                        </label><i class="material-icons circle blue-text">info_outline</i>
+                        <label class="cyan-text">created on : {{key.created_on }}</li>
+                    <li class="collection-item ">
+                        </label><i class="material-icons circle blue-text">info_outline</i>
+                        <label class="cyan-text">modified on : {{key.modified_on}}</li>
+                </ul>
+            </div>
+            <!-- body containing the list of items -->
+            <div class="collapsible-body ">
+                <ul class="collection ">
+                    <!-- check if item contains data -->
+                    {%if key.items%} {% for item in key.items%}
+                    <div class="row z-depth-4 hoverable">
+                        <div class=" s12 m12 l3 col">
+                            <img src="{% static "images/happy.png" %}" width='64' class='responsive-img '>
+                            <!-- delete item -->
                         </div>
-                            <div class="collapsible-header blue lighten-1"> {{key.name }}
-                            
-                                <a class="dropdown-button white" href="#!" data-activates="dropdown1"><i class="material-icons left circle white-text"> arrow_drop_down</i></a>
-                                <ul id="dropdown1" class="dropdown-content ">
-                                   
-                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i>id : {{key.id }}</li>
-                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i> created on : {{key.created_on }}</li>
-                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i> modified on : {{key.modified_on}}</li>
-                                </ul>
-                                
-                                
-                                
-                            
-                                
+                        <div class=" s12  m12 l9 col ">
+                            <ul class="collection with-header materialboxed ">
+                                <div class='s12'>
+                                    <li class="collection-item blue-grey-text">
+                                        <i class="material-icons circle blue-text text-lighten-1">work</i>
+                                        <label for="">Description </label>{{item.name}}
+                                    </li>
+                                    <li class="collection-item blue-grey-text">
+                                    {% if item.done %}
+                                        <img src="{% static "images/happy.png" %}" width = 32>{%else%}
+                                        <img src="{% static "images/sad.png" %}" width = 32>{% endif%}
+                                        <label for="">Completed </label>
+                                        {{item.done}}
+                                        <div class="right">
+                                            <a href="/web/bucketlists/{{key.id}}/items/{{item.id}}/?delete=1" <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i></a>
+                                            <!-- edit item -->
+                                            <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit item">mode_edit</i></a>
+
+                                        </div>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+ 
+                    <hr> {%endfor%}
+                    <!-- end item iter -->
+        </li>
+        {%endif%}
 
 
 
-
-
-                            </div>
-                            <div class="collapsible-body">
-                                <ul class="collection">
-                                    
-                                    {%if key.items%}
-                                   
-                                            {% for item in key.items%} 
-                                            <div class=" s12 l3 col">
-                                              <i class="material-icons align-right large blue-grey-text text-lighten-1">shopping_basket</i>
-                                            <a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete item">delete</i></a>
-                                 <a href="#"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit item">mode_edit</i></a>
-                                          
-                                             
-                                           </div>
-                                            <ul class="collection with-header"> 
-                                            
-                                            <div class='s12'>
-                                            <li class="collection-item blue-grey-text">
-                                            {% if item.done %} 
-                                            <i class="material-icons circle blue-text medium text-lighten-1">done_all</i>
-                                            {%else%}
-                                        
-											 <i class="material-icons circle red-text tiny">assignment</i>
-											{% endif%}
-											<label for="">Name </label>{{item.name}}
-                                              
-                                             
-
-                                              </li>
-											
-                                            <li class="collection-item blue-grey-text"><i class="material-icons circle blue-text text-lighten-1">work</i> <label for="">Completed </label>
- {{item.done}}</li>
-                                            </div></ul>
-                                            <br>
-                                            <hr>
-                                            {%endfor%}
-                                           
-                                        
-                                    </li> {%endif%}
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="card-action">
-                <a href="#">This is a link</a>
-                <a href="#">This is a link</a>
-            </div>
+       
+        <!-- end item check  -->
+        </ul>
         </div>
-    </div>
+        </li>
+    </ul>{% endfor %}
+        
+<script>
+
+
+   
+   $(document).ready(function(){
+      $('.parallax').parallax();
+         
+        
+    });
+</script> 
+</div>
+<!-- end of bucketlist iter -->
 </div>
 
 <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-  <div class="blue">&nbsp;<label class='white-text'> Add a Bucketlist</label></div>
-    <div class="modal-content">
-      
-      {% include 'addbucketlist.html' %}
-    </div>
-    
-  </div>
+{%include 'modal.html'%} {% endblock %}
+</label></li></label></li>
 
-
-<script>
-$('.dropdown-button').dropdown({
-    inDuration: 300,
-    outDuration: 225,
-    constrain_width: false, // Does not change width of dropdown to that of the activator
-    hover: true, // Activate on hover
-    gutter: 0, // Spacing from edge
-    belowOrigin: true, // Displays dropdown below the button
-    alignment: 'right' // Displays dropdown with edge aligned to the left of button
-});
-$(document).ready(function() {
-    $('.collapsible').collapsible({
-        accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    });
-
-  $('.modal-trigger').leanModal();
-    
-});
-
-
-
-</script>
-{% endblock %}

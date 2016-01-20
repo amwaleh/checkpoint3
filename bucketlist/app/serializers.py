@@ -16,9 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class BucketitemSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Bucketitems
-		fileds = ('id', 'blist', 'name', 'done', 'created_on', 'modified_on')
+    class Meta:
+    	model = Bucketitems
+    	fileds = ('id', 'blist', 'name', 'done', 'created_on', 'modified_on')
 
 
 class BucketlistSerializer(serializers.ModelSerializer):

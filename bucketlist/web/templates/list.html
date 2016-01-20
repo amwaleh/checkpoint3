@@ -1,0 +1,102 @@
+{% extends 'partials/base.html' %} {% block content %}{{list}}
+<div class="row ">
+    <div class="col m8 l10 s10 offset-l2 ">
+        <div class="card centered2 ">
+            <div class="card-content blue-grey-text text-lighten-5">
+                <span class="card-title center">
+                 <a class="btn-floating btn-large waves-effect waves-light light-blue modal-trigger" href="#modal1" ><i class=" large material-icons">add</i></a>BucketList</span> 
+                <!-- collapsible bucket list start -->
+                {% if key|length <= 1%}
+
+                   <h2 class='brown-text'> {{key.detail}}</h2>
+
+                {%endif%}
+                 {% if key|length > 1%}
+                <div class="">
+                    <ul class="collapsible popout s12 m6 l6" data-collapsible="accordion">
+                        <li>
+                            <!-- check if the bucketlist has any items in it and create a notifictation -->
+                            <div class="white lighten-1 hoverable">&nbsp;{% if key.items|length > 0 %}
+                                <span class="amber  lighten-4 badge z-depth-1 hoverable"> <a   href="#!">{{key.items|length}} <i class="tiny material-icons circle cyan-text">toc</i> </a>
+                            
+
+                            </span> {%endif%}
+                                <!-- create icon menu to edit bucketlist -->
+                                <a href="/web/bucketlists/?delete={{key.id}}"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist">clear</i></a>
+
+                                <a href="#modal3"  class="modal-trigger" onclick="editbucketlist({{key.id}}, '{{key.name}}')"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist">mode_edit</i></a>
+                                <!-- end icon menu -->
+                            </div>
+                            <!-- bucketlist headaer -->
+                            <div class="collapsible-header blue lighten-1 active"> {{key.name }}
+                                <!-- Icon for adding item to bucketlist -->
+                                <a href="#modal2" id='additem' class="modal-trigger" onclick='additem({{key.id}})'><i class="tiny material-icons blue darken-2 hoverable right  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add_box</i></a>
+                                <!-- drop down display for bucketlist properties -->
+                                <a class="dropdown-button white" href="#!" data-activates="dropdown1"><i class="material-icons left circle white-text"> arrow_drop_down</i></a>
+                                <ul id="dropdown1 collection" class="dropdown-content ">
+                                    <li class="collection-item truncate"><i class="material-icons circle blue-text">info_outline</i>
+                                        <label class="cyan-text">id : {{key.id }}</label>
+                                    </li>
+                                    <li class="collection-item truncate">
+                                        </label><i class="material-icons circle blue-text">info_outline</i>
+                                        <label class="cyan-text">created on : {{key.created_on }}</li>
+                                    <li class="collection-item truncate">
+                                        </label><i class="material-icons circle blue-text">info_outline</i>
+                                        <label class="cyan-text">modified on : {{key.modified_on}}</li>
+                                </ul>
+                            </div>
+                            <!-- body containing the list of items -->
+                            <div class="collapsible-body">
+                                <ul class="collection">
+                                    <!-- check if item contains data -->
+                                    {%if key.items%} {% for item in key.items%}
+                                    <div class=" s12 l3 col">
+                                        <i class="material-icons align-right large blue-grey-text text-lighten-1">shopping_basket</i>
+                                        <!-- delete item -->
+                                        <div class="">
+                                        <a href="/web/bucketlists/{{key.id}}/items/{{item.id}}/?delete=1" <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i></a>
+                                        <!-- edit item -->
+
+                                        <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit item">mode_edit</i></a>
+                                        </div>
+
+                                    </div>
+                                    <ul class="collection with-header">
+                                        <div class='s12'>
+                                            <li class="collection-item blue-grey-text">
+                                                {% if item.done %}
+                                                <i class="material-icons circle blue-text medium text-lighten-1">done_all</i> {%else%}
+                                                <i class="material-icons circle red-text tiny">assignment</i> {% endif%}
+                                                <label for="">Description </label>{{item.name}}
+                                            </li>
+                                            <li class="collection-item blue-grey-text"><i class="material-icons circle blue-text text-lighten-1">work</i>
+                                                <label for="">Completed </label>
+                                                {{item.done}}</li>
+                                        </div>
+                                    </ul>
+                                    <br>
+                                    <hr> {%endfor%}
+                                    <!-- end item iter -->
+                        </li>
+                        {%endif%}
+                        <!-- end item check  -->
+                        </ul>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+                {%endif%}
+                <!-- end of bucketlist iter -->
+               <!--   -->
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Structure -->
+{%include 'modal.html'%}
+
+{% endblock %}
