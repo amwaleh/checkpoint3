@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework.authentication import TokenAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from models import Bucketlist, Bucketitems
 from serializers import UserSerializer, BucketlistSerializer, BucketitemSerializer
@@ -41,7 +42,7 @@ class Bucketlists(APIView):
             List bucket list and items handle GET and POST request 
     '''
     # Add permission to class
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
     pagination_class = StandardResultsSetPagination
 
@@ -71,7 +72,7 @@ class EditBucketlists(APIView):
             List bucket list and items handle GET and POST request 
     '''
     # Add permissiion to class
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
   
 
@@ -110,7 +111,7 @@ class BucketitemsView(APIView):
             Handles POST and GET request for Editing bucketlist items
     '''
     # Token and user login permissions
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def check_user(self, id, userid):
@@ -154,7 +155,7 @@ class EditBucketitemsView(APIView):
             Handles PUT and DELETE request for Editing an item in a Bucketlist
     '''
     # Token and user login permissions
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 

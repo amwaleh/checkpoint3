@@ -40,4 +40,5 @@ url(r'^api/', include('app.urls')),
 urlpatterns += [
     url(r'^auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
+    
 ]

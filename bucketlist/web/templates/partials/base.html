@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8"> {% load staticfiles %}
     <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon' />
     <!-- Compiled and minified CSS -->
@@ -20,21 +21,13 @@
             <!-- Navbar goes here -->
             <nav class="light-blue dark-4 z-depth-2 fixed">
                 <div class="logoe l12 s12 left">
-                    <h5><a href='/web/bucketlists/'>bucketlist</a></h5>
-                </div>
+                    <h5><a href='/web/bucketlists/'><img src="{% static "images/logo.png" %}" width="32" alt="">bucketlist </a></h5> 
+                </div><a href="/web/logout" class="btn right">logout </a>
             </nav>
+          
         </div>
         <!-- side -->
-        <div class='col  sidemenu z-depth-5 hide-on-med-and-down blue'>
-            <div class="nav-wrapper  ">
-                <a href="#!" class=""><img src="{% static "images/logo.png" %}" width="64" alt=""> </a>
-                <div class="divider"></div>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="!" class="grey-text">Make Hay while the sunshines</a></li>
-                </ul>
-            </div>
-            <a class="waves-effect waves-light btn light-blue modal-trigger " href="#modal1"><i class="material-icons left">list</i>make list</a>
-        </div>
+{%include 'side.html'%}
         <!-- end side -->
         <!-- Page Layout here -->
         <div class="main">

@@ -1,0 +1,42 @@
+
+{% load staticfiles %}
+
+<div id='auth1' class='dropdown-content curve blue-text'> 
+  <div class="row"> 
+<div class="col">
+  <i class="large material-icons blue-text">account_circle</i> : {{header.username}}
+  </div>
+    </div>
+    <div class="row"><div class="col">
+    {{header.Authorization}}</div>
+  </div>
+  </div>
+
+<div class='col  sidemenu z-depth-5 hide-on-med-and-down blue'>
+
+            <div class="nav-wrapper  ">
+              <div>
+<a class='dropdown-button' href='#' data-activates='auth1'>
+<i class=" medium material-icons white-text prefix">account_circle</i>
+</a>
+</div>
+               
+                <div class="divider"></div>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#" class="blue-grey-text text-lighten-4">Make Hay while the sun shines</a></li>
+                </ul>
+            </div>
+             <a href="#" class=""> </a>
+            <a class="waves-effect waves-light btn light-blue modal-trigger " href="#modal1"><img src="{% static "images/logo.png" %}" width="32" class="left">make  list</a>
+          
+             
+        </div>
+
+
+
+<!-- Dropdown Trigger -->
+  
+
+  <!-- Dropdown Structure -->
+  
+        
