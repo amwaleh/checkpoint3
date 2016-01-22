@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from views import index, listBucketlists, login, listItems, editItems
+from views import (index, listBucketlists, login, 
+				   listItems, editItems, signup)
 
 urlpatterns = patterns('',
 
@@ -11,4 +12,6 @@ urlpatterns = patterns('',
     url(r'^bucketlists/(?P<id>[0-9]+)/',listItems),
     url(r'^bucketlists/$',listBucketlists),
     url(r'^login/',login),
+    url(r'^signup/',signup),
+
 )

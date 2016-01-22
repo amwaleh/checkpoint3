@@ -1,6 +1,21 @@
+<!-- search form -->
+<div id="modal6" class="modal curve">
+    <div class="blue darken-1">&nbsp;
+        <label class='white-text'> search</label>
+    </div>
+    <div class="modal-content">
+        <form action="/web/bucketlists?search=" method="get">
+            <div class="input-field">
+                <input id="search" type="search" name="search" required>
+                <label for="search"><i class="material-icons">search</i> search</label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- add bucketlist -->
-<div id="modal1" class="modal">
-    <div class="blue">&nbsp;
+<div id="modal1" class="modal curve">
+    <div class="blue darken-1">&nbsp;
         <label class='white-text'> Add a Bucketlist</label>
     </div>
     <div class="modal-content">
@@ -8,28 +23,26 @@
     </div>
 </div>
 <!-- add items -->
-<div id="modal2" class="modal">
-    <div class="blue">&nbsp;
+<div id="modal2" class="modal curve">
+    <div class="blue darken-1">&nbsp;
         <label class='white-text'> Add an item</label>
     </div>
     <div class="modal-content">
         {% include 'additems.html' %}
     </div>
 </div>
-
 <!-- edit bucketlist-->
-<div id="modal3" class="modal">
-    <div class="blue">&nbsp;
+<div id="modal3" class="modal curve">
+    <div class="blue darken-1">&nbsp;
         <label class='white-text'> Update Bucketlist</label>
     </div>
-    <div class="modal-content">
+    <div>
         {% include 'editbucketlist.html' %}
     </div>
 </div>
 <!-- edit items -->
-
-<div id="modal4" class="modal">
-    <div class="blue">&nbsp;
+<div id="modal4" class="modal curve">
+    <div class="blue darken-1">&nbsp;
         <label class='white-text'> Update item</label>
     </div>
     <div class="modal-content">

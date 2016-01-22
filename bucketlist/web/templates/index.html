@@ -1,17 +1,1 @@
-{% extends 'partials/base.html' %}
-
-{% block content %}
-
-    <form action="/" method="POST">
-        {% csrf_token %}
-        {% for k, detail in form.items %}
-        			{{k}}:{{detail}}
-
-        {%endfor%}
-
-
-        <input type="submit" value="Save"/>
-    </form>
-
-
-{% endblock %}
+{%include 'signin.html'%}

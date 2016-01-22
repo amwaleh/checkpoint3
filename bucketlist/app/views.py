@@ -46,13 +46,18 @@ class Bucketlists(APIView):
     pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
+    
         blist = Bucketlist.objects.filter(creator=request.user.id)
+        if 'search' in request.GET:
+            search =request.GET.get('search')
+            blist = blist.filter(name__icontains=search)
+
         serializer = BucketlistSerializer(blist, many=True)
         return Response(serializer.data)
+
     def post(self, request, format=None):
         request.POST._mutable=True
         request.data['creator'] = request.user.id
-
         serializer = BucketlistSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

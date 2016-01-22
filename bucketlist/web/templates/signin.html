@@ -1,67 +1,103 @@
-
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-{% load staticfiles %}
-   <!-- Compiled and minified CSS -->
-   <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
-   <link rel="stylesheet" href="{% static "css/style.css" %}">
-   <!-- Compiled and minified JavaScript -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-   <script src="{% static "js/materialize.min.js" %}"></script>
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   
-   <title>bucketlist</title>
+    <meta charset="UTF-8"> {% load staticfiles %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static "js/materialize.min.js" %}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>bucketlist</title>
 </head>
-
-<div class="intro  light-blue accent-4 z-depth-1">
-  <h1 class="grey-text text-lighten-5">Bucketlist </h1>
-  
-
-{% block content %}
-
-   <div class=" centered z-depth-3">
-  <h5 class="grey lighten-4 grey-text text-darken-1">Plan with Pride Ω</h5>
-
-   	<form method ='POST' action='/web/login/'class="z-depth-2 valign card col s12  offset-s6">
-   	  {% csrf_token %}
-
-   		<div>
-   		<div > <div class="light-blue"><i class="material-icons large white-text">account_circle</i><h4></h4></div>
-         <div class="error"> {% for r, k in form.items%}
-             {{k}}
-
-             {% endfor %}</div>
-   			<div class="input-field col s12">
-            <i class="material-icons large blue-text prefix">account_circle</i>
-   				<input id="username" type="text" class="validate" name='username'>
-   				<label for="username">username</label>
-   			</div>
-   		</div>
-   		<div class="row">
-
-   			<div class="input-field col s12">
-            <i class="material-icons blue-text prefix">lock_outline</i>
-   				<input id="password" type="password" class="validate" name="password">
-   				<label for="password">password</label>
-   			</div>
-   		</div>
-   		
-   		<button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button>
-   	</form>
-   </div>
+<div class="intro light-blue accent-4 z-depth-1 s12">
+    <h1 class="grey-text text-lighten-5">Bucketlist </h1> {% block content %}
+    <div class="login-wrapper s12 l12 ">
+        <form method='POST' action='/web/login/' class="curve inner-log z-depth-2 valign  col s12  offset-s6">
+            {% csrf_token %}
+            <div class="white ">
+                <div class="light-blue">
+                    <h4><i class="material-icons curve large white-text prefix">account_circle</i></h4></div>
+                <div class="error"> {% for r, k in form.items%} {{k}} {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 white">
+                        <i class="material-icons  blue-text prefix">account_circle</i>
+                        <input id="username" type="text" class="validate" name='username'>
+                        <label for="username">username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 white">
+                        <i class="material-icons blue-text prefix">lock_outline</i>
+                        <input id="password" type="password" class="validate" name="password">
+                        <label for="password">password</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button>
+        </form>
+        </div>
+        @mwalex
+        <div class="row">
+            <div class="col s12 m6 l10 right ">
+                <div class=" curve white" style=" opacity: 0.7;">
+                    <div class="card-content black-text">
+                        <span class="card-title"> Make hay while the sun shines</span>
+                        <p>Sign up today and plan the reality of every dream </p>
+                        <a class="cyan waves-effect waves-light btn modal-trigger" href="#modal1" style=" opacity: 1;">sign-up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="parallax"> <img src="{% static "images/skate.jpeg" %}"> 
-
+<div class="parallax"> <img src="{% static "images/travel.jpeg" %}">
 </div>
-<script>
+<!-- Modal Trigger -->
+<!-- Modal Structure -->
+<div id="modal1" class="modal fixed curve">
+    <div class="  blue row">
+        <h5 class="white-text center"><i class="material-icons large">account_circle</i>Sign Up </h5>
+    </div>
+    <div class="m ">
+        <div class="   row">
+            <form class="signup col s12" action="/web/signup/" method="POST" name='signup'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="tiny material-icons blue-text prefix">account_circle</i>
+                        <input id="username" name="username" type="text" class="validate" required>
+                        <label for="username">username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons blue-text prefix">lock_outline</i>
+                        <input id="password" type="password" name="password" class="validate" required>
+                        <label for="password">password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons blue-text prefix">email</i>
+                        <input id="email" type="email" class="validate" name="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <button type="submit" class="blue btn waves-effect waves-light right"><i class="material-icons right">send</i>submit</button>
+            </form>
+        </div>
+        <script>
+        $(document).ready(function() {
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal-trigger').leanModal();
+            $('.parallax').parallax();
+        });
 
 
-   
-   $(document).ready(function(){
-      $('.parallax').parallax();
-    });
-</script>
-
-{% endblock %}
+        function submitForm() {
+            $('.signup').submit();
+        }
+        </script>
+        {% endblock %}

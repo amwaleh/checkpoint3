@@ -4,38 +4,27 @@
         {% csrf_token %}
         <input type="hidden" name="update">
         <legend></legend>
-        <div class="input-field">
-            <div class="col  form-group left">
-                <i class="material-icons large blue-grey-text text-lighten-1">add_box</i>
-            </div>
-            <div class="col s6 form-group left">
+        <div class="col  form-group left">
+            <i class="material-icons large blue-grey-text text-lighten-1">add_box</i>
+        </div>
+        <div class="col s6 form-group left">
+            <div class="input-field">
                 <span class="help-block"></span>
                 <textarea id="textarea1" class="materialize-textarea" length="120" name='name'></textarea>
-                <div class="input-field">
-                    
-                    <br>
-                    <select class="icons browser-default" name='done'>
-                        <option value="" selected></option>
-                        <option value="True">True</option>
-                        <option value="False">False</option>
-                    </select><label>Finished</label>
-                </div>
-                <div class="">
-                    <p>
-                        <button type="submit" class="btn  cyan">add</button>
-                    </p>
-                </div>
+            </div>
+            <div class=" col 12">
+                <label>completed </label>
+                <select class="icons browser-default" name='done'>
+                    <option value="" selected></option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+            <div class="">
+                <p>
+                    <button type="submit" class="btn  blue darken-1">add</button>
+                </p>
             </div>
     </form>
     </div>
-    <script>
-    // $('#done').submit(function(){
-    //      if($(this).attr('checked')){
-    //           $(this).val('TRUE');
-    //      }else{
-    //           $(this).val('FALSE');
-    //      }
-    // });
-    //$('.tabs-wrapper').pushpin({ top:110, bottom:500 });
-    </script>
     {% endblock %}

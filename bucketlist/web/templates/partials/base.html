@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"> {% load staticfiles %}
-     <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon'/ >
+    <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon' />
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
@@ -15,42 +15,50 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="navbar-fixed">
+    <div class="row ">
+        <div class="navbar-fixed ">
             <!-- Navbar goes here -->
-            <nav class="blue z-depth-6 fixed">
-                <div class="logo l12 s12">
-                    <img src="{% static "images/logo.png" %}" width="64" alt="">
-                    bucketlist
+            <nav class="light-blue dark-4 z-depth-2 fixed">
+                <div class="logoe l12 s12 left">
+                    <h5><a href='/web/bucketlists/'>bucketlist</a></h5>
                 </div>
             </nav>
         </div>
         <!-- side -->
-        <div class='col  sidemenu z-depth-5 hide-on-med-and-down'>
-            <div class="nav-wrapper ">
-
+        <div class='col  sidemenu z-depth-5 hide-on-med-and-down blue'>
+            <div class="nav-wrapper  ">
                 <a href="#!" class=""><img src="{% static "images/logo.png" %}" width="64" alt=""> </a>
                 <div class="divider"></div>
                 <ul class="right hide-on-med-and-down">
-                    
                     <li><a href="!" class="grey-text">Make Hay while the sunshines</a></li>
                 </ul>
             </div>
-            >
             <a class="waves-effect waves-light btn light-blue modal-trigger " href="#modal1"><i class="material-icons left">list</i>make list</a>
         </div>
         <!-- end side -->
         <!-- Page Layout here -->
         <div class="main">
-            <div class="parallax-container z-depth-3">
-                <div class="parallax"> <img src="{% static "images/evening.jpeg" %}">
+            <div class=" ">
+                <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <a class="btn-floating btn-large cyan">
+                        <i class="large material-icons">mode_edit</i>
+                    </a>
+                    <ul>
+                        <li><a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text " href="#modal1"><i class=" large material-icons">add</i></a></li>
+                        <li><a class="btn-floating yellow darken-1 modal-trigger" href="#modal6"><i class="material-icons">search</i></a></li>
+                    </ul>
                 </div>
+                {% block content %}{% endblock %} {%include 'modal.html'%}
             </div>
-            {% block content %}{% endblock %}
         </div>
-    </div>
 </body>
 <script>
+$(document).ready(function() {
+    $('.slider').slider({
+        full_width: true
+    });
+});
+
 // Initialize collapse button
 $('.button-collapse').sideNav({
     menuWidth: 300, // Default is 240
@@ -105,6 +113,17 @@ function edititem(id, item, name, done) {
 
 $(document).ready(function() {
     $('.carousel').carousel();
+});
+
+$(document).ready(function() {
+    $('.carousel').carousel();
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('.parallax').parallax();
+
+
 });
 </script>
 

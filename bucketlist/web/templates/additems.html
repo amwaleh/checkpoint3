@@ -4,21 +4,21 @@
 <form action="" method="POST" name="form_additem" >
     {% csrf_token %}
     <legend></legend>
-
-    <div class="input-field">
-    <div class="col  form-group left">
+   <div class="row">
+  
+ 
+    <div class="col left">
     <i class="material-icons large blue-grey-text ">add_box</i>
     </div>
-        <div class="col s6 form-group left">
-            
-            <span class="help-block"></span>
-           
-            <textarea id="textarea1" class="materialize-textarea" length="120" name='name'></textarea>
-            <label for="textarea1">Textarea</label>
-        </div>
+       
+             <div class="input-field l8 left">
+            <textarea id="textarea1" class="materialize-textarea" length="254" name='name'></textarea>
+            <label for="textarea1">description</label>
+     
 
     </div>
-    <button type="submit" class="btn c cyan">add</button>
+    </div>
+    <button type="submit" class="btn blue darken-1 valign">add</button>
 </form>
 </div>
 
