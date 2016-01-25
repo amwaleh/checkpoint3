@@ -5,8 +5,7 @@ import requests
 import json
 
 
-domain = 'http://127.0.0.1:8000'
-
+domain = 'http://0.0.0.0:8000'
 user = {}
 
 
@@ -16,7 +15,7 @@ def index(request):
 
 
 def check_token(request):
-
+    
     if request.session.has_key('Authorization') is False:
         return redirect('/web/login/', )
 

@@ -9,8 +9,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from models import Bucketlist, Bucketitems
-from serializers import (UserSerializer, BucketlistSerializer, 
-                        BucketitemSerializer)
+from serializers import (UserSerializer, BucketlistSerializer,
+                         BucketitemSerializer)
 
 
 class StandardResultsSetPagination(PageNumberPagination):

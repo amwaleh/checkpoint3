@@ -54,7 +54,7 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 }
-JWT_AUTH  = {
+JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
 }
@@ -95,15 +95,7 @@ WSGI_APPLICATION = 'bucketlist.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-#DATABASES['default'] =  dj_database_url.config()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bucketlist',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
@@ -122,9 +114,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = "staticfiles"
-STATIC_URL =  os.path.join(BASE_DIR, "static/")
+STATIC_URL = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = (
+    os.path.join("static"),
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 )
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+

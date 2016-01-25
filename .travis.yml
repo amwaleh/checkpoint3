@@ -22,7 +22,7 @@ env:
   global:
     - TRAVIS_BUILD=true
 script: 
-   coverage run --omit="*env*","migrations*","static","templates" manage.py test app
+   coverage run --omit="*env*","migrations*","web*","static","templates" manage.py test app
 after_success: 
   coveralls
   #coverage run --omit="*env*","migrations*","static","templates" -m
