@@ -180,3 +180,13 @@ def editItems(request, id, item):
             update = requests.put(
                 domain + "/api/bucketlists/{0}/items/{1}/".format(id, item), data, headers=request.session)
             return redirect('/web/bucketlists/{0}/'.format(id))
+
+def logout(request):
+	
+	form=""
+	if request.method =='GET':
+		del request.session['Authorization']
+		del request.session['username']
+		form = "welcome"
+		check_token(request)
+    	return render(request, 'index.html', {'form': form})

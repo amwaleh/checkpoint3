@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from views import (index, listBucketlists, login, 
-				   listItems, editItems, signup)
+				   listItems, editItems, signup, logout)
 
 urlpatterns = patterns('',
 
@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^bucketlists/$',listBucketlists),
     url(r'^login/',login),
     url(r'^signup/',signup),
+    url(r'^logout/',logout),
 
 )
