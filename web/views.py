@@ -7,35 +7,33 @@ import json
 
 domain = 'http://127.0.0.1:8000'
 
-user ={}
+user = {}
+
 
 def index(request):
     form = "welcome"
     return render(request, 'index.html', {'form': form})
+
+
 def check_token(request):
-	
-	if  request.session.has_key('Authorization') is False:
-		return redirect('/web/login/', )
-	
-	
-	data = {'token':request.session['token']}
-	verify = requests.post(domain + '/api/api-token-verify/', data)
-	if verify.status_code == 200 :
-		# try to refresh the expired token
-		new_token = requests.post(domain + '/api/api-token-refresh/', data)
-		new_token = new_token.json()
-		if 'token' in new_token:
-			token = 'JWT {}'.format(new_token['token'])
-			request.session['Authorization'] = token
-		 	return True
 
-		return redirect('/web/login/', )
+    if request.session.has_key('Authorization') is False:
+        return redirect('/web/login/', )
 
-	return False
+    data = {'token': request.session['token']}
+    verify = requests.post(domain + '/api/api-token-verify/', data)
+    if verify.status_code == 200:
+        # try to refresh the expired token
+        new_token = requests.post(domain + '/api/api-token-refresh/', data)
+        new_token = new_token.json()
+        if 'token' in new_token:
+            token = 'JWT {}'.format(new_token['token'])
+            request.session['Authorization'] = token
+            return True
 
+        return redirect('/web/login/', )
 
-
-
+    return False
 
 
 def signup(request):
@@ -58,7 +56,6 @@ def login(request):
         return render(request, 'signin.html',)
 
     if request.method == "POST":
-    	import ipdb; ipdb.set_trace()
         form = {}
         data = {"username": request.POST.get(
             'username'), "password": request.POST.get('password')}
@@ -77,8 +74,8 @@ def login(request):
 
 
 def listBucketlists(request):
-    if check_token(request)!= True:
-    	return render(request, 'signin.html',)
+    if check_token(request) != True:
+        return render(request, 'signin.html',)
 
     if request.method == 'GET':
         # Edit a list
@@ -98,7 +95,9 @@ def listBucketlists(request):
         if 'search' in request.GET:
             search = request.GET.get('search')
             url = domain + '/api/bucketlists/?search={0}'.format(search)
+       
         bucketlists = requests.get(url, headers=request.session)
+
         lists = bucketlists.json()
         paginator = Paginator(lists, 10)
         page = request.GET.get('page')
@@ -111,7 +110,7 @@ def listBucketlists(request):
             # If page is out of range), deliver last page of
             # results.
             contacts = paginator.page(paginator.num_pages)
-        return render(request, 'bucketlist.html', {'lists': contacts,"header":user})
+        return render(request, 'bucketlist.html', {'lists': contacts, "header": user})
     if request.method == 'POST':
         # Create a new bucketlist
         name = request.POST.get('name')
@@ -124,8 +123,8 @@ def listBucketlists(request):
 
 
 def listItems(request, id):
-    if check_token(request)!= True:
-    	return render(request, 'signin.html',)
+    if check_token(request) != True:
+        return render(request, 'signin.html',)
     # add an item
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -144,18 +143,18 @@ def listItems(request, id):
         bucketlists = requests.get(
             domain + '/api/bucketlists/{}/'.format(id), headers=request.session)
         lists = bucketlists.json()
-        return render(request, 'list.html', {'key': lists,"header":user})
+        return render(request, 'list.html', {'key': lists, "header": user})
 
     if request.method == 'GET':
         bucketlists = requests.get(
             domain + '/api/bucketlists/{}/'.format(id), headers=request.session)
         lists = bucketlists.json()
-        return render(request, 'list.html', {'key': lists,"header":user})
+        return render(request, 'list.html', {'key': lists, "header": user})
 
 
 def editItems(request, id, item):
-    if check_token(request)!= True:
-    	return render(request, 'signin.html',)
+    if check_token(request) != True:
+        return render(request, 'signin.html',)
 
     if request.method == 'GET':
         if 'delete' in request.GET:
@@ -165,7 +164,7 @@ def editItems(request, id, item):
         lists = requests.get(
             domain + '/api/bucketlists/{0}/items/{1}/'.format(id, item), headers=request.session)
         lists = lists
-        return render(request, 'bucketlist.html', {'lists': lists,"header":user})
+        return render(request, 'bucketlist.html', {'lists': lists, "header": user})
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -181,12 +180,13 @@ def editItems(request, id, item):
                 domain + "/api/bucketlists/{0}/items/{1}/".format(id, item), data, headers=request.session)
             return redirect('/web/bucketlists/{0}/'.format(id))
 
+
 def logout(request):
-	
-	form=""
-	if request.method =='GET':
-		del request.session['Authorization']
-		del request.session['username']
-		form = "welcome"
-		check_token(request)
-    	return render(request, 'index.html', {'form': form})
+
+    form = ""
+    if request.method == 'GET':
+        del request.session['Authorization']
+        del request.session['username']
+        form = "welcome"
+        check_token(request)
+    return render(request, 'index.html', {'form': form})

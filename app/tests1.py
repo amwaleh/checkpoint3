@@ -7,7 +7,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from app.models import Bucketlist, Bucketitems
 from django.contrib.auth.models import User
-
+from app.models import Bucketlist, Bucketitems
+from django.contrib.auth.models import User
 
 factory = APIRequestFactory()
 
@@ -29,20 +30,21 @@ class BucketlistTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def _require_login(self):
-        url = '/api/api-token'
+        url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
         response = self.client.post(url, data, format='json')
         return response.data
+
       
 
     def _get_token(self):
     	token = self._require_login()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token['token'])
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token['token'])
        
 
     def test_2_token_generation(self):
         # Test if a token has been produced using credntials
-        url = '/api/api-token'
+        url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
         response = self.client.post(url, data, format='json')
 
@@ -62,7 +64,7 @@ class BucketlistTest(TestCase):
         # use token to access authicated page:
         # http://www.django-rest-framework.org/api-guide/testing/#authenticating
         token = self._require_login()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token['token'])
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token['token'])
         response = self.client.get("/api/bucketlists/", format='json')
         self.assertEqual(response.status_code, 200)
 
@@ -94,7 +96,7 @@ class BucketlistTest(TestCase):
     	data ={'name':'bucketlist1','creator':self.user.id}
     	item = {'name':'item'}
     	response = self.client.post("/api/bucketlists/", data,format='json')
-    	
+    	self.assertEqual(response.status_code,201)
     	# create Item
     	bid = Bucketlist.objects.first().id
     	url = "/api/bucketlists/{}/items/".format(bid)
@@ -118,7 +120,6 @@ class BucketlistTest(TestCase):
 
 
 
-    	
 
 
     	
