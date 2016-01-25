@@ -1,24 +1,19 @@
 {% block content %}
-
-<div class="row">	
-<form action="/web/bucketlists/" method="POST" >
-    {% csrf_token %}
-    <legend></legend>
-
-   
-    <div class=" form-group left ">
-    <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
-    </div>
-        <div class="col s6 form-group left">
-             <div class="input-field">
-            <input type="text" class="form-control" id="" placeholder="Bucketlist Name" name="name">
+<div class="row">
+    <form action="/web/bucketlists/" method="POST">
+        {% csrf_token %}
+        <legend></legend>
+        <div class=" form-group left ">
+            <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
         </div>
-
-    </div>
-    <button type="submit" class="btn blue darken-1">add</button>
-</form>
+        <div class="col s6 form-group left">
+            <div class="input-field">
+                <input type="text" class="form-control" id="" placeholder="Bucketlist Name" name="name">
+            </div>
+        </div>
+        <button type="submit" class="btn blue darken-1">add</button>
+    </form>
 </div>
-
 <script>
 //$('.tabs-wrapper').pushpin({ top:110, bottom:500 });
 </script>

@@ -95,7 +95,7 @@ def listBucketlists(request):
         if 'search' in request.GET:
             search = request.GET.get('search')
             url = domain + '/api/bucketlists/?search={0}'.format(search)
-       
+
         bucketlists = requests.get(url, headers=request.session)
 
         lists = bucketlists.json()

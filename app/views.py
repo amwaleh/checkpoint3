@@ -9,13 +9,16 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from models import Bucketlist, Bucketitems
-from serializers import UserSerializer, BucketlistSerializer, BucketitemSerializer
+from serializers import (UserSerializer, BucketlistSerializer, 
+                        BucketitemSerializer)
+
 
 class StandardResultsSetPagination(PageNumberPagination):
-	django_paginator_class ='django.core.paginator.Paginator'
-	page_size = 1
-	paginate_by_param = 'page_size'
-	max_page_size = 2
+    django_paginator_class = 'django.core.paginator.Paginator'
+    page_size = 1
+    paginate_by_param = 'page_size'
+    max_page_size = 2
+
 
 class UserList(APIView):
 
@@ -38,6 +41,7 @@ class UserList(APIView):
 
 
 class Bucketlists(APIView):
+
     '''
             List bucket list and items handle GET and POST request 
     '''
@@ -47,17 +51,17 @@ class Bucketlists(APIView):
     pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
-    
+
         blist = Bucketlist.objects.filter(creator=request.user.id)
         if 'search' in request.GET:
-            search =request.GET.get('search')
+            search = request.GET.get('search')
             blist = blist.filter(name__icontains=search)
 
         serializer = BucketlistSerializer(blist, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        request.POST._mutable=True
+        request.POST._mutable = True
         request.data['creator'] = request.user.id
         serializer = BucketlistSerializer(data=request.data)
         if serializer.is_valid():
@@ -74,7 +78,6 @@ class EditBucketlists(APIView):
     # Add permissiion to class
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
-  
 
     def get_blist(self, userid, id):
         # Checks if Buckelist exists
@@ -102,7 +105,7 @@ class EditBucketlists(APIView):
             # Handles Delete Request
         blist = self.get_blist(request.user.id, id)
         blist.delete()
-        return Response({"info":"List Deleted"},status=status.HTTP_204_NO_CONTENT)
+        return Response({"info": "List Deleted"}, status=status.HTTP_204_NO_CONTENT)
 
 
 class BucketitemsView(APIView):
@@ -133,13 +136,13 @@ class BucketitemsView(APIView):
         self.check_user(id, request.user.id)
         item = self.get_items(id)
         serializer = BucketitemSerializer(item, many=True)
-        re#turn Response(serializer.data)
+        re  # turn Response(serializer.data)
 
     def post(self, request, id, format=None):
         # Handles the POST request
-     
+
         self.check_user(id, request.user.id)
-        request.POST._mutable=True
+        request.POST._mutable = True
         request.data['blist'] = id
         request.data['done'] = False
         serializer = BucketitemSerializer(data=request.data)
@@ -157,7 +160,6 @@ class EditBucketitemsView(APIView):
     # Token and user login permissions
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
 
     def check_user(self, id, userid):
         try:
@@ -180,15 +182,15 @@ class EditBucketitemsView(APIView):
     def put(self, request, id, item_id, format=None):
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
-       
+
         serializer = BucketitemSerializer(item, request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, item_id, format=None):
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
         item.delete()
-        return Response('Item Deleted',status=status.HTTP_204_NO_CONTENT)
+        return Response('Item Deleted', status=status.HTTP_204_NO_CONTENT)
