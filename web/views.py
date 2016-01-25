@@ -58,7 +58,7 @@ def login(request):
         return render(request, 'signin.html',)
 
     if request.method == "POST":
-    	
+    	import ipdb; ipdb.set_trace()
         form = {}
         data = {"username": request.POST.get(
             'username'), "password": request.POST.get('password')}
