@@ -5,7 +5,7 @@
 [![Code Issues](https://www.quantifiedcode.com/api/v1/project/36021450ea624bebb9a47d637b01ed9c/badge.svg)](https://www.quantifiedcode.com/app/project/36021450ea624bebb9a47d637b01ed9c)
 
 # Introduction
-Bucketlist is an API created using Flask Framework 
+Bucketlist is an API created using Django rest Framework 
 ### Requirements
 - Postgres
 - Django
