@@ -80,14 +80,14 @@ Bucketlist is an API created using Flask Framework
   - response  : 
   ```python
         {
-              "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0IjoxNDUwNzI2NDE3fQ.eyJ1aWQiOjJ9.cCwq8u_wXZ8wuw9CN3EwhAn7db9w2t_j0o20sVE7rlE"
+              "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0IjoxNDUwNzI2NDE3fQ......."
                }
   ```
 - A token will be returned.
 - Copy the value of the token
 - click on the header and add a key called `Authorization` and paste the copied token in to the value field
   - `JWT <TOKEN_VALUE>` e.g `Authorization : JWT eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0........`
-  - ***the API uses JWT Token for authorization ***
+  - *** the API uses JWT Token for authorization ***
 - This token will be used to access all the necesary endpoints till it expires
 - Note: Authentication relies on the token all other pages can only be accessed once a valid token is presented
 
@@ -171,7 +171,7 @@ Bucketlist is an API created using Flask Framework
                 }
             
       ```
-- To Delete 
+- To Delete Item
     - Navigate to `http://localhost:8000/api/bucketlists/<id>/item/<item_id>/`.
     - Set request method to `DELETE `
     - replace `<id>` with id of bucketlist and `<item_id>` with the id of item you want to edit
@@ -179,6 +179,6 @@ Bucketlist is an API created using Flask Framework
     
 ### Tests
 - To run test use any of the following commands
-    * `coverage run --omit="*env*","migrations*","web*","static","templates","test*" -m unittest discover tests`
-    * `python -m unittest discover tests`
-    * `python tests/test_bucketlist.py`
+    * `coverage run --omit="*env*","migrations*","web*","static","templates","test*" -m manage.py tests`
+    * `python manage.py tests`
+   
