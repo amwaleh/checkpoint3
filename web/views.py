@@ -94,9 +94,7 @@ def listBucketlists(request):
         if 'search' in request.GET:
             search = request.GET.get('search')
             url = domain + '/api/bucketlists/?search={0}'.format(search)
-
         bucketlists = requests.get(url, headers=request.session)
-
         lists = bucketlists.json()
         paginator = Paginator(lists, 10)
         page = request.GET.get('page')
@@ -106,7 +104,7 @@ def listBucketlists(request):
             # If page is not an integer, deliver first page.
             contacts = paginator.page(1)
         except EmptyPage:
-            # If page is out of range), deliver last page of
+            # If page is out of range, deliver last page of
             # results.
             contacts = paginator.page(paginator.num_pages)
         return render(request, 'bucketlist.html', {'lists': contacts, "header": user})
