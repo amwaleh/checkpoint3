@@ -100,7 +100,7 @@ if os.getenv('TRAVIS_BUILD', None):
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'bucketlist',
-            'USER': 'alexmwaleh',
+            'USER': 'travis',
             'PASSWORD': '',
             'HOST': '0.0.0.0',
         }
@@ -122,8 +122,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = "staticfiles"
-STATIC_URL = os.path.join("static/")
+STATIC_URL = "/static/"
 STATICFILES_DIRS = (
-    os.path.join("static"),
+    os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 )
