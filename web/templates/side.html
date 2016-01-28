@@ -1,19 +1,21 @@
 {% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <div id='auth1' class='side dropdown-content curve blue-text aside'>
- <div class="row">
-        <div class="col"> 
-            <i class="large material-icons blue-text">account_circle</i> : {{header.username}}
+    <div class="row">
+        <div class="col">
+            <i class="large material-icons blue-text">account_circle</i> : {{header}}
         </div>
     </div>
     <div class="row">
         <div class="col">
-            {{header.Authorization}}</div>
+            </div>
     </div>
 </div>
 <div class='col  sidemenu z-depth-5 hide-on-med-and-down blue'>
     <div class="nav-wrapper  ">
-        <div> <br>
-<br> 
+        <div>
+            <br>
+            <br>
             <a class='dropdown-button' href='#' data-activates='auth1'>
                 <i class=" medium material-icons white-text prefix">account_circle</i>
             </a>
@@ -22,10 +24,14 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="#" class="blue-grey-text text-lighten-4">Make Hay while the sun shines</a></li>
         </ul>
-
     </div>
-    <a href="#" class=""> </a>
-    <a class="waves-effect waves-light btn light-blue modal-trigger " href="#modal1"><img src="{% static "images/logo.png" %}" width="32" class="left">make list</a>
-</div><div class="divider"></div>
-
-
+    <div class="collection-item row">
+        <a class="waves-effect waves-light btn light-blue modal-trigger " href="#modal1"><img src="{% static "images/logo.png" %}" width="32" class="circle">make list</a>
+    </div><div class="collection-item row"><center>
+    <a class="btn-floating btn-large waves-effect waves-light  " href="/bucketlists/"><i class="material-icons lighten-2">home</i></a></center></div>
+     <div class="collection-item row"><center>
+    <a class="btn-floating btn-large waves-effect waves-light cyan" href="https://github.com/andela-amwaleh/checkpoint3"><i class="fa fa-github"></i> Github</a></center></div>
+     
+</div>
+</div>
+</div>
