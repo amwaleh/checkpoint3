@@ -15,13 +15,11 @@ Including another URLconf
 """
 
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.authtoken import views
-import app.urls 
+import app.urls
 import web.urls
-#from app import viewsets
-
 from rest_framework.routers import DefaultRouter
 admin.autodiscover()
 
@@ -29,16 +27,12 @@ admin.autodiscover()
 # router.register(r'bucketlists',viewsets.BucketlistViewset)
 
 # urlpatterns = router.urls
-urlpatterns = patterns('',
-url(r'^admin/', include(admin.site.urls)),
-# Urls for web 
-url(r'^web/', include('web.urls')),
-# urls for api
-url(r'^api/', include('app.urls')),
-)
-
-urlpatterns += [
+urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
+    # Urls for web
+    url(r'^web/', include('web.urls')),
+    # urls for api
+    url(r'^api/', include('app.urls')),
     url(r'^auth/', include('rest_framework.urls',
-                               namespace='rest_framework')),
-    
+                           namespace='rest_framework')),
 ]
