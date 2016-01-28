@@ -46,7 +46,6 @@ INSTALLED_APPS = (
     'web'
 )
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
@@ -109,6 +108,7 @@ if os.getenv('TRAVIS_BUILD', None):
 else:
     DATABASES['default'] = dj_database_url.config()
 
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -122,7 +122,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = "staticfiles"
-STATIC_URL = os.path.join(BASE_DIR, "static/")
+STATIC_URL = os.path.join("static/")
 STATICFILES_DIRS = (
     os.path.join("static"),
     '/var/www/static/',

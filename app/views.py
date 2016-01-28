@@ -1,11 +1,9 @@
 
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from rest_framework.authentication import TokenAuthentication
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from models import Bucketlist, Bucketitems
@@ -30,7 +28,7 @@ class UserList(APIView):
     def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
-        return Response(serializer.data, status=status.HTTP_201_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         serializer = UserSerializer(data=request.data)
@@ -43,7 +41,7 @@ class UserList(APIView):
 class Bucketlists(APIView):
 
     '''
-            List bucket list and items handle GET and POST request 
+            List bucket list and items handle GET and POST request
     '''
     # Add permission to class
     authentication_classes = (JSONWebTokenAuthentication,)
@@ -73,7 +71,7 @@ class Bucketlists(APIView):
 class EditBucketlists(APIView):
 
     '''
-            List bucket list and items handle GET and POST request 
+            List bucket list and items handle GET and POST request
     '''
     # Add permissiion to class
     authentication_classes = (JSONWebTokenAuthentication,)
@@ -105,7 +103,8 @@ class EditBucketlists(APIView):
             # Handles Delete Request
         blist = self.get_blist(request.user.id, id)
         blist.delete()
-        return Response({"info": "List Deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"info": "List Deleted"},
+                        status=status.HTTP_204_NO_CONTENT)
 
 
 class BucketitemsView(APIView):
@@ -136,7 +135,7 @@ class BucketitemsView(APIView):
         self.check_user(id, request.user.id)
         item = self.get_items(id)
         serializer = BucketitemSerializer(item, many=True)
-        re  # turn Response(serializer.data)
+        return Response(serializer.data)
 
     def post(self, request, id, format=None):
         # Handles the POST request
