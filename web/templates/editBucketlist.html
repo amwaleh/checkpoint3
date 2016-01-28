@@ -1,27 +1,21 @@
 {% block content %}
-
-<div class="">	
-<form action="" method="POST" name="form_editbucketlist" >
-    {% csrf_token %}
-    <legend></legend>
-
-    
-    <div class="col  form-group left">
-    <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
-    </div>
+<div class="">
+    <form action="" method="POST" name="form_editbucketlist">
+        {% csrf_token %}
+        <legend></legend>
+        <div class="col  form-group left">
+            <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
+        </div>
         <div class="col s6 form-group ">
             <div class="input-field">
-            <span class="help-block"></span>
-            <input type="text" class="form-control" id="buck-name" placeholder="bucketlist name" name="name">
-            <input type="hidden" name="update">
+                <span class="help-block"></span>
+                <input type="text" class="form-control" id="buck-name" placeholder="bucketlist name" name="name">
+                <input type="hidden" name="update">
+            </div>
         </div>
-
-    </div>
-    <button type="submit" class="btn blue darken-1">update</button>
-</form>
+        <button type="submit" class="btn blue darken-1">update</button>
+    </form>
 </div>
-
 <script>
-
 </script>
 {% endblock %}
