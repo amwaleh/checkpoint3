@@ -109,6 +109,7 @@ if os.getenv('TRAVIS_BUILD', None):
 else:
     DATABASES['default'] = dj_database_url.config()
 
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
