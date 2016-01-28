@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8"> {% load staticfiles %}
     <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon' />
     <!-- Compiled and minified CSS -->
@@ -21,13 +20,12 @@
             <!-- Navbar goes here -->
             <nav class="light-blue dark-4 z-depth-2 fixed">
                 <div class="logoe l12 s12 left">
-                    <h5><a href='/web/bucketlists/'><img src="{% static "images/logo.png" %}" width="32" alt="">bucketlist </a></h5> 
+                    <h5><a href='/web/bucketlists/'><img src="{% static "images/logo.png" %}" width="32" alt="">bucketlist </a></h5>
                 </div><a href="/web/logout" class="circle right">logout<i class="material-icons right">https</i> </a>
             </nav>
-          
         </div>
         <!-- side -->
-{%include 'side.html'%}
+        {%include 'side.html'%}
         <!-- end side -->
         <!-- Page Layout here -->
         <div class="main">
@@ -41,7 +39,6 @@
                         <li><a class="btn-floating yellow darken-1 modal-trigger" href="#modal6"><i class="material-icons">search</i></a></li>
                     </ul>
                 </div>
-
                 {% block content %}{% endblock %} {%include 'modal.html'%}
             </div>
         </div>
@@ -51,8 +48,6 @@ $(document).ready(function() {
     $('.slider').slider({
         full_width: true
     });
-});
-
 // Initialize collapse button
 $('.button-collapse').sideNav({
     menuWidth: 300, // Default is 240
@@ -61,8 +56,7 @@ $('.button-collapse').sideNav({
 });
 // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 $('.collapsible').collapsible();
-</script>
-<script>
+
 $('.dropdown-button').dropdown({
     inDuration: 300,
     outDuration: 225,
@@ -71,15 +65,20 @@ $('.dropdown-button').dropdown({
     gutter: 0, // Spacing from edge
     belowOrigin: false, // Displays dropdown below the button
     alignment: 'left' // Displays dropdown with edge aligned to the left of button
-$('.collapsible').collapsible({
+});
+    $('.collapsible').collapsible({
         accordion: true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
 
     });
 
     $('.modal-trigger').leanModal();
-     $('.carousel').carousel();
-     $('.parallax').parallax();
+    $('.carousel').carousel();
+    $('.parallax').parallax();
 });
+
+
+
+
 
 
 
@@ -104,8 +103,6 @@ function edititem(id, item, name, done) {
     document.form_edititem.action = "/web/bucketlists/" + id + "/items/" + item + "/?edit=1"
 
 }
-
-
 </script>
 
 </html>
