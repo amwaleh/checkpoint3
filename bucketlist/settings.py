@@ -95,19 +95,9 @@ WSGI_APPLICATION = 'bucketlist.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-#DATABASES['default'] =  dj_database_url.config()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bucketlist',
-        'HOST': '0.0.0.0',
-        'PORT': '5432',
-    }
-}
+DATABASES = {}
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
+DATABASES['default'] = dj_database_url.config()
 
 LANGUAGE_CODE = 'en-us'
 
@@ -125,7 +115,5 @@ STATIC_ROOT = "staticfiles"
 STATIC_URL = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = (
     os.path.join("static"),
-    os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 )
-
