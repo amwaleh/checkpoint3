@@ -5,17 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from rest_framework.pagination import PageNumberPagination
 from models import Bucketlist, Bucketitems
 from serializers import (UserSerializer, BucketlistSerializer,
                          BucketitemSerializer)
-
-
-class StandardResultsSetPagination(PageNumberPagination):
-    django_paginator_class = 'django.core.paginator.Paginator'
-    page_size = 1
-    paginate_by_param = 'page_size'
-    max_page_size = 2
 
 
 class UserList(APIView):
@@ -40,16 +32,15 @@ class UserList(APIView):
 
 class Bucketlists(APIView):
 
-    '''
+    """
             List bucket list and items handle GET and POST request
-    '''
+    """
     # Add permission to class
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
-    pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
-
+        # handles Get request
         blist = Bucketlist.objects.filter(creator=request.user.id)
         if 'search' in request.GET:
             search = request.GET.get('search')
@@ -59,6 +50,7 @@ class Bucketlists(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        # handles Post request
         request.POST._mutable = True
         request.data['creator'] = request.user.id
         serializer = BucketlistSerializer(data=request.data)
@@ -70,9 +62,9 @@ class Bucketlists(APIView):
 
 class EditBucketlists(APIView):
 
-    '''
+    """
             List bucket list and items handle GET and POST request
-    '''
+    """
     # Add permissiion to class
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
@@ -109,9 +101,9 @@ class EditBucketlists(APIView):
 
 class BucketitemsView(APIView):
 
-    '''
+    """
             Handles POST and GET request for Editing bucketlist items
-    '''
+    """
     # Token and user login permissions
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -152,9 +144,9 @@ class BucketitemsView(APIView):
 
 class EditBucketitemsView(APIView):
 
-    '''
+    """
             Handles PUT and DELETE request for Editing an item in a Bucketlist
-    '''
+    """
     # Token and user login permissions
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

@@ -14,7 +14,7 @@ def index(request):
 
 
 def check_token(request):
-    # Check if the user is logged in and the token is valid
+    """Check if the user is logged in and the token is valid"""
     if 'Authorization' not in request.session:
         return redirect('/web/login/', )
     data = {'token': request.session['token']}
@@ -36,7 +36,7 @@ def check_token(request):
 
 
 def signup(request):
-    # handles signup
+    """handles signup"""
     if request.method == "POST":
         data = {
             "username": request.POST.get('username'),
@@ -52,7 +52,7 @@ def signup(request):
 
 
 def login(request):
-    # Handles login
+    """Handles login"""
     if request.method == "GET":
         return render(request, 'signin.html',)
 
@@ -74,7 +74,7 @@ def login(request):
 
 
 def list_bucketlists(request):
-    # List all bucketlist a user has created
+    """List all bucketlist a user has created"""
     if check_token(request) is not True:
         return render(request, 'signin.html',)
 
@@ -127,6 +127,7 @@ def list_bucketlists(request):
 
 
 def list_items(request, id):
+    """ Handles operation request on items in a list"""
     if check_token(request)is not True:
         return render(request, 'signin.html',)
     # add an item
@@ -166,7 +167,7 @@ def list_items(request, id):
 
 
 def edit_items(request, id, item):
-    # Handles items within a bucketlist
+    """Handles items within a bucketlist"""
     if check_token(request) is not True:
         return render(request, 'signin.html',)
 
@@ -203,7 +204,7 @@ def edit_items(request, id, item):
 
 
 def logout(request):
-    # logs out a user from the system
+    """logs out a user from the system"""
     form = ""
     if request.method == 'GET':
         del request.session['Authorization']

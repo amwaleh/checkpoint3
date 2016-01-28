@@ -44,16 +44,16 @@ View live demo of the API and Webpage here:-
 |------------------------------------------|-----------------------------------|
 | POST /auth/login                         | Logs a user in                    |
 | POST /api/users                          | Create a user                   |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') GET /auth/logout                         | Logs a user out                   |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') POST /api/bucketlists/                       | Create a new bucket list          |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') GET /api/bucketlists/                        | List all the created bucket lists |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') GET /api/bucketlists/<id>                    | Get single bucket list            |
-|![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') PUT /api/bucketlists/<id>                    | Update this bucket list           |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') DELETE /api/bucketlists/<id>                 | Delete this single bucket list    |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') POST /api/bucketlists/<id>/items/            | Create a new item in bucket list  |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') PUT /api/bucketlists/<id>/items/<item_id>    | Update a bucket list item         |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') DELETE /api/bucketlists/<id>/items/<item_id> | Delete an item in a bucket list   |
-- NB. ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') Need login or Authorization Token 
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') GET /auth/logout                         | Logs a user out                   |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') POST /api/bucketlists/                       | Create a new bucket list          |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') GET /api/bucketlists/                        | List all the created bucket lists |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') GET /api/bucketlists/<id>                    | Get single bucket list            |
+|![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') PUT /api/bucketlists/<id>                    | Update this bucket list           |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') DELETE /api/bucketlists/<id>                 | Delete this single bucket list    |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') POST /api/bucketlists/<id>/items/            | Create a new item in bucket list  |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') PUT /api/bucketlists/<id>/items/<item_id>    | Update a bucket list item         |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') DELETE /api/bucketlists/<id>/items/<item_id> | Delete an item in a bucket list   |
+- NB. ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-blue-16.png 'logo') Need login or Authorization Token 
 
 ### Accessing API
 - Once the server is runnng, navigate to `http://localhost:8000/api/users` using Postman 

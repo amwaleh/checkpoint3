@@ -12,12 +12,12 @@ factory = APIRequestFactory()
 
 class BucketlistTest(TestCase):
 
-    '''
+    """
        Test Views on the Front End
-    '''
+    """
 
     def setUp(self):
-        '''Setting for test'''
+        """Setting for test"""
 
         self.factory = APIRequestFactory()
         self.client = APIClient()
@@ -29,9 +29,9 @@ class BucketlistTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_require_login(self):
-        '''
+        """
            test if login is able
-        '''
+        """
 
         url = '/web/login/'
         data = {"username": "admintest", "password": "password"}
@@ -40,23 +40,22 @@ class BucketlistTest(TestCase):
         response = self.client.get('/web/')
 
     def test_homepage(self):
-        '''
+        """
           testing home page
-        '''
+        """
         response = self.client.get('/web/')
         self.assertEqual(response.status_code, 200)
 
     def test_bucketlistpage(self):
-        '''
+        """
           testing main dashboard
-        '''
+        """
         response = self.client.get('/web/bucketlists/')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'multiple Lists')
 
     def test_listpage(self):
-        '''
+        """
            testing single page dashboad
-        '''
+        """
         response = self.client.get('/web/bucketlists/1/')
         self.assertEqual(response.status_code, 200)

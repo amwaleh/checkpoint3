@@ -13,12 +13,12 @@ factory = APIRequestFactory()
 
 class BucketlistTest(TestCase):
 
-    ''' Test for Api responses '''
+    """ Test for Api responses """
 
     def setUp(self):
-        '''
+        """
            Setting for test
-        '''
+        """
         self.factory = APIRequestFactory()
         self.client = APIClient()
         self.bucketlist = None
@@ -29,7 +29,7 @@ class BucketlistTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def _require_login(self):
-        '''set up login'''
+        """set up login"""
 
         url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
@@ -37,8 +37,7 @@ class BucketlistTest(TestCase):
         return response.data
 
     def test_user(self):
-        ''' Test if user exist in the user table'''
-        
+        """ Test if user exist in the user table"""
         data = {"username": "admintest2", "password": "password"}
         response = self.client.post('/api/users/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -53,16 +52,13 @@ class BucketlistTest(TestCase):
         response = self.client.post('/api/users/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-
-
-
     def _get_token(self):
-        '''Setting token to header'''
+        """Setting token to header"""
         token = self._require_login()
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token['token'])
 
     def test_2_token_generation(self):
-        '''Test if a token has been produced using credntials'''
+        """Test if a token has been produced using credntials"""
         url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
         response = self.client.post(url, data, format='json')
@@ -72,7 +68,7 @@ class BucketlistTest(TestCase):
         self.assertIn('token', response.data)
 
     def test_3_page_authorization(self):
-        '''Check if protected page can be accessed without authorization'''
+        """Check if protected page can be accessed without authorization"""
         response = self.client.get("/api/bucketlists/", format='json')
         self.assertEqual(response.status_code, 401)
         response = self.client.get(
@@ -80,7 +76,7 @@ class BucketlistTest(TestCase):
         self.assertNotEqual(response.status_code, 401)
 
     def test_4_token_access(self):
-        '''use token to access authicated page:'''
+        """use token to access authicated page:"""
 
         # http://www.django-rest-framework.org/api-guide/testing/#authenticating
         token = self._require_login()
@@ -89,14 +85,15 @@ class BucketlistTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_5_bucketlist(self):
-        '''Test Bucketlist creation'''
+        """Test Bucketlist creation"""
 
         self._get_token()
         data = {'name': 'bucketlist1', 'creator': self.user.id}
         response = self.client.post("/api/bucketlists/", data, format='json')
         self.assertEqual(response.status_code, 201)
         self.bucketlist = Bucketlist.objects.first()
-        response = self.client.get("/api/bucketlists/?search=bucketlist1", format='json')
+        response = self.client.get("/api/bucketlists/?search=bucketlist1",
+                                   format='json')
         self.assertIn('name', response.json()[0])
         # Test  invalid data
         data = {'name': '', 'creator': ''}
@@ -119,7 +116,7 @@ class BucketlistTest(TestCase):
         self.assertEqual(Bucketlist.objects.count(), 0)
 
     def test_6_add_edit_item(self):
-        '''Test editing of items'''
+        """Test editing of items"""
 
         self._get_token()
         data = {'name': 'bucketlist1', 'creator': self.user.id}

@@ -5,9 +5,9 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
 
-    '''
+    """
         Serializer handles User registration signin and signout
-    '''
+    """
     class Meta:
         model = User
         fields = (
@@ -16,6 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
     def create(self, validated_data):
+        # override create function
         user = User.objects.create(username=validated_data['username'],)
         user.set_password(validated_data['password'])
         user.save()
@@ -24,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class BucketitemSerializer(serializers.ModelSerializer):
 
-    ''' serializer Handles items in the bucketlist'''
+    """ serializer Handles items in the bucketlist"""
     class Meta:
         model = Bucketitems
         fileds = ('id', 'blist', 'name', 'done', 'created_on', 'modified_on')
@@ -32,7 +33,7 @@ class BucketitemSerializer(serializers.ModelSerializer):
 
 class BucketlistSerializer(serializers.ModelSerializer):
 
-    ''' Serializer Handles Bucketlists '''
+    """ Serializer Handles Bucketlists """
 
     items = BucketitemSerializer(many=True,
                                  required=False,
