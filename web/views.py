@@ -7,6 +7,7 @@ port = int(os.environ.get("PORT", 8000))
 domain = 'http://0.0.0.0:{}'.format(port)
 user = {}
 
+
 def index(request):
     form = "welcome"
     return render(request, 'index.html', {'form': form})
@@ -18,7 +19,7 @@ def check_token(request):
         return redirect('/web/login/', )
     data = {'token': request.session['token']}
     verify = requests.post(domain + '/api/api-token-verify/', data)
-
+    # verify if the token is still valid
     if verify.status_code == 200:
         # try to refresh the expired token
         new_token = requests.post(domain + '/api/api-token-refresh/', data)
@@ -28,7 +29,9 @@ def check_token(request):
             token = 'JWT {}'.format(new_token['token'])
             request.session['Authorization'] = token
             return True
+        # else if no token was returned
         return redirect('/web/login/', )
+        # Token has expired return user to login
     return False
 
 
@@ -65,7 +68,6 @@ def login(request):
             request.session['content_type'] = 'application/json'
             request.session['username'] = request.POST.get('username')
             request.session['token'] = form['token']
-
             return redirect('/web/bucketlists/', )
         form = {"info": " Wrong password or Username"}
         return render(request, 'signin.html', {'form': form})
@@ -98,7 +100,7 @@ def list_bucketlists(request):
             url = domain + '/api/bucketlists/?search={0}'.format(search)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
-        paginator = Paginator(lists, 10)
+        paginator = Paginator(lists, 4)
         page = request.GET.get('page')
         try:
             contacts = paginator.page(page)
@@ -110,7 +112,8 @@ def list_bucketlists(request):
             # results.
             contacts = paginator.page(paginator.num_pages)
         return render(request, 'bucketlist.html',
-                      {'lists': contacts, "header": request.session['username']})
+                      {'lists': contacts,
+                       "header": request.session['username']})
     if request.method == 'POST':
         # Create a new bucketlist
         name = request.POST.get('name')
@@ -118,7 +121,8 @@ def list_bucketlists(request):
         request.session['content_type'] = 'application/json'
         data = {"name": name, "creator": creator}
         bucketlists = requests.post(
-            domain + '/api/bucketlists/', data, headers=request.session['username'])
+            domain + '/api/bucketlists/', data,
+            headers=request.session)
     return redirect('/web/bucketlists/', )
 
 
@@ -137,6 +141,7 @@ def list_items(request, id):
             data['name'] = name
             requests.put(url, data, headers=request.session)
             return redirect('/web/bucketlists/{}/'.format(id), )
+
         data = {"name": name}
         requests.post(
             domain + '/api/bucketlists/{}/items/'.format(id),
@@ -145,22 +150,29 @@ def list_items(request, id):
             domain + '/api/bucketlists/{}/'.format(id),
             headers=request.session)
         lists = bucketlists.json()
-        return render(request, 'list.html', {'key': lists, "header": request.session['username']})
+        return render(request, 'list.html',
+                      {'key': lists,
+                       "header": request.session['username']})
 
     if request.method == 'GET':
+        # List all available lists created by user
         bucketlists = requests.get(
             domain + '/api/bucketlists/{}/'.format(id),
             headers=request.session)
         lists = bucketlists.json()
-        return render(request, 'list.html', {'key': lists, "header": request.session['username']})
+        return render(request, 'list.html',
+                      {'key': lists,
+                       "header": request.session['username']})
 
 
 def edit_items(request, id, item):
+    # Handles items within a bucketlist
     if check_token(request) is not True:
         return render(request, 'signin.html',)
 
     if request.method == 'GET':
         if 'delete' in request.GET:
+            # perform delete request of an item
             requests.delete(
                 domain + '/api/bucketlists/{0}/items/{1}/'.format(id, item),
                 headers=request.session)
@@ -173,10 +185,11 @@ def edit_items(request, id, item):
                       {'lists': lists, "header": request.session['username']})
 
     if request.method == 'POST':
+        # Handles the creation of a new item to a list
         name = request.POST.get('name')
         done = request.POST.get('done')
-
         if 'update' in request.POST:
+            # update the information contained in an item
             item_res = requests.get(
                 domain + "/api/bucketlists/{0}/items/{1}/".format(id, item),
                 headers=request.session)
@@ -190,7 +203,7 @@ def edit_items(request, id, item):
 
 
 def logout(request):
-
+    # logs out a user from the system
     form = ""
     if request.method == 'GET':
         del request.session['Authorization']

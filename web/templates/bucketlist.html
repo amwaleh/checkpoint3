@@ -45,7 +45,7 @@
                             <!-- end icon menu -->
                             <div class="img-collapsible   lighten-1  z-depth-1 " id="img-{{forloop.counter0}}">
                                 <div class=" waves-effect waves-light kello center circle white-text  accent-1   tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
-                                    {{key.name.0}}
+                                    <a href="/bucketlists/{{key.id}}/" class='white-text'>{{key.name.0}}</a>
                                 </div>
                                 <h5 class="valign left-align truncate"> {{key.name }}</h5>
                             </div>
@@ -89,7 +89,7 @@
                                                 </li>
                                                 <li class="collection-item blue-grey-text">
                                                     {% if item.done %}
-                                                    <img src="{% static "images/happy.png" %}" width=3 2>{%else%}
+                                                    <img src="{% static "images/happy.png" %}" width=32>{%else%}
                                                     <img src="{% static "images/sad.png" %}" width=3 2>{% endif%}
                                                     <label for="">Completed </label>
                                                     {{item.done}}

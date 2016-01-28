@@ -1,14 +1,10 @@
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
-from django.core.urlresolvers import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
 from app.models import Bucketlist, Bucketitems
 from django.contrib.auth.models import User
-from app.models import Bucketlist, Bucketitems
-from django.contrib.auth.models import User
+
 
 factory = APIRequestFactory()
 
@@ -31,7 +27,7 @@ class BucketlistTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def _require_login(self):
-          # set up login
+        # set up login
 
         url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
@@ -44,7 +40,7 @@ class BucketlistTest(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token['token'])
 
     def test_2_token_generation(self):
-      # Test if a token has been produced using credntials
+        # Test if a token has been produced using credntials
         url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
         response = self.client.post(url, data, format='json')
@@ -61,7 +57,7 @@ class BucketlistTest(TestCase):
             "auto_find_instance_path()/users/", format='json')
         self.assertNotEqual(response.status_code, 401)
 
-    def test_4_tokenAccess(self):
+    def test_4_token_access(self):
         # use token to access authicated page:
         # http://www.django-rest-framework.org/api-guide/testing/#authenticating
         token = self._require_login()

@@ -5,14 +5,21 @@
 [![Code Issues](https://www.quantifiedcode.com/api/v1/project/36021450ea624bebb9a47d637b01ed9c/badge.svg)](https://www.quantifiedcode.com/app/project/36021450ea624bebb9a47d637b01ed9c)
 
 # Introduction
-Bucketlist is an API created using Django rest Framework 
+Bucketlist is an API created using Django rest-Framework 
+
 ### Requirements
 - Postgres
 - Django
 - Django restFramework
 
+### Demo 
+View live demo of the API and Webpage here:-
+- [API](https://blist-django.herokuapp.com/api/)
+- [webpage](https://blist-django.herokuapp.com/)
+
 
 ### Installation
+
 ####Setup Postgress
 - Download the repo
 - Download and install [postgres](http://www.postgresql.org/)
@@ -36,16 +43,16 @@ Bucketlist is an API created using Django rest Framework
 |------------------------------------------|-----------------------------------|
 | POST /auth/login                         | Logs a user in                    |
 | POST /api/users                          | Create a user                   |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') GET /auth/logout                         | Logs a user out                   |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') POST /api/bucketlists/                       | Create a new bucket list          |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') GET /api/bucketlists/                        | List all the created bucket lists |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') GET /api/bucketlists/<id>                    | Get single bucket list            |
-|![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') PUT /api/bucketlists/<id>                    | Update this bucket list           |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') DELETE /api/bucketlists/<id>                 | Delete this single bucket list    |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') POST /api/bucketlists/<id>/items/            | Create a new item in bucket list  |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') PUT /api/bucketlists/<id>/items/<item_id>    | Update a bucket list item         |
-| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') DELETE /api/bucketlists/<id>/items/<item_id> | Delete an item in a bucket list   |
-- NB. ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-green-16.png 'logo') Need login or Authorization Token 
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') GET /auth/logout                         | Logs a user out                   |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') POST /api/bucketlists/                       | Create a new bucket list          |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') GET /api/bucketlists/                        | List all the created bucket lists |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') GET /api/bucketlists/<id>                    | Get single bucket list            |
+|![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') PUT /api/bucketlists/<id>                    | Update this bucket list           |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') DELETE /api/bucketlists/<id>                 | Delete this single bucket list    |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') POST /api/bucketlists/<id>/items/            | Create a new item in bucket list  |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') PUT /api/bucketlists/<id>/items/<item_id>    | Update a bucket list item         |
+| ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') DELETE /api/bucketlists/<id>/items/<item_id> | Delete an item in a bucket list   |
+- NB. ![secure](https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/lock-circle-red-16.png 'logo') Need login or Authorization Token 
 
 ### Accessing API
 - Once the server is runnng, navigate to `http://localhost:8000/api/users` using Postman 
@@ -70,6 +77,7 @@ Bucketlist is an API created using Django rest Framework
 
 
 ### Login
+
 - Using `POST` method on the Postman
 - Navigate to `http://localhost:8000/auth/login/`.
 - Enter username and password 
@@ -83,6 +91,7 @@ Bucketlist is an API created using Django rest Framework
               "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0IjoxNDUwNzI2NDE3fQ......."
                }
   ```
+
 - A token will be returned.
 - Copy the value of the token
 - click on the header and add a key called `Authorization` and paste the copied token in to the value field
@@ -126,7 +135,7 @@ Bucketlist is an API created using Django rest Framework
 ### Adding Item
 -  Navigate to `http://localhost:8000/api/bucketlists/<id>/items/`.
 -  Replace `<id>` with id of bucketlist you want to add item to 
-- Set request method to `POST`
+-  Set request method to `POST`
   - request : `{"name":"buy equipment"}`
   - response :
   ```python

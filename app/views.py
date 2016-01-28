@@ -85,7 +85,7 @@ class EditBucketlists(APIView):
             raise Http404
 
     def get(self, request, id, format=None):
-            # handles the GEt request
+        # handles the GEt request
         blist = self.get_blist(request.user.id, id)
         serializer = BucketlistSerializer(blist)
         return Response(serializer.data)
@@ -100,7 +100,7 @@ class EditBucketlists(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
-            # Handles Delete Request
+        # Handles Delete Request
         blist = self.get_blist(request.user.id, id)
         blist.delete()
         return Response({"info": "List Deleted"},
@@ -131,7 +131,7 @@ class BucketitemsView(APIView):
             raise Http404
 
     def get(self, request, id, format=None):
-            # Handles the GET request
+        # Handles the GET request
         self.check_user(id, request.user.id)
         item = self.get_items(id)
         serializer = BucketitemSerializer(item, many=True)
@@ -139,7 +139,6 @@ class BucketitemsView(APIView):
 
     def post(self, request, id, format=None):
         # Handles the POST request
-
         self.check_user(id, request.user.id)
         request.POST._mutable = True
         request.data['blist'] = id
@@ -161,24 +160,29 @@ class EditBucketitemsView(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def check_user(self, id, userid):
+        # Confirm the cureent user has right to edit item
         try:
             return Bucketlist.objects.get(id=id, creator=userid)
         except Bucketlist.DoesNotExist:
             raise Http404
 
     def get_items(self, list_id, item_id):
+        # Gets item that are specific to current user
         try:
             return Bucketitems.objects.get(blist=list_id, id=item_id)
         except Bucketitems.DoesNotExist:
             raise Http404
 
     def get(self, request, id, item_id, format=None):
+        # override get method to get results pegged on current user
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
         serializer = BucketitemSerializer(item)
         return Response(serializer.data)
 
     def put(self, request, id, item_id, format=None):
+        # Handles the updating of item with restriction to items created by
+        # current user
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
 
@@ -189,6 +193,7 @@ class EditBucketitemsView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, item_id, format=None):
+        # handles deletion of items pegged to the current user
         self.check_user(id, request.user.id)
         item = self.get_items(id, item_id)
         item.delete()

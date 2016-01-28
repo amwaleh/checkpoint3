@@ -17,7 +17,6 @@ import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = 'oq^fz-4f6l5r@&pvx@5*j=5qpo6@$geyk##ty^)f(o^42%v4o^'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 

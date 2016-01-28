@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8"> {% load staticfiles %}
     <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon' />
@@ -10,68 +11,66 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static "js/materialize.min.js" %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>bucketlist</title><script src="{% static "js/script.js" %}"></script>
+    <title>bucketlist</title>
+    <script src="{% static "js/script.js" %}"></script>
 </head>
+
 <body onload="loadDoc()">
-{% load staticfiles %}
-<div class="curve centered intro  z-depth-5" style="z-index:999999; bodrde: 1px solid" height='500px'>
-
-
-<h5><a class="btn blue large" href="/login/"><i class="material-icons"> wc </i> Join the movement</a></h5>
-
-
-
-
-</div>
-<div class="slider fullscreen intro-slider" >
-    <ul class="slides">
-      <li>
-        <img src="{% static "images/travel.jpeg" %}"> <!-- random image -->
-        <div class="caption c">
-          <h3>Only Those who dare ,truly live..  </h3>
-          <h5 class="light grey-text text-lighten-3">We are young, we have too much to lose..</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/dine.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3> Whatever your dreams are, take them very very seriously</h3>
-          <h5 class="light grey-text text-lighten-3">The view on life isn't just change , but time</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/party.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3>Today is the youngest you will ever be</h3>
-          <h5 class="light grey-text text-lighten-3">it doesnt matter how slow you go... dont stop</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/skydive.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3>Without a goal, you can’t score !</h3>
-          <h5 class="light grey-text text-lighten-3 centered">Accept who you are. Unless you're a serial killer.</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/paint.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3>You will never find time for anything. If you want time you must make it</h3>
-          <h5 class="light grey-text text-lighten-3">Accept who you are. Unless you're a serial killer.</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
-
+    {% load staticfiles %}
+    <div class="curve centered intro  z-depth-5" style="z-index:999999; bodrde: 1px solid" height='500px'>
+        <h5><a class="btn blue large" href="/login/"><i class="material-icons"> wc </i> Join the movement</a></h5>
+    </div>
+    <div class="slider fullscreen intro-slider">
+        <ul class="slides">
+            <li>
+                <img src="{% static "images/travel.jpeg" %}">
+                <!-- random image -->
+                <div class="caption c">
+                    <h3> Without a goal, you can’t score </h3>
+                    <h5 class="light grey-text text-lighten-3">We are young, we have too much to lose..</h5>
+                </div>
+            </li>
+            <li>
+                <img src="{% static "images/dine.jpeg" %}">
+                <!-- random image -->
+                <div class="caption ">
+                    <h3> Whatever your dreams are, take them very very seriously</h3>
+                    <h5 class="light grey-text text-lighten-3">The view on life isn't just change , but time</h5>
+                </div>
+            </li>
+            <li>
+                <img src="{% static "images/party.jpeg" %}">
+                <!-- random image -->
+                <div class="caption ">
+                    <h3>Today is the youngest you will ever be</h3>
+                    <h5 class="light grey-text text-lighten-3">it doesnt matter how slow you go... dont stop</h5>
+                </div>
+            </li>
+            <li>
+                <img src="{% static "images/skydive.jpeg" %}">
+                <!-- random image -->
+                <div class="caption ">
+                    <h3> Only Those who dare ,truly live.. !</h3>
+                    <h5 class="light grey-text text-lighten-3 centered">Accept who you are. Unless you're a serial killer.</h5>
+                </div>
+            </li>
+            <li>
+                <img src="{% static "images/paint.jpeg" %}">
+                <!-- random image -->
+                <div class="caption ">
+                    <h3>You will never find time for anything. If you want time you must make it</h3>
+                    <h5 class="light grey-text text-lighten-3">Accept who you are. Unless you're a serial killer.</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
 </body>
-
 <script>
-	
 $('.slider').slider({
     full_width: true,
-    indicators:false,
-    
-  });
+    indicators: false,
 
+});
 </script>
+
 </html>

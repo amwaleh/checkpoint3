@@ -1,1 +1,0 @@
-web: gunicorn bucketlist.bucketlist.wsgi --log-file -
