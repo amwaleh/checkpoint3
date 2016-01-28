@@ -30,6 +30,7 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # Urls for web
+    url(r'^', include('web.urls')),
     url(r'^web/', include('web.urls')),
     # urls for api
     url(r'^api/', include('app.urls')),

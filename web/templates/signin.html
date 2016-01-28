@@ -9,16 +9,19 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static "js/materialize.min.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>bucketlist</title>
 </head>
-<div class="intro light-blue accent-4 z-depth-1 s12">
-    <h1 class="grey-text text-lighten-5">Bucketlist </h1> {% block content %}
+<div class="intro  light-blue accent-4 s12 z-depth-2 " style="backgrouned-color:rgba(1,87,205,0.9)">
+    <h1 class="grey-text text-lighten-5 " style="text-shadow: 1px 1px #000"> Bucketlist</h1> {% block content %}
     <div class="login-wrapper s12 l12 ">
         <form method='POST' action='/web/login/' class="curve inner-log z-depth-2 valign  col s12  offset-s6">
             {% csrf_token %}
             <div class="white ">
                 <div class="light-blue">
+                
                     <h4><i class="material-icons curve large white-text prefix">account_circle</i></h4></div>
                 <div class="error"> {% for r, k in form.items%} {{k}} {% endfor %}
                 </div>
@@ -42,7 +45,7 @@
         @mwalex
         <div class="row">
             <div class="col s12 m6 l10 right ">
-                <div class=" curve white" style=" opacity: 0.7;">
+                <div class=" curve white" style="background-color:rgba(1,87,155,0.6)">
                     <div class="card-content black-text">
                         <span class="card-title"> Make hay while the sun shines</span>
                         <p>Sign up today and plan the reality of every dream </p>
@@ -53,8 +56,43 @@
         </div>
     </div>
 </div>
-<div class="parallax"> <img src="{% static "images/travel.jpeg" %}">
-</div>
+<!-- <div class="parallax"> <img src="{% static "images/travel.jpeg" %}">
+</div> -->
+
+
+
+<div class="slider fullscreen intro-slider" >
+    <ul class="slides">
+      <li>
+        <img src="{% static "images/travel.jpeg" %}"> <!-- random image -->
+        <div class="caption c">
+          <h3>  </h3>
+          <h5 class="light grey-text text-lighten-3">We are young, we have too much to lose..</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static "images/dine.jpeg" %}"> <!-- random image -->
+        <div class="caption ">
+          <h3> yolo</h3>
+          <h5 class="light grey-text text-lighten-3">The view on life isn't just change , but time</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static "images/party.jpeg" %}"> <!-- random image -->
+        <div class="caption ">
+          <h3></h3>
+          <h5 class="light grey-text text-lighten-3">it doesnt matter how slow you go... dont stop</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static "images/paint.jpeg" %}"> <!-- random image -->
+        <div class="caption ">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Accept who you are. Unless you're a serial killer.</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
 <!-- Modal Trigger -->
 <!-- Modal Structure -->
 <div id="modal1" class="modal fixed curve">
@@ -94,11 +132,15 @@
             // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
             $('.modal-trigger').leanModal();
             $('.parallax').parallax();
+             $(document).ready(function(){
+      
         });
 
-
+$('.slider').slider({indicator: false});
+    });
         function submitForm() {
             $('.signup').submit();
+
         }
         </script>
         {% endblock %}

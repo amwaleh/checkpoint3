@@ -3,17 +3,17 @@
     <form action="" method="POST" name="form_editbucketlist">
         {% csrf_token %}
         <legend></legend>
-        <div class="col  form-group left">
+        <div class="row   ">
             <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
         </div>
-        <div class="col s6 form-group ">
+        <div class="row ">
             <div class="input-field">
                 <span class="help-block"></span>
+                <i class="material-icons prefix ">shopping_basket</i>
                 <input type="text" class="form-control" id="buck-name" placeholder="bucketlist name" name="name">
-                <input type="hidden" name="update">
             </div>
-        </div>
-        <button type="submit" class="btn blue darken-1">update</button>
+        </div><input type="hidden" name="update">
+        <button type="submit" class="btn blue darken-1 right">update<i class="material-icons ">send</i></button>
     </form>
 </div>
 <script>

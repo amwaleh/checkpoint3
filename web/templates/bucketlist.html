@@ -35,7 +35,7 @@
                     <li class='curve z-depth-1'>
                         <!-- check if the bucketlist has any items in it and create a notifictation -->
                         <div class="curve  blue darken-1 hoverable ">&nbsp;{% if key.items|length > 0 %}
-                            <span class=" right amber  lighten-4   hoverable "> <a   href="#!">{{key.items|length}} <i class="tiny material-icons circle cyan-text">toc</i> </a>
+                            <span class=" right amber  lighten-2  hoverable "><i class="tiny material-icons circle cyan-text">toc</i>  <a   href="#!" class="">{{key.items|length}} </a>
                             
 
                             </span> {%endif%}
@@ -44,7 +44,7 @@
                             <a href="#modal3" class="modal-trigger" onclick="editbucketlist({{key.id}}, '{{key.name}}')"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist">mode_edit</i></a>
                             <!-- end icon menu -->
                             <div class="img-collapsible   lighten-1  z-depth-1 " id="img-{{forloop.counter0}}">
-                                <div class=" waves-effect waves-light kello center circle cyan-text  accent-1 white z-depth-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
+                                <div class=" waves-effect waves-light kello center circle white-text  accent-1   tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
                                     {{key.name.0}}
                                 </div>
                                 <h5 class="valign left-align truncate"> {{key.name }}</h5>
