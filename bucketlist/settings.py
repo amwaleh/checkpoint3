@@ -96,8 +96,18 @@ WSGI_APPLICATION = 'bucketlist.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 DATABASES = {}
-
-DATABASES['default'] = dj_database_url.config()
+if os.getenv('TRAVIS_BUILD', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'bucketlist',
+            'USER': 'travis',
+            'PASSWORD': '',
+            'HOST': '0.0.0.0',
+        }
+    }
+else:
+    DATABASES['default'] = dj_database_url.config
 
 LANGUAGE_CODE = 'en-us'
 
