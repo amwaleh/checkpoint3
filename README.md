@@ -178,9 +178,7 @@ View live demo of the API and Webpage here:-
     "done": true,
     "name": "buy equipment"
   }
-
-            
-   ```
+ ```
   
 - To Delete Item
     - Navigate to `http://localhost:8000/api/bucketlists/<id>/item/<item_id>/`.
