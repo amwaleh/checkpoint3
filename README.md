@@ -6,7 +6,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/e0914feff72a4b8fa55c84b54a4fb8ee)](https://www.codacy.com/app/alex-mwaleh/checkpoint3)
 
 # Introduction
-Bucketlist is an API created using Django rest-Framework 
+Bucketlist is an API created using Django REST Framework 
 
 ### Requirements
 - Postgres
@@ -32,10 +32,9 @@ View live demo of the API and Webpage here:-
  * `Python manage.py makemigrations`
  * `python manage.py  migrate`
  * `python manage.py runserver` to start the server
- * In your browser navigate to `http://localhost:8000/web/`
-  - this will lead to the web page 
- * You can also navigate to `http://localhost:8000/api/`
-  - to access the API view 
+ * To access the web page  navigate to `http://localhost:8000/web/`
+ * To access the API navigate to `http://localhost:8000/api/`
+  on your browser
  
 
 ### API Endpoints
@@ -86,6 +85,7 @@ View live demo of the API and Webpage here:-
                    "username":"admdin",
                     "password":"12345"
                 }`
+- A token will be returned.
   - response  : 
   `
         {
@@ -93,7 +93,7 @@ View live demo of the API and Webpage here:-
        }
   `
 
-- A token will be returned.
+
 - Copy the value of the token
 - Click on the header and add a key called `Authorization` and paste the copied token in to the value field
   - `JWT <TOKEN_VALUE>` e.g `Authorization : JWT eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0........`
@@ -180,7 +180,8 @@ View live demo of the API and Webpage here:-
   }
 
             
-      ```
+   ```
+  
 - To Delete Item
     - Navigate to `http://localhost:8000/api/bucketlists/<id>/item/<item_id>/`.
     - Set request method to `DELETE `
