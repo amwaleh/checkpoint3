@@ -38,6 +38,7 @@ class BucketlistTest(TestCase):
 
     def test_user(self):
         """ Test if user exist in the user table"""
+
         data = {"username": "admintest2", "password": "password"}
         response = self.client.post('/api/users/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -54,11 +55,13 @@ class BucketlistTest(TestCase):
 
     def _get_token(self):
         """Setting token to header"""
+
         token = self._require_login()
         self.client.credentials(HTTP_AUTHORIZATION='JWT ' + token['token'])
 
     def test_2_token_generation(self):
         """Test if a token has been produced using credntials"""
+
         url = '/api/api-token/'
         data = {"username": "admintest", "password": "password"}
         response = self.client.post(url, data, format='json')
@@ -69,6 +72,7 @@ class BucketlistTest(TestCase):
 
     def test_3_page_authorization(self):
         """Check if protected page can be accessed without authorization"""
+
         response = self.client.get("/api/bucketlists/", format='json')
         self.assertEqual(response.status_code, 401)
         response = self.client.get(
@@ -90,6 +94,7 @@ class BucketlistTest(TestCase):
         self._get_token()
         data = {'name': 'bucketlist1', 'creator': self.user.id}
         response = self.client.post("/api/bucketlists/", data, format='json')
+
         self.assertEqual(response.status_code, 201)
         self.bucketlist = Bucketlist.objects.first()
         response = self.client.get("/api/bucketlists/?search=bucketlist1",
@@ -109,7 +114,7 @@ class BucketlistTest(TestCase):
         response.data['name'] = 'new game'
         data = response.data
         response = self.client.put(url, data, format='json')
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
         # Delete bucketlist
         response = self.client.delete(url, data)
@@ -135,10 +140,11 @@ class BucketlistTest(TestCase):
         url += "{}/".format(id.id)
         response = self.client.get(url, item, format='json')
         item = response.data
-        item['done'] = False
+        item['done'] = True
         response = self.client.put(url, item, format='json')
-        id = Bucketitems.objects.first()
-        self.assertEqual(response.status_code, 201)
+        bucketitem = Bucketitems.objects.first()
+        self.assertEqual(response.data['done'], item['done'])
+        self.assertTrue(bucketitem.done)
 
         # Delete
         response = self.client.delete(url, item, format='json')

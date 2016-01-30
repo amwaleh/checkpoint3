@@ -1,56 +1,39 @@
 
 from django.contrib.auth.models import User
-from django.http import Http404
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from models import Bucketlist, Bucketitems
 from serializers import (UserSerializer, BucketlistSerializer,
                          BucketitemSerializer)
+from rest_framework import viewsets
 
 
-class UserList(APIView):
-
-    """
-            List all users, or create a new user.
-    """
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request, format=None):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request, format=None):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class Bucketlists(APIView):
+class UserViewSet(viewsets.ModelViewSet):
 
     """
-            List bucket list and items handle GET and POST request
+    This viewset automatically provides `list` and `detail` actions.
     """
-    # Add permission to class
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = ()
+
+
+class BucketlistViewset(viewsets.ModelViewSet):
+
+    """ Handles Creation and manupulation of Bucketlists"""
+    queryset = Bucketlist.objects.all()
+    serializer_class = BucketlistSerializer
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get(self, request, format=None):
-        # handles Get request
-        blist = Bucketlist.objects.filter(creator=request.user.id)
-        if 'search' in request.GET:
-            search = request.GET.get('search')
-            blist = blist.filter(name__icontains=search)
+    def get_queryset(self):
+        # Override method to restrict query to current user
+        bucketlist = Bucketlist.objects.filter(creator=self.request.user.id)
+        return bucketlist
 
-        serializer = BucketlistSerializer(blist, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        # handles Post request
+    def create(self, request):
+        # Override to Ristrict creator to current user
         request.POST._mutable = True
         request.data['creator'] = request.user.id
         serializer = BucketlistSerializer(data=request.data)
@@ -60,133 +43,29 @@ class Bucketlists(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EditBucketlists(APIView):
+class ItemsViewSet(viewsets.ModelViewSet):
 
-    """
-            List bucket list and items handle GET and POST request
-    """
-    # Add permissiion to class
+    """ Handles Creation and manupulation of Items """
+    queryset = Bucketitems.objects.all()
+    serializer_class = BucketitemSerializer
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get_blist(self, userid, id):
-        # Checks if Buckelist exists
-        try:
-            return Bucketlist.objects.get(id=id, creator=userid)
-        except Bucketlist.DoesNotExist:
-            raise Http404
+    def get_queryset(self):
+        # Restrict  bucketlist to current user
+        bucketlist = Bucketlist.objects.filter(
+            id=self.kwargs['id'], creator=self.request.user.id)
+        items = Bucketitems.objects.filter(blist=bucketlist)
+        return items
 
-    def get(self, request, id, format=None):
-        # handles the GEt request
-        blist = self.get_blist(request.user.id, id)
-        serializer = BucketlistSerializer(blist)
-        return Response(serializer.data)
-
-    def put(self, request, id, format=None):
-        # Handles PUT Request
-        blist = self.get_blist(request.user.id, id)
-        serializer = BucketlistSerializer(blist, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id, format=None):
-        # Handles Delete Request
-        blist = self.get_blist(request.user.id, id)
-        blist.delete()
-        return Response({"info": "List Deleted"},
-                        status=status.HTTP_204_NO_CONTENT)
-
-
-class BucketitemsView(APIView):
-
-    """
-            Handles POST and GET request for Editing bucketlist items
-    """
-    # Token and user login permissions
-    authentication_classes = (JSONWebTokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-    def check_user(self, id, userid):
-            # Check if the logged in user is the creator of the the list
-        try:
-            return Bucketlist.objects.get(id=id, creator=userid)
-        except Bucketlist.DoesNotExist:
-            raise Http404
-
-    def get_items(self, list_id):
-        # Check if the item exists
-        try:
-            return Bucketitems.objects.filter(blist=list_id)
-        except Bucketitems.DoesNotExist:
-            raise Http404
-
-    def get(self, request, id, format=None):
-        # Handles the GET request
-        self.check_user(id, request.user.id)
-        item = self.get_items(id)
-        serializer = BucketitemSerializer(item, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, id, format=None):
+    def create(self, request, id=None):
         # Handles the POST request
-        self.check_user(id, request.user.id)
+
         request.POST._mutable = True
-        request.data['blist'] = id
+        request.data['blist'] = self.kwargs['id']
         request.data['done'] = False
         serializer = BucketitemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class EditBucketitemsView(APIView):
-
-    """
-            Handles PUT and DELETE request for Editing an item in a Bucketlist
-    """
-    # Token and user login permissions
-    authentication_classes = (JSONWebTokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-    def check_user(self, id, userid):
-        # Confirm the cureent user has right to edit item
-        try:
-            return Bucketlist.objects.get(id=id, creator=userid)
-        except Bucketlist.DoesNotExist:
-            raise Http404
-
-    def get_items(self, list_id, item_id):
-        # Gets item that are specific to current user
-        try:
-            return Bucketitems.objects.get(blist=list_id, id=item_id)
-        except Bucketitems.DoesNotExist:
-            raise Http404
-
-    def get(self, request, id, item_id, format=None):
-        # override get method to get results pegged on current user
-        self.check_user(id, request.user.id)
-        item = self.get_items(id, item_id)
-        serializer = BucketitemSerializer(item)
-        return Response(serializer.data)
-
-    def put(self, request, id, item_id, format=None):
-        # Handles the updating of item with restriction to items created by
-        # current user
-        self.check_user(id, request.user.id)
-        item = self.get_items(id, item_id)
-
-        serializer = BucketitemSerializer(item, request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id, item_id, format=None):
-        # handles deletion of items pegged to the current user
-        self.check_user(id, request.user.id)
-        item = self.get_items(id, item_id)
-        item.delete()
-        return Response('Item Deleted', status=status.HTTP_204_NO_CONTENT)

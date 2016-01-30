@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
+from django.views.generic import View
 import requests
 import os
 
@@ -8,9 +9,10 @@ domain = 'http://0.0.0.0:{}'.format(port)
 user = {}
 
 
-def index(request):
-    form = "welcome"
-    return render(request, 'index.html', {'form': form})
+class Welcome(View):
+
+    def get(self, request):
+        return render(request, 'index.html')
 
 
 def check_token(request):
@@ -35,9 +37,11 @@ def check_token(request):
     return False
 
 
-def signup(request):
+class Signup(View):
+
     """handles signup"""
-    if request.method == "POST":
+
+    def post(self, request, *args, **kwargs):
         data = {
             "username": request.POST.get('username'),
             "password": request.POST.get('password'),
@@ -51,12 +55,14 @@ def signup(request):
         return redirect('/web/login/#modal1',)
 
 
-def login(request):
+class Login(View):
+
     """Handles login"""
-    if request.method == "GET":
+
+    def get(self, request):
         return render(request, 'signin.html',)
 
-    if request.method == "POST":
+    def post(self, request, *args, **kwargs):
         form = {}
         data = {"username": request.POST.get(
             'username'), "password": request.POST.get('password')}
@@ -203,12 +209,14 @@ def edit_items(request, id, item):
             return redirect('/web/bucketlists/{0}/'.format(id))
 
 
-def logout(request):
+class Logout(View):
     """logs out a user from the system"""
-    form = ""
-    if request.method == 'GET':
-        del request.session['Authorization']
-        del request.session['username']
-        form = "welcome"
-        check_token(request)
-    return render(request, 'index.html', {'form': form})
+
+    def get(self, request):
+        try:
+            del request.session['Authorization']
+            del request.session['username']
+            return render(request, 'index.html')
+        except:
+            # handles an attempt to logout session is available
+            return render(request, 'index.html')

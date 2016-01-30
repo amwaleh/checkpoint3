@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
     def create(self, validated_data):
-        # override create function
+        # override create function to save password
         user = User.objects.create(username=validated_data['username'],)
         user.set_password(validated_data['password'])
         user.save()
@@ -28,7 +28,7 @@ class BucketitemSerializer(serializers.ModelSerializer):
     """ serializer Handles items in the bucketlist"""
     class Meta:
         model = Bucketitems
-        fileds = ('id', 'blist', 'name', 'done', 'created_on', 'modified_on')
+        fileds = ('url', 'name', 'done', 'created_on', 'modified_on')
 
 
 class BucketlistSerializer(serializers.ModelSerializer):
@@ -42,4 +42,6 @@ class BucketlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bucketlist
         fields = (
-            'id', 'name', 'created_on', 'modified_on', 'creator', 'items')
+            'id', 'name', 'created_on',
+            'modified_on', 'creator', 'items')
+        read_only_fields = ('creator')
