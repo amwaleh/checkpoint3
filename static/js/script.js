@@ -45,11 +45,11 @@ function edititem(id, item, name, done) {
     document.form_edititem.name.value = name
     $('#textarea1').val(name);
     $('#textarea1').trigger('autoresize');
-    var checked = 2
+    var checked = false
     if (done == 'True') {
-        checked = 1
+        checked = true
     }
-    document.form_edititem.done.selectedIndex = checked
+    document.form_edititem.done.checked = checked
     document.form_edititem.action = "/web/bucketlists/" + id + "/items/" + item + "/update"
 
 }

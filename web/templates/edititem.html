@@ -11,14 +11,17 @@
                 <span class="help-block"></span>
                 <textarea id="textarea1" class="materialize-textarea" length="120" name='name'></textarea>
             </div>
-            <div class=" col 12">
-                <label>completed </label>
-                <select class="icons browser-default" name='done'>
-                    <option value="" selected></option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                </select>
-            </div>
+ <div class="switch grey-text">
+ completed:
+    <label>
+      No
+      <input type="checkbox" name ='done'>
+      <span class="lever"></span>
+  yes
+    </label>
+  </div>
+
+            
             <div class="">
                 <p>
                     <button type="submit" class="btn  blue darken-1 right">update<i class="material-icons ">send</i></button>

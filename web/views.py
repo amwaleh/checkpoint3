@@ -192,8 +192,11 @@ class UpdateItem(View):
     @login_required
     def post(self, request, id=None, item=None):
         # update edits made to an item
+        done = False
         name = request.POST.get('name')
-        done = request.POST.get('done')
+        res_done = request.POST.get('done')
+        if res_done == 'on':
+            done = True
         url = DOMAIN + "/api/bucketlists/{0}/items/{1}/".format(id, item)
         item_details = requests.get(url, headers=request.session)
         data = item_details.json()
