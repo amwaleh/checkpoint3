@@ -38,7 +38,7 @@ function additem(id) {
 
 function editbucketlist(id, sname) {
     document.form_editbucketlist.name.value = sname
-    document.form_editbucketlist.action = "/web/bucketlists/" + id + "/?edit=1"
+    document.form_editbucketlist.action = "/web/bucketlists/" + id + "/update"
 }
 
 function edititem(id, item, name, done) {
@@ -50,6 +50,21 @@ function edititem(id, item, name, done) {
         checked = 1
     }
     document.form_edititem.done.selectedIndex = checked
-    document.form_edititem.action = "/web/bucketlists/" + id + "/items/" + item + "/?edit=1"
+    document.form_edititem.action = "/web/bucketlists/" + id + "/items/" + item + "/update"
 
 }
+
+function deletelist(id,sname) {
+     $("h5[name='name']").text("Delete: "+ sname +" ?")
+    // document.form_deletelist.name.value = sname
+    document.form_deletelist.action = "/web/bucketlists/" + id + "/delete"
+
+}
+function deleteitem(id,item,sname) {
+     $("h5[name='itemname']").text("Delete: "+ sname +" ?")
+   
+    document.form_deleteitem.action = "/web/bucketlists/" + id + "/items/"+item+"/delete"
+
+}
+
+

@@ -1,21 +1,27 @@
 {% block content %}
-<div class="">
-    <form action="" method="POST" name="form_editbucketlist">
+<div >
+<div class="intro"></div>
+    <form action="" method="POST" name="form_editbucketlist" class="card" style="left:10%; height:50%">
         {% csrf_token %}
         <legend></legend>
-        <div class="row   ">
-            <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
+        <div class="row  ">
+
+            <h5 class="center-align blue-grey-text"> Update Bucketlist </h5>
         </div>
         <div class="row ">
+      <div class="col s10">
+
             <div class="input-field">
                 <span class="help-block"></span>
                 <i class="material-icons prefix ">shopping_basket</i>
-                <input type="text" class="form-control" id="buck-name" placeholder="bucketlist name" name="name">
+                <input type="text" class="form-control " id="buck-name" placeholder="bucketlist name" name="name">
             </div>
         </div>
         <input type="hidden" name="update">
-        <button type="submit" class="btn blue darken-1 right">update<i class="material-icons ">send</i></button>
-    </form>
+        <center>
+        <button type="submit" class="btn blue darken-1 "> update <i class="material-icons prefix right">send</i></button>
+        </center>
+    </form></div>
 </div>
 <script>
 </script>

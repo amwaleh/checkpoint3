@@ -1,13 +1,15 @@
 {% extends 'partials/base.html' %} {% block content %} {% load staticfiles %}
-</div>
-<div class="row ">
+        <!-- Modal Structure -->
 
-    <div class="col m8 l11 s12 offset-l3 ">
+
+<div class="row " >
+    <div class="col m8  s12 offset-l3 " >
         <div class="card-content blue-grey-text text-lighten-5">
             <h4 class="card-content blue-grey-text text-lighten-3">My lists</h4>
             <!-- search bar -->
             <div class="nav-wrapper " style="width:70%; text-align:center;">
-                <form action="/web/bucketlists?search=" method="get">
+                <form action="/search/" method="POST">
+                    {% csrf_token %}
                     <div class="input-field">
                         <input id="search" type="search" name="search" required>
                         <label for="search"><i class="material-icons">search</i></label>
@@ -28,87 +30,77 @@
                 <a href="?page={{ lists.next_page_number }}">next</a> {% endif %}
                 </span>
             </div>
+
+            <div >
+          
             <!-- collapsible bucket list start -->
             {% for key in lists%}
-            <div class="gg l6 s12 m6 " onload='random_imglink(img-{{forloop.counter0}})'>
-                <ul class="collapsible popout s12 m6 l6 z-depth-0" data-collapsible="accordion">
-                    <li class='curve z-depth-1'>
+            <div class="gg  l6 s12 m12 " onload='random_imglink(img-{{forloop.counter0}})' style="display:block">
+                <ul class="collapsible popout s12 m6 l6 " data-collapsible="accordion">
+                    <li class='curve z-depth-2'>
                         <!-- check if the bucketlist has any items in it and create a notifictation -->
-                        <div class="curve  blue darken-1 hoverable ">&nbsp;{% if key.items|length > 0 %}
-                            <span class=" right amber  lighten-2  hoverable "><i class="tiny material-icons circle cyan-text">toc</i>  <a   href="#!" class="">{{key.items|length}} </a>
+
+                        <div class="curve  blue darken-1 hoverable ">&nbsp;
                             
 
-                            </span> {%endif%}
-                            <!-- create icon menu to edit bucketlist -->
-                            <a href="/web/bucketlists/?delete={{key.id}}"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist">clear</i></a>
-                            <a href="#modal3" class="modal-trigger" onclick="editbucketlist({{key.id}}, '{{key.name}}')"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist">mode_edit</i></a>
                             <!-- end icon menu -->
-                            <div class="img-collapsible   lighten-1  z-depth-1 " id="img-{{forloop.counter0}}">
+                            <div class="img-collapsible  lighten-1  z-depth-0 " id="img-{{forloop.counter0}}">
                                 <div class=" waves-effect waves-light kello center circle white-text  accent-1   tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
                                     <a href="/bucketlists/{{key.id}}/" class='white-text'>{{key.name.0}}</a>
-                                </div>
-                                <h5 class="valign left-align truncate"> {{key.name }}</h5>
+                                </div><center>
+                                <h5 class="valign left-align truncate white-text"> {{key.name }}</h5></center>
+                                <!-- create icon menu to edit bucketlist -->
+                                <center>
+                            <a href="#deletelist" onclick="deletelist({{key.id}}, '{{key.name}}')" class="chip btn blue hoverable modal-trigger z-depth-0"><i class=" small  fa fa-ban white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist"></i></a>
+
+                            <a href="#modal3" class="chip btn  modal-trigger light-blue hoverable z-depth-0" onclick="editbucketlist({{key.id}}, '{{key.name}}')"><i class=" small fa fa-pencil-square-o tooltipped white-text " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist"></i></a>
+                          
+                            </center>
+
                             </div>
                         </div>
-                        <!-- bucketlist headaer -->
-                        <div class="collapsible-header  blue-text white darken-3 ">
-                            <span class="card-title center"> items <span class="card-title center"><i class="material-icons center circle blue-text">playlist_add_check</i></span>
-                            </span>
-                            <!-- Icon for adding item to bucketlist -->
-                            <a href="#modal2" id='additem' class="modal-trigger" onclick='additem({{key.id}})'><i class="tiny material-icons blue darken-2 hoverable right  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add_box</i></a>
-                            <!-- drop down display for bucketlist properties -->
-                            <a class="dropdown-button white" href="#!" data-activates="dropdown1"><i class="material-icons left circle blue-text"> arrow_drop_down</i></a>
-                            <ul id="dropdown1 collection" class="dropdown-content ">
-                                <li class="collection-item "><i class="material-icons circle blue-text">info_outline</i>
-                                    <label class="cyan-text">id : {{key.id }}</label>
-                                </li>
-                                <li class="collection-item">
-                                    </label><i class="material-icons circle blue-text">info_outline</i>
-                                    <label class="cyan-text">created on : {{key.created_on }}</li>
-                                <li class="collection-item ">
-                                    </label><i class="material-icons circle blue-text">info_outline</i>
-                                    <label class="cyan-text">modified on : {{key.modified_on}}</li>
-                            </ul>
+                        <!-- bucketlist header -->
+                        <div id="container1"  class="collapsible-header  blue-text  z-depth-2 dropdown" >
+                            <i class="material-icons left grey-text  text-darken-2">playlist_add_check</i>
+                            <span class="left"> view list items</span> {% if key.items|length > 0 %}
+                            <div class="chip lime  lighten-2  align-right hoverable col  " style="margin-left:10%; margin-top:2%">
+                                <div class="circle valign right-align">
+                                    {{key.items|length}}
+                                </div>
+                            </div> {%endif%}
+                            
+                           
+      <i id="icon" class="fa fa-arrow-down right" ></i>
+  
                         </div>
+
                         <!-- body containing the list of items -->
-                        <div class="collapsible-body ">
-                            <ul class="collection curve_circle">
+                        <div class="collapsible-body white z-depth-2">
+                            <ul class="collection  ">
                                 <!-- check if item contains data -->
-                                {%if key.items%} {% for item in key.items%}
-                                <div class="row  hoverable z-depth-1">
-                                    <div class=" s12 m12 l3 col ">
-                                        <img src="{% static "images/happy.png" %}" width='64' class='responsive-img '>
-                                        <!-- delete item -->
-                                    </div>
-                                    <div class=" s12  m12 l9 col ">
-                                        <ul class="collection with-header materialboxed ">
-                                            <div class='s12'>
-                                                <li class="collection-item blue-grey-text">
-                                                    <i class="material-icons circle blue-text text-lighten-1">work</i>
-                                                    <label for="">Description </label>{{item.name}}
-                                                </li>
-                                                <li class="collection-item blue-grey-text">
-                                                    {% if item.done %}
-                                                    <img src="{% static "images/happy.png" %}" width=32>{%else%}
-                                                    <img src="{% static "images/sad.png" %}" width=3 2>{% endif%}
-                                                    <label for="">Completed </label>
-                                                    {{item.done}}
-                                                    <div class="right">
-                                                        <a href="/web/bucketlists/{{key.id}}/items/{{item.id}}/?delete=1" <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i></a>
-                                                        <!-- edit item -->
-                                                        <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit item">mode_edit</i></a>
-                                                    </div>
-                                                </li>
-                                            </div>
-                                        </ul>
-                                    </div>
+                                {%if key.items%}
+                                <div class="col s12">
+                                    {% for item in key.items%}
+                                    <li class="collection-item  black-text">
+                                        {% if item.done %}
+                                        <i class="material-icons lime circle">check</i>{%else%}
+                                        <i class="material-icons grey circle">remove_circle_outline</i>{% endif%} {{item.name}}
+                                        <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger secondary-content light-blue-text ligten-text-1"><i class="material-icons">mode_edit</i></a>
+                                    
+                                    <a href="#deletelitem" onclick="deleteitem('{{key.id}}','{{item.id}}','{{item.name}}')" class="modal-trigger secondary-content"> <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped  " data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i></a> 
+                                   </li> <!-- edit item -->
+                                    <!--  <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger"><i class="material-icons hoverable  blue-text text-lighten-4  tooltipped" data-position="bottom" data-delay="50" data-tooltip="edit item"></i></a>  -->
+                                    {%endfor%}
                                 </div>
                                 <br>
-                                <hr> {%endfor%}
                                 <!-- end item iter -->
                     </li>
                     {%endif%}
                     <!-- end item check  -->
+                    <div class="collection-item">
+                        <center><a href="#modal2" id='additem' class="modal-trigger btn  blue accent-2" onclick='additem({{key.id}})'><i class="material-icons 
+               tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add</i> add item</a></center>
+                    </div>
                     </ul>
                     </div>
                     </li>
@@ -116,9 +108,7 @@
             </div>
             <!-- end of bucketlist iter -->
         </div>
-        <!-- Modal Structure -->
-        {% endblock %}
-        </label>
-        </li>
-        </label>
-        </li>
+
+</div>
+      
+   {% endblock %}

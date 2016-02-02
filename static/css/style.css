@@ -1,10 +1,10 @@
 .centered {
     width: 400px;
-    min-width: 50%;
+   
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-70%, -90%)
 }
 
 .centered2 {
@@ -37,7 +37,9 @@
 }
 
 .modal {
-    max-width: 450px;
+    max-width: 500px;
+    min-width: 400px;
+    overflow: hidden;
 }
 
 button[type=submit].modal input[type=submit].modal {
@@ -229,11 +231,18 @@ button[type=submit].modal input[type=submit].modal {
 
 .curve {
     border-radius: 10px;
+    height:200px;
+}
+.curve2 {
+    border-radius: 10px;
+    height:500px;
+    overflow: hidden;
 }
 
 .dropdown-content {
     width: 300px;
     font-size: 10px;
+
 }
 
 @media (min-width: 480px) {
@@ -269,21 +278,21 @@ button[type=submit].modal input[type=submit].modal {
 
 body,
 .modal {
-    min-height: 200px;
-    -webkit-animation: fadein 2s;
+  
+    -webkit-animation: fadein 1s;
     /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 2s;
+    -moz-animation: fadein 1s;
     /* Firefox < 16 */
-    -ms-animation: fadein 2s;
+    -ms-animation: fadein 1s;
     /* Internet Explorer */
-    -o-animation: fadein 2s;
+    -o-animation: fadein 1s;
     /* Opera < 12.1 */
-    animation: fadein 2s;
+    animation: fadein 1s;
 }
 
 @keyframes fadein {
     from {
-        opacity: 0;
+        opacity: 0.3;
     }
     to {
         opacity: 1;
@@ -388,4 +397,21 @@ body,
     bottom: 60px;
     z-index: 100;
     /* text-align: left; */
+}
+
+
+.fa-arrow-down{
+  transform: rotate(30deg);
+  transition: transform 1s linear;
+}
+
+.fa-arrow-down.open{
+  transform: rotate(180deg);
+  transition: transform 1s linear;
+}
+
+.sign-container{
+    background-image: url('../images/road.jpeg');
+    background-position: center;
+    background-size: cover;
 }

@@ -1,4 +1,5 @@
 
+from rest_framework import filters
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -26,6 +27,8 @@ class BucketlistViewset(viewsets.ModelViewSet):
     serializer_class = BucketlistSerializer
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
     def get_queryset(self):
         # Override method to restrict query to current user
@@ -50,6 +53,8 @@ class ItemsViewSet(viewsets.ModelViewSet):
     serializer_class = BucketitemSerializer
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'done')
 
     def get_queryset(self):
         # Restrict  bucketlist to current user

@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8"> {% load staticfiles %}
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
@@ -10,97 +10,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static "js/materialize.min.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>bucketlist</title>
 </head>
-<div class="intro  light-blue accent-4 s12 z-depth-2 " style="backgrouned-color:rgba(1,87,205,0.9)">
-    <h1 class="grey-text text-lighten-5 " style="text-shadow: 1px 1px #000"> Bucketlist</h1> {% block content %}
-    <div class="login-wrapper s12 l12 ">
-        <form method='POST' action='/web/login/' class="curve inner-log z-depth-2 valign  col s12  offset-s6">
-            {% csrf_token %}
-            <div class="white ">
-                <div class="light-blue">
-                
-                    <h4><i class="material-icons curve large white-text prefix">account_circle</i></h4></div>
-                <div class="error"> {% for r, k in form.items%} {{k}} {% endfor %}
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 white">
-                        <i class="material-icons  blue-text prefix">account_circle</i>
-                        <input id="username" type="text" class="validate" name='username'>
-                        <label for="username">username</label>
+<body class="sign-container blue">
+    <div class=" centered intro  light3-blue accent-4 s12" style="backgroun2d-color:rgba(1,87,205,0.9)">
+        
+        <div class="" >
+            <form method='POST' action='/web/login/' class="curve blue inner-log z-depth-2 valign  col s12  offset-s6" >
+                {% csrf_token %}
+                <div class=" z-depth-2" Style="background-color:rgba(255,255,255,0.9)">
+                    <div class="blue">
+                        <h4><i class="material-icons  large white-text prefix">account_circle</i></h4>
+                        <h4 class="grey-text text-lighten-5 " style="text-shadow: 1px 1px #000"> Bucketlist</h4> {% block content %}</div>
+                    <div class="error"> {% for r, k in form.items%} {{k}} {% endfor %}
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 white">
-                        <i class="material-icons blue-text prefix">lock_outline</i>
-                        <input id="password" type="password" class="validate" name="password">
-                        <label for="password">password</label>
+                    <div class="row">
+                        <div class="input-field col s12 ">
+                            <i class="material-icons  blue-text prefix">account_circle</i>
+                            <input id="username" type="text" class="validate" name='username'>
+                            <label for="username">username</label>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button>
-        </form>
-        </div>
-        @mwalex
-        <div class="row">
-            <div class="col s12 m6 l10 right ">
-                <div class=" curve white" style="background-color:rgba(1,87,155,0.6)">
-                    <div class="card-content black-text">
-                        <span class="card-title"> Make hay while the sun shines</span>
-                        <p>Sign up today and plan the reality of every dream </p>
-                        <a class="cyan waves-effect waves-light btn modal-trigger" href="#modal1" style=" opacity: 1;">sign-up</a>
+                    <div class="row">
+                        <div class="input-field col s12 ">
+                            <i class="material-icons blue-text prefix">lock_outline</i>
+                            <input id="password" type="password" class="validate" name="password">
+                            <label for="password">password</label>
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button><div class="divider"></div>
+                    <br/>
+                    <a class="cyan waves-effect waves-light btn modal-trigger" href="#modal1" style=" opacity: 1;"><small>sign-up</small></a>
+            </form>
             </div>
-        </div>
-    </div>
-</div>
-<!-- <div class="parallax"> <img src="{% static "images/travel.jpeg" %}">
+        </div></div> </body>
+        <!-- <div class="parallax"> <img src="{% static "images/travel.jpeg" %}">
 </div> -->
-
-
-
-<div class="slider fullscreen intro-slider" >
-    <ul class="slides">
-      <li>
-        <img src="{% static "images/travel.jpeg" %}"> <!-- random image -->
-        <div class="caption c">
-          <h3>  </h3>
-          <h5 class="light grey-text text-lighten-3">We are young, we have too much to lose..</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/dine.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3> yolo</h3>
-          <h5 class="light grey-text text-lighten-3">The view on life isn't just change , but time</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/party.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3></h3>
-          <h5 class="light grey-text text-lighten-3">it doesnt matter how slow you go... dont stop</h5>
-        </div>
-      </li>
-      <li>
-        <img src="{% static "images/paint.jpeg" %}"> <!-- random image -->
-        <div class="caption ">
-          <h3>This is our big Tagline!</h3>
-          <h5 class="light grey-text text-lighten-3">Accept who you are. Unless you're a serial killer.</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
-<!-- Modal Trigger -->
-<!-- Modal Structure -->
-<div id="modal1" class="modal fixed curve">
-    <div class="  blue row">
-        <h5 class="white-text center"><i class="material-icons large">account_circle</i>Sign Up </h5>
+        <!-- Modal Trigger -->
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal fixed curve2" style ="width:400px">
+    <div class="blue row">
+        <h5 class="white-text center"><i class="material-icons large">account_circle</i><br>Sign Up </h5>
     </div>
-    <div class="m ">
-        <div class="   row">
+    <div class=" ">
+        <div class="row">
             <form class="signup col s12" action="/web/signup/" method="POST" name='signup'>
                 {% csrf_token %}
                 <div class="row">
@@ -123,24 +77,13 @@
                         <input id="email" type="email" class="validate" name="email" required>
                         <label for="email">Email</label>
                     </div>
-                </div>
-                <button type="submit" class="blue btn waves-effect waves-light right"><i class="material-icons right">send</i>submit</button>
+                </div><center>
+                <button type="submit" class="blue btn waves-effect waves-light "><i class="material-icons right">send</i>submit</button></center>
             </form>
         </div>
-        <script>
-        $(document).ready(function() {
-            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-            $('.modal-trigger').leanModal();
-            $('.parallax').parallax();
-             $(document).ready(function(){
-      
-        });
+    </div>
 
-$('.slider').slider({indicator: false});
-    });
-        function submitForm() {
-            $('.signup').submit();
+</div>>
+       
 
-        }
-        </script>
-        {% endblock %}
+            {% endblock %}

@@ -41,9 +41,11 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'app',
     'rest_framework_swagger',
-    'web'
+    'web',
+    'crispy_forms'
 )
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
