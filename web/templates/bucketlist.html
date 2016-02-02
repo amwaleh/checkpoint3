@@ -91,13 +91,15 @@
                         {%endif%}
                         <!-- end item check  -->
                         <div class="collection-item">
-                            <center><a href="#modal2" id='additem' class="modal-trigger btn  blue accent-2" onclick='additem({{key.id}})'><i class="material-icons 
+                            <center><a href="#modal2" id='additem' class="modal-trigger btn  blue accent-2 " onclick='additem({{key.id}})'><i class="material-icons 
                tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add</i> add item</a></center>
                         </div>
                         </ul>
                         </div>
                         </li>
-                    </ul>{% endfor %}
+                    </ul>{% endfor %} 
+                    <center><a class=" btn-floating btn-large waves-effect waves-light blue modal-trigger hoverable circle" href="#modal1">  <i class="large material-icons">add</i></a></center>
+                   
                 </div>
                 <!-- end of bucketlist iter -->
             </div>
