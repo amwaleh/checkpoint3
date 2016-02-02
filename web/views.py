@@ -5,8 +5,8 @@ import requests
 import os
 
 
-port = int(os.environ.get("PORT", 8000))
-domain = 'http://0.0.0.0:{}'.format(port)
+PORT = int(os.environ.get("PORT", 8000))
+DOMAIN = 'http://0.0.0.0:{}'.format(PORT)
 user = {}
 LOGIN_REDIRECT_URL = '/login'
 
@@ -18,12 +18,12 @@ def login_required(handler):
         if 'Authorization' not in self.request.session:
             return redirect('/web/login/', abort=False)
         data = {'token': self.request.session['token']}
-        verify = requests.post(domain + '/api/api-token-verify/', data)
+        verify = requests.post(DOMAIN + '/api/api-token-verify/', data)
         # verify if the token is still valid
         # Refresh the token
         if verify.status_code == 200:
             token_data = requests.post(
-                domain + '/api/api-token-refresh/', data)
+                DOMAIN + '/api/api-token-refresh/', data)
             new_token = token_data.json()
             if 'token' in new_token:
                 token = 'JWT {}'.format(new_token['token'])
@@ -52,7 +52,7 @@ class Signup(View):
             "username": request.POST.get('username'),
             "password": request.POST.get('password'),
             "email": request.POST.get('email')}
-        user = requests.post(domain + '/api/users/', data)
+        user = requests.post(DOMAIN + '/api/users/', data)
         if user.status_code == 201:
             form = {"info": "Log in"}
             return render(request, 'signin.html', {'form': form})
@@ -71,7 +71,7 @@ class Login(View):
         form = {}
         data = {"username": request.POST.get(
             'username'), "password": request.POST.get('password')}
-        bucketlists = requests.post(domain + '/api/api-token/', data)
+        bucketlists = requests.post(DOMAIN + '/api/api-token/', data)
         form = bucketlists.json()
         if 'token' in form:
             token = 'JWT {}'.format(form['token'])
@@ -91,7 +91,7 @@ class ListCreateBucketlists(View):
     @login_required
     def get(self, request):
 
-        url = domain + '/api/bucketlists/'
+        url = DOMAIN + '/api/bucketlists/'
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
         paginator = Paginator(lists, 4)
@@ -112,7 +112,7 @@ class ListCreateBucketlists(View):
         name = request.POST.get('name')
         creator = request.user.id
         request.session['content_type'] = 'application/json'
-        url = domain + '/api/bucketlists/'
+        url = DOMAIN + '/api/bucketlists/'
         data = {"name": name, "creator": creator}
         requests.post(url, data, headers=request.session)
         return redirect('/web/bucketlists/', )
@@ -125,7 +125,7 @@ class DeleteList(View):
     # Delete bucketlist '/bucketlis/{}/delete'
     @login_required
     def post(self, request, id=None):
-        url = domain + '/api/bucketlists/{}/'.format(id)
+        url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         requests.delete(url, headers=request.session)
         return redirect('/web/bucketlists/', )
 
@@ -137,7 +137,7 @@ class UpdateList(View):
     @login_required
     def post(self, request, id=None):
         name = request.POST.get('name')
-        url = domain + '/api/bucketlists/{}/'.format(id)
+        url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         bucketlist = requests.get(url, headers=request.session)
         update_data = bucketlist.json()
         update_data['name'] = name
@@ -151,7 +151,7 @@ class CreateListItems(View):
     @login_required
     def get(self, request, id=None):
         # handles listing of items
-        url = domain + '/api/bucketlists/{}/items'.format(id)
+        url = DOMAIN + '/api/bucketlists/{}/items'.format(id)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
         return render(request, 'list.html',
@@ -163,9 +163,9 @@ class CreateListItems(View):
         # Handles creation of items
         name = request.POST.get('name')
         data = {"name": name}
-        url = domain + '/api/bucketlists/{}/items/'.format(id)
+        url = DOMAIN + '/api/bucketlists/{}/items/'.format(id)
         requests.post(url, data, headers=request.session)
-        result_url = domain + '/api/bucketlists/{}/'.format(id)
+        result_url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         bucketlist = requests.get(result_url, headers=request.session)
         list_items = bucketlist.json()
         return render(request, 'list.html',
@@ -180,7 +180,7 @@ class DeleteItem(View):
     @login_required
     def post(self, request, id=None, item=None):
         # Delete an item
-        url = domain + '/api/bucketlists/{0}/items/{1}/'.format(id, item)
+        url = DOMAIN + '/api/bucketlists/{0}/items/{1}/'.format(id, item)
         requests.delete(url, headers=request.session)
         return redirect('/web/bucketlists/')
 
@@ -194,7 +194,7 @@ class UpdateItem(View):
         # update edits made to an item
         name = request.POST.get('name')
         done = request.POST.get('done')
-        url = domain + "/api/bucketlists/{0}/items/{1}/".format(id, item)
+        url = DOMAIN + "/api/bucketlists/{0}/items/{1}/".format(id, item)
         item_details = requests.get(url, headers=request.session)
         data = item_details.json()
         data['name'] = name
@@ -215,7 +215,6 @@ class Logout(View):
         except:
             return render(request, 'index.html')
             # handles an attempt to logout session is available
-            return render(request, 'index.html')
 
 
 class SearchView(View):
@@ -225,7 +224,7 @@ class SearchView(View):
     @login_required
     def post(self, request):
         search = request.POST.get('search')
-        url = domain + "/api/bucketlists?search={}".format(search)
+        url = DOMAIN + "/api/bucketlists?search={}".format(search)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
         paginator = Paginator(lists, 4)
