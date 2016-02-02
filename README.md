@@ -15,8 +15,8 @@ Bucketlist is an API created using Django REST Framework
 
 ### Demo 
 View live demo of the API and Webpage here:-
-- [API](https://blist-django.herokuapp.com/api/)
-- [webpage](https://blist-django.herokuapp.com/)
+- [API](https://bucketlist-django.herokuapp.com/api/)
+- [webpage](https://bucketlist-django.herokuapp.com/)
 
 
 ### Installation
@@ -29,7 +29,7 @@ View live demo of the API and Webpage here:-
     - `CREATE DATABASE bucketlist`
 - At the Terminal cd into the project folder and run the following commands 
  * `pip install -r requirements.txt` to install all dependencies
- * `Python manage.py makemigrations`
+ * `python manage.py makemigrations`
  * `python manage.py  migrate`
  * `python manage.py runserver` to start the server
  * To access the web page  navigate to `http://localhost:8000/web/`
@@ -69,11 +69,11 @@ View live demo of the API and Webpage here:-
       - request :  `{ "username":"admin", "password":"12345"}`
 
       - response :
-      `
-                    {
-                     "username": "admin"
-                    }
-      `
+      ```
+         {
+           "username": "admin"
+         }
+      ```
 
 
 ### Login
@@ -81,18 +81,19 @@ View live demo of the API and Webpage here:-
 - Using `POST` method on the Postman
 - Navigate to `http://localhost:8000/auth/login/`.
 - Enter username and password 
-  -   request : `{
-                   "username":"admdin",
-                    "password":"12345"
-                }`
+  -   request : 
+  ```{
+         "username":"admdin",
+         "password":"12345"
+      }
+  ```
 - A token will be returned.
   - response  : 
-  `
-        {
-        "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0IjoxNDUwNzI2NDE3fQ......."
-       }
-  `
-
+  ```
+    {
+    "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0IjoxNDUwNzI2NDE3fQ......."
+    }
+  ```
 
 - Copy the value of the token
 - Click on the header and add a key called `Authorization` and paste the copied token in to the value field
@@ -109,16 +110,16 @@ View live demo of the API and Webpage here:-
 - Enter name of the bucketlist in the textarea and click send
     - request : ` { "name": "Bucketlist1" }`
     - response :
-    ```
-          {
-              "name": "digger",
-              "created_by": 2,
-              "created_on": "Mon, 21 Dec 2015 22:51:26 GMT",
-              "modified_on": "Mon, 21 Dec 2015 23:04:14 GMT",
-              "id": 2
-          }
+  ```
+      {
+        "name": "digger",
+        "created_by": 2,
+        "created_on": "Mon, 21 Dec 2015 22:51:26 GMT",
+        "modified_on": "Mon, 21 Dec 2015 23:04:14 GMT",
+        "id": 2
+      }
 
-    ```
+  ```
 
 ### Editing Bucketlist
 - Navigate to `http://localhost:8000/api/bucketlists/<id>/,`.
@@ -172,12 +173,12 @@ View live demo of the API and Webpage here:-
       *   Send a request containing either `name` or `done` fields.
       *   Request : `{"done":"True"}`
       *   Response :
-      ```python 
+  ```python 
           
-  {
-    "done": true,
-    "name": "buy equipment"
-  }
+    {
+      "done": true,
+      "name": "buy equipment"
+    }
  ```
   
 - To Delete Item

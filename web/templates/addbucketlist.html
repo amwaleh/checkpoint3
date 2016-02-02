@@ -1,6 +1,6 @@
 {% block content %}
 <div class="row">
-    <form action="/web/bucketlists/" method="POST">
+    <form action="/bucketlists/" method="POST">
         {% csrf_token %}
         <legend></legend>
         <div class=" form-group left ">
@@ -14,7 +14,4 @@
         <button type="submit" class="btn blue darken-1 right">add</button>
     </form>
 </div>
-<script>
-//$('.tabs-wrapper').pushpin({ top:110, bottom:500 });
-</script>
 {% endblock %}

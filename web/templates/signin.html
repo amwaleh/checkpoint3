@@ -13,11 +13,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>bucketlist</title>
 </head>
+
 <body class="sign-container blue">
     <div class=" centered intro  light3-blue accent-4 s12" style="backgroun2d-color:rgba(1,87,205,0.9)">
-        
-        <div class="" >
-            <form method='POST' action='/web/login/' class="curve blue inner-log z-depth-2 valign  col s12  offset-s6" >
+        <div class="">
+            <form method='POST' action='/login/' class="curve blue inner-log z-depth-2 valign  col s12  offset-s6">
                 {% csrf_token %}
                 <div class=" z-depth-2" Style="background-color:rgba(255,255,255,0.9)">
                     <div class="blue">
@@ -39,23 +39,22 @@
                             <label for="password">password</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button><div class="divider"></div>
+                    <button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button>
+                    <div class="divider"></div>
                     <br/>
                     <a class="cyan waves-effect waves-light btn modal-trigger" href="#modal1" style=" opacity: 1;"><small>sign-up</small></a>
             </form>
             </div>
-        </div></div> </body>
-        <!-- <div class="parallax"> <img src="{% static "images/travel.jpeg" %}">
-</div> -->
-        <!-- Modal Trigger -->
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal fixed curve2" style ="width:400px">
+        </div>
+    </div>
+</body>
+<div id="modal1" class="modal fixed curve2" style="width:400px">
     <div class="blue row">
         <h5 class="white-text center"><i class="material-icons large">account_circle</i><br>Sign Up </h5>
     </div>
     <div class=" ">
         <div class="row">
-            <form class="signup col s12" action="/web/signup/" method="POST" name='signup'>
+            <form class="signup col s12" action="/signup/" method="POST" name='signup'>
                 {% csrf_token %}
                 <div class="row">
                     <div class="input-field col s12">
@@ -77,13 +76,12 @@
                         <input id="email" type="email" class="validate" name="email" required>
                         <label for="email">Email</label>
                     </div>
-                </div><center>
-                <button type="submit" class="blue btn waves-effect waves-light "><i class="material-icons right">send</i>submit</button></center>
+                </div>
+                <center>
+                    <button type="submit" class="blue btn waves-effect waves-light "><i class="material-icons right">send</i>submit</button>
+                </center>
             </form>
         </div>
     </div>
-
 </div>
-       
-
-            {% endblock %}
+{% endblock %}

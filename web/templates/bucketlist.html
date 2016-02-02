@@ -70,11 +70,11 @@
                                         <li class="collection-item  black-text">
                                             <!-- Switch -->
                                             <div class="switch left">
-                                                <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger secondary-content light-blue-text ligten-text-1">
+                                                <a href="#" onchange="autoEditItem('{{key.id}}','{{item.id}}','{{item.name}}')" class="  light-blue-text ligten-text-1">
                                                     <label>
                                                         {% if item.done %}
-                                                        <input type="checkbox" checked> {%else%}
-                                                        <input type="checkbox"> {% endif%}
+                                                        <input id="complete" type="checkbox" checked> {%else%}
+                                                        <input id="complete" type="checkbox"> {% endif%}
                                                         <span class="lever"></span> Done
                                                     </label>
                                                 </a>

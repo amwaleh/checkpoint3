@@ -60,14 +60,14 @@ class ItemsViewSet(viewsets.ModelViewSet):
         # Restrict  bucketlist to current user
         bucketlist = Bucketlist.objects.filter(
             id=self.kwargs['id'], creator=self.request.user.id)
-        items = Bucketitems.objects.filter(blist=bucketlist)
+        items = Bucketitems.objects.filter(bucketlist=bucketlist)
         return items
 
     def create(self, request, id=None):
         # Handles the POST request
 
         request.POST._mutable = True
-        request.data['blist'] = self.kwargs['id']
+        request.data['bucketlist'] = self.kwargs['id']
         request.data['done'] = False
         serializer = BucketitemSerializer(data=request.data)
         if serializer.is_valid():

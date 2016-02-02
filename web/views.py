@@ -16,7 +16,7 @@ def login_required(handler):
 
     def check_login(self, *args, **kwargs):
         if 'Authorization' not in self.request.session:
-            return redirect('/web/login/', abort=False)
+            return redirect('/login/', abort=False)
         data = {'token': self.request.session['token']}
         verify = requests.post(DOMAIN + '/api/api-token-verify/', data)
         # verify if the token is still valid
@@ -30,7 +30,7 @@ def login_required(handler):
                 self.request.session['Authorization'] = token
                 return handler(self, *args, **kwargs)
             # else if no token was returned
-        return redirect('/web/login/', abort=False)
+        return redirect('/login/', abort=False)
         # Token has expired return user to login
     return check_login
 
@@ -57,7 +57,7 @@ class Signup(View):
             form = {"info": "Log in"}
             return render(request, 'signin.html', {'form': form})
         form = {"info": user.text}
-        return redirect('/web/login/#modal1',)
+        return redirect('/login/#modal1',)
 
 
 class Login(View):
@@ -79,7 +79,7 @@ class Login(View):
             request.session['content_type'] = 'application/json'
             request.session['username'] = request.POST.get('username')
             request.session['token'] = form['token']
-            return redirect('/web/bucketlists/', )
+            return redirect('/bucketlists/', )
         form = {"info": " Wrong password or Username"}
         return render(request, 'signin.html', {'form': form})
 
@@ -115,7 +115,7 @@ class ListCreateBucketlists(View):
         url = DOMAIN + '/api/bucketlists/'
         data = {"name": name, "creator": creator}
         requests.post(url, data, headers=request.session)
-        return redirect('/web/bucketlists/', )
+        return redirect('/bucketlists/', )
 
 
 class DeleteList(View):
@@ -127,7 +127,7 @@ class DeleteList(View):
     def post(self, request, id=None):
         url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         requests.delete(url, headers=request.session)
-        return redirect('/web/bucketlists/', )
+        return redirect('/bucketlists/', )
 
 
 class UpdateList(View):
@@ -142,7 +142,7 @@ class UpdateList(View):
         update_data = bucketlist.json()
         update_data['name'] = name
         requests.put(url, update_data, headers=request.session)
-        return redirect('/web/bucketlists/{}/'.format(id), )
+        return redirect('/bucketlists/{}/'.format(id), )
 
 
 class CreateListItems(View):
@@ -182,20 +182,21 @@ class DeleteItem(View):
         # Delete an item
         url = DOMAIN + '/api/bucketlists/{0}/items/{1}/'.format(id, item)
         requests.delete(url, headers=request.session)
-        return redirect('/web/bucketlists/')
+        return redirect('/bucketlists/')
 
 
 class UpdateItem(View):
 
     """ Handles Deletion of Item """
-    # Update bucketlist '/bucketlis/{}/item/{}/update'
+    # Update bucketlist '/bucketlist/{}/item/{}/update'
     @login_required
     def post(self, request, id=None, item=None):
+
         # update edits made to an item
         done = False
         name = request.POST.get('name')
         res_done = request.POST.get('done')
-        if res_done == 'on':
+        if res_done =='on':
             done = True
         url = DOMAIN + "/api/bucketlists/{0}/items/{1}/".format(id, item)
         item_details = requests.get(url, headers=request.session)
@@ -203,7 +204,7 @@ class UpdateItem(View):
         data['name'] = name
         data['done'] = done
         requests.put(url, data, headers=request.session)
-        return redirect('/web/bucketlists/{0}/'.format(id))
+        return redirect('/bucketlists/{0}/'.format(id))
 
 
 class Logout(View):

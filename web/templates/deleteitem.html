@@ -1,17 +1,17 @@
 {% block content %}
 <form action="" method="POST" name="form_deleteitem">
-             {% csrf_token %}
-        <div class="input-field"> 
-            <div class="form-group">
-               <center>	
-             
-               <h5 name='itemname' class="blue-grey-text"> Do you want to delete  this item?</h5></center>
-            </div> 
-            <div class="divider"></div>
+    {% csrf_token %}
+    <div class="input-field">
+        <div class="form-group">
+            <center>
+                <h5 name='itemname' class="blue-grey-text"> Do you want to delete  this item?</h5></center>
         </div>
-         <center>
-<br><br>
+        <div class="divider"></div>
+    </div>
+    <center>
+        <br>
+        <br>
         <button type="submit" class="btn">yes</button>
-         <a href="#" type="reset" class="btn" onclick="closeModal()">no</a>
-          </center>	
-    </form>{% endblock %}
+        <a href="#" type="reset" class="btn" onclick="closeModal()">no</a>
+    </center>
+</form>{% endblock %}

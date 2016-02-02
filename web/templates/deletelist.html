@@ -1,17 +1,17 @@
 {% block content %}
 <form action="" method="POST" name="form_deletelist">
-             {% csrf_token %}
-        <div class="input-field"> 
-            <div class="form-group">
-               <center>	
-             
-               <h5 name='name' class="blue-grey-text"> DO you want to delete  this list?</h5></center>
-            </div> 
-            <div class="divider"></div>
+    {% csrf_token %}
+    <div class="input-field">
+        <div class="form-group">
+            <center>
+                <h5 name='name' class="blue-grey-text"> DO you want to delete  this list?</h5></center>
         </div>
-         <center>
-<br><br>
+        <div class="divider"></div>
+    </div>
+    <center>
+        <br>
+        <br>
         <button type="submit" class="btn">yes</button>
-         <a href="/bucketlists/" type="reset" class="btn">no</a>
-          </center>	
-    </form>{% endblock %}
+        <a href="/bucketlists/" type="reset" class="btn">no</a>
+    </center>
+</form>{% endblock %}
