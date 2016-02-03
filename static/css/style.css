@@ -46,7 +46,9 @@
 .modal {
   max-width: 500px;
   min-width: 400px;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 500px;
+
 }
 
 button[type=submit].modal input[type=submit].modal {
@@ -214,7 +216,10 @@ button[type=submit].modal input[type=submit].modal {
 .gg {
   border-radius: 100%;
 }
-
+.collapsible-header:focus{
+  clear:both;
+  background-color: #F00;
+}
 .kello {
   text-transform: uppercase;
   border: dashed 1px #fff;
@@ -364,7 +369,7 @@ body,
   padding: 1px;
   border-radius: 10px;
   text-shadow: 1px 1px 1px #000;
-  transform: translate(50%, 1000%);
+  transform: translate(50%, 100%);
 }
 
 .slider h3 {

@@ -20,18 +20,14 @@ from django.contrib import admin
 from rest_framework.authtoken import views
 import app.urls
 import web.urls
-from rest_framework.routers import DefaultRouter
+
 admin.autodiscover()
 
-# router = DefaultRouter()
-# router.register(r'bucketlists',viewsets.BucketlistViewset)
 
-# urlpatterns = router.urls
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # Urls for web
     url(r'^', include('web.urls')),
-    url(r'^web/', include('web.urls')),
     # urls for api
     url(r'^api/', include('app.urls')),
     url(r'^auth/', include('rest_framework.urls',

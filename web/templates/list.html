@@ -1,7 +1,7 @@
 {% extends 'partials/base.html' %} {% block content %} {% load staticfiles %}
 <!-- Modal Structure -->
 <div class="row ">
-    <div class="col m8  s12 offset-l3 ">
+    <div class="col m8  s12 offset-l4 ">
         <div class="card-content blue-grey-text text-lighten-5">
             <h4 class="card-content blue-grey-text text-lighten-3">My lists</h4>
             <!-- search bar -->
@@ -9,22 +9,24 @@
                 <form action="/search/" method="POST">
                     {% csrf_token %}
                     <div class="input-field">
-                        <input id="search" type="search" name="search" required>
+                        <input id="search" type="search" name="search" required style="background-color:rgba(1,87,205,0.2)" class="z-depth-5 blue-grey-text text-darken-2">
                         <label for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
                 </form>
             </div>
+            <div>
                 <!-- collapsible bucket list start -->
-                <div class="gg  l6 s12 m12 " onload='random_imglink(img-{{forloop.counter0}})' style="display:block">
+               
+                <div class="gg l8 s12 m12 " onload='random_imglink(img-{{forloop.counter0}})' style="display:block">
                     <ul class="collapsible popout s12 m6 l6 " data-collapsible="accordion">
-                        <li class='curve z-depth-'>
+                        <li class='curve z-depth-2'>
                             <!-- check if the bucketlist has any items in it and create a notifictation -->
                             <div class="curve  blue darken-1 hoverable ">&nbsp;
                                 <!-- end icon menu -->
                                 <div class="img-collapsible  lighten-1  z-depth-0 " id="img-{{forloop.counter0}}">
                                     <div class=" waves-effect waves-light kello center circle white-text  accent-1   tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
-                                        <a href="/bucketlists/{{key.id}}/" class='white-text'>{{key.name.0}}</a>
+                                        <a href="/bucketlists/{{key.id}}/items/" class='white-text'>{{key.name.0}}</a>
                                     </div>
                                     <center>
                                         <h5 class="valign left-align truncate white-text"> {{key.name }}</h5></center>
@@ -36,7 +38,7 @@
                                 </div>
                             </div>
                             <!-- bucketlist header -->
-                            <div id="container1" class="collapsible-header  blue-text  z-depth-0 dropdown">
+                            <div id="container1" class="collapsible-header  blue-text  z-depth-2 dropdown ">
                                 <i class="material-icons left grey-text  text-darken-2">playlist_add_check</i>
                                 <span class="left"> view list items</span> {% if key.items|length > 0 %}
                                 <div class="chip lime  lighten-2  align-right hoverable col  " style="margin-left:10%; margin-top:2%">
@@ -47,7 +49,7 @@
                                 <i id="icon" class="fa fa-arrow-down right"></i>
                             </div>
                             <!-- body containing the list of items -->
-                            <div class="collapsible-body white z-depth-0">
+                            <div class="collapsible-body white z-depth-2">
                                 <ul class="collection  ">
                                     <!-- check if item contains data -->{%if key.items%}
                                     <div class="col s12">
@@ -76,6 +78,7 @@
                         {%endif%}
                         <!-- end item check  -->
                         <div class="collection-item">
+                        <br/>
                             <center> <a href="#modal2" id='additem' class="modal-trigger btn  blue accent-2 " onclick='myApp.additem({{key.id}})'><i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add</i> add item</a>
                             </center>
                         </div>
@@ -83,12 +86,13 @@
                         </div>
                         </li>
                     </ul>
-                     
+             
                     <center>
-                        <a class=" btn-floating btn-large waves-effect waves-light blu modal-trigger hoverable circle hide-on-med-and-down" href="#modal1"> <i class="large material-icons">add</i></a>
+                        <a class=" btn-floating btn-large waves-effect waves-light blue modal-trigger hoverable circle hide-on-med-and-down" href="#modal1"> <i class="large material-icons">add</i></a>
                     </center>
                 </div>
                 <!-- end of bucketlist iter -->
             </div>
         </div>
         {% endblock %}
+        

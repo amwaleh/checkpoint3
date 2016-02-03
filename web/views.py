@@ -1,46 +1,46 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.core.urlresolvers import reverse
 import requests
 import os
 
 
 PORT = int(os.environ.get("PORT", 8000))
 DOMAIN = 'http://0.0.0.0:{}'.format(PORT)
-user = {}
-LOGIN_REDIRECT_URL = '/login'
+
+
 
 
 def login_required(handler):
-    """  Handles Authenication """
-
+    """Handle Authenication."""
     def check_login(self, *args, **kwargs):
         if 'Authorization' not in self.request.session:
-            return redirect('/login/', abort=False)
+            return redirect(reverse('login'), abort=False)
         data = {'token': self.request.session['token']}
         verify = requests.post(DOMAIN + '/api/api-token-verify/', data)
         # verify if the token is still valid
         if verify.status_code == 200:
             return handler(self, *args, **kwargs)
         # else if no token was returned
-        return redirect('/login/', abort=False)
+        return redirect(reverse('login'), abort=False)
     # Token has expired return user to login
     return check_login
 
 
 class Welcome(View):
-
-    """ Handles Welcome Screen """
+    """Handle Welcome Screen."""
 
     def get(self, request):
+        # show slider
         return render(request, 'index.html')
 
 
 class Signup(View):
-
-    """handles signup"""
+    """handle signup."""
 
     def post(self, request, *args, **kwargs):
+        # handles signup
         data = {
             "username": request.POST.get('username'),
             "password": request.POST.get('password'),
@@ -50,12 +50,11 @@ class Signup(View):
             form = {"info": "Log in"}
             return render(request, 'signin.html', {'form': form})
         form = {"info": user.text}
-        return redirect('/login/#modal1',)
+        return redirect(reverse('login'),)
 
 
 class Login(View):
-
-    """Handles login"""
+    """Handles login."""
 
     def get(self, request):
         return render(request, 'signin.html',)
@@ -72,14 +71,13 @@ class Login(View):
             request.session['content_type'] = 'application/json'
             request.session['username'] = request.POST.get('username')
             request.session['token'] = form['token']
-            return redirect('/bucketlists/', )
+            return redirect(reverse('detail'), )
         form = {"info": " Wrong password or Username"}
         return render(request, 'signin.html', {'form': form})
 
 
 class ListCreateBucketlists(View):
-
-    """Lists all bucketlist a user has created"""
+    """Lists all bucketlist a user has created."""
 
     @login_required
     def get(self, request):
@@ -108,25 +106,23 @@ class ListCreateBucketlists(View):
         url = DOMAIN + '/api/bucketlists/'
         data = {"name": name, "creator": creator}
         requests.post(url, data, headers=request.session)
-        return redirect('/bucketlists/', )
+        return redirect(reverse('detail'), )
 
 
 class DeleteList(View):
-
-    """  Deletes bucketlist"""
+    """Deletes bucketlist."""
 
     # Delete bucketlist '/bucketlis/{}/delete'
     @login_required
     def post(self, request, id=None):
         url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         requests.delete(url, headers=request.session)
-        return redirect('/bucketlists/', )
+        return redirect(reverse('detail'), )
 
 
 class UpdateList(View):
+    """Updates  bucketlist"""
 
-    """ Updates  bucketlist"""
-    # Update bucketlist '/bucketlis/{}/update'
     @login_required
     def post(self, request, id=None):
         name = request.POST.get('name')
@@ -135,16 +131,16 @@ class UpdateList(View):
         update_data = bucketlist.json()
         update_data['name'] = name
         requests.put(url, update_data, headers=request.session)
-        return redirect('/bucketlists/{}/'.format(id), )
+        return redirect(reverse('detail'))
 
 
 class CreateListItems(View):
+    """handles Creation and listing of items."""
 
-    """ handles Creation and listing of items """
     @login_required
     def get(self, request, id=None):
         # handles listing of items
-        url = DOMAIN + '/api/bucketlists/{}/items'.format(id)
+        url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
         return render(request, 'list.html',
@@ -167,25 +163,25 @@ class CreateListItems(View):
 
 
 class DeleteItem(View):
+    """Handles  Deletion of an item."""
 
-    """ Handles  Deletion of an item """
     # Update bucketlist '/bucketlis/{}/item/{}/delete'
     @login_required
     def post(self, request, id=None, item=None):
         # Delete an item
         url = DOMAIN + '/api/bucketlists/{0}/items/{1}/'.format(id, item)
         requests.delete(url, headers=request.session)
-        return redirect('/bucketlists/')
+        return redirect(reverse('detail'))
 
 
 class UpdateItem(View):
+    """Handles Deletion of Item"""
 
-    """ Handles Deletion of Item """
     # Update bucketlist '/bucketlist/{}/item/{}/update'
     @login_required
     def post(self, request, id=None, item=None):
-
         # update edits made to an item
+
         done = False
         name = request.POST.get('name')
         res_done = request.POST.get('done')
@@ -197,12 +193,15 @@ class UpdateItem(View):
         data['name'] = name
         data['done'] = done
         requests.put(url, data, headers=request.session)
-        return redirect('/bucketlists/{0}/'.format(id))
+        return redirect(reverse('items', args=[id]))
+
+    def get(self, request, id=None, item=None):
+        return redirect(reverse('items', args=[id]))
 
 
 class Logout(View):
-
     """logs out a user from the system"""
+
     @login_required
     def get(self, request):
         del request.session['Authorization']
@@ -211,8 +210,7 @@ class Logout(View):
 
 
 class SearchView(View):
-
-    """ handles Search Query """
+    """handles Search Query"""
 
     @login_required
     def post(self, request):
@@ -220,7 +218,7 @@ class SearchView(View):
         url = DOMAIN + "/api/bucketlists?search={}".format(search)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
-        paginator = Paginator(lists, 4)
+        paginator = Paginator(lists, 5)
         page = request.GET.get('page')
         try:
             buckets = paginator.page(page)
@@ -232,3 +230,7 @@ class SearchView(View):
                       {'lists': buckets,
                        'search': search,
                        "header": request.session['username']})
+
+    @login_required
+    def get(self, request):
+        return redirect(reverse('detail'))

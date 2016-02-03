@@ -85,15 +85,14 @@ View live demo of the API and Webpage here:-
   ```{
          "username":"admdin",
          "password":"12345"
-      }
-  ```
+      }```
 - A token will be returned.
   - response  : 
   ```
     {
     "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ1MDcyNzAxNywiaWF0IjoxNDUwNzI2NDE3fQ......."
     }
-  ```
+```
 
 - Copy the value of the token
 - Click on the header and add a key called `Authorization` and paste the copied token in to the value field
@@ -143,21 +142,19 @@ View live demo of the API and Webpage here:-
   - response :
   ```python
     
-    
   {
-    "name": "digger",
-    "items": [{
+            "created_by": 2,
+            "created_on": "Mon, 21 Dec 2015 22:51:26 GMT",
+            "modified_on": "Mon, 21 Dec 2015 23:04:14 GMT",
+            "id": 2 "name": "digger",
+            "items": [{
                 "date_created": "Mon, 21 Dec 2015 23:15:09 GMT",
                 "date_modified": "Mon, 21 Dec 2015 23:15:09 GMT",
                 "done": false,
                 "id": 3,
                 "name": "buy equipment"
-              }],
-    "created_by": 2,
-    "created_on": "Mon, 21 Dec 2015 22:51:26 GMT",
-    "modified_on": "Mon, 21 Dec 2015 23:04:14 GMT",
-    "id": 2
-  }
+            }],
+        }
     
  
   ```
@@ -176,9 +173,9 @@ View live demo of the API and Webpage here:-
   ```python 
           
     {
-      "done": true,
-      "name": "buy equipment"
-    }
+        "done": true,
+        "name": "buy equipment"
+      }
  ```
   
 - To Delete Item

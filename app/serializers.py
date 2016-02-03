@@ -5,9 +5,8 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
 
-    """
-        Serializer handles User registration signin and signout
-    """
+    """Serializer handles User registration signin and signout."""
+
     class Meta:
         model = User
         fields = (
@@ -25,10 +24,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class BucketitemSerializer(serializers.ModelSerializer):
 
-    """ serializer Handles items in the bucketlist"""
+    """serializer Handles items in the bucketlist"""
+
     class Meta:
         model = Bucketitems
-        fileds = ('url', 'name', 'done', 'created_on', 'modified_on')
+        fileds = ('url', 'bucketlist', 'name', 'done', 'created_on',
+                  'modified_on')
 
 
 class BucketlistSerializer(serializers.ModelSerializer):
