@@ -9,7 +9,7 @@
                 <form action="/search/" method="POST">
                     {% csrf_token %}
                     <div class="input-field">
-                        <input id="search" type="search" name="search" required>
+                      <input id="search" type="search" name="search" required style="background-color:rgba(1,87,205,0.2)" class="z-depth-5 blue-grey-text text-darken-2">
                         <label for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
@@ -19,13 +19,13 @@
             <div class="pagination chip center">
                 <span class="step-links">
         {% if lists.has_previous %}
-            <a href="?page={{ lists.previous_page_number }}">previous</a>
+            <a href="/bucketlists/page={{ lists.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
             Page {{ lists.number }} of {{ lists.paginator.num_pages }}.
         </span> {% if lists.has_next %}
-                <a href="?page={{ lists.next_page_number }}">next</a> {% endif %}
+                <a href="/bucketlists/?page={{ lists.next_page_number }}">next</a> {% endif %}
                 </span>
             </div>
             <div>
@@ -45,8 +45,8 @@
                                         <h5 class="valign left-align truncate white-text"> {{key.name }}</h5></center>
                                     <!-- create icon menu to edit bucketlist -->
                                     <center>
-                                        <a href="#deletelist" onclick="deletelist({{key.id}}, '{{key.name}}')" class="chip btn blue hoverable modal-trigger z-depth-0"><i class=" small  fa fa-ban white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist"></i></a>
-                                        <a href="#modal3" class="chip btn  modal-trigger light-blue hoverable z-depth-0" onclick="editbucketlist({{key.id}}, '{{key.name}}')"><i class=" small fa fa-pencil-square-o tooltipped white-text " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist"></i></a>
+                                        <a href="#deletelist" onclick="myApp.deletelist({{key.id}}, '{{key.name}}')" class="chip btn blue hoverable modal-trigger z-depth-0"><i class=" small  fa fa-ban white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist"></i></a>
+                                        <a href="#modal3" class="chip btn  modal-trigger light-blue hoverable z-depth-0" onclick="myApp.editbucketlist({{key.id}}, '{{key.name}}')"><i class=" small fa fa-pencil-square-o tooltipped white-text " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist"></i></a>
                                     </center>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         <li class="collection-item  black-text">
                                             <!-- Switch -->
                                             <div class="switch left">
-                                                <a href="#" onchange="autoEditItem('{{key.id}}','{{item.id}}','{{item.name}}')" class="  light-blue-text ligten-text-1">
+                                                <a href="#" onchange="myApp.autoEditItem('{{key.id}}','{{item.id}}','{{item.name}}')" class="  light-blue-text ligten-text-1">
                                                     <label>
                                                         {% if item.done %}
                                                         <input id="complete" type="checkbox" checked> {%else%}
@@ -79,8 +79,8 @@
                                                     </label>
                                                 </a>
                                             </div>&nbsp; {{item.name}}
-                                            <a href="#modal4" onclick="edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger secondary-content light-blue-text ligten-text-1"><i class="material-icons">mode_edit</i></a>
-                                            <a href="#deletelitem" onclick="deleteitem('{{key.id}}','{{item.id}}','{{item.name}}')" class="modal-trigger secondary-content"> <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped  " data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i></a>
+                                            <a href="#modal4" onclick="myApp.edititem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="modal-trigger secondary-content light-blue-text ligten-text-1"><i class="material-icons">mode_edit</i></a>
+                                            <a href="#deletelitem" onclick="myApp.deleteitem('{{key.id}}','{{item.id}}','{{item.name}}')" class="modal-trigger secondary-content"> <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped  " data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i></a>
                                         </li>
                                         <!-- edit item -->
                                         {%endfor%}
@@ -91,15 +91,17 @@
                         {%endif%}
                         <!-- end item check  -->
                         <div class="collection-item">
-                            <center><a href="#modal2" id='additem' class="modal-trigger btn  blue accent-2 " onclick='additem({{key.id}})'><i class="material-icons 
-               tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add</i> add item</a></center>
+                            <center> <a href="#modal2" id='additem' class="modal-trigger btn  blue accent-2 " onclick='myApp.additem({{key.id}})'><i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="add an item">add</i> add item</a>
+                            </center>
                         </div>
                         </ul>
                         </div>
                         </li>
-                    </ul>{% endfor %} 
-                    <center><a class=" btn-floating btn-large waves-effect waves-light blue modal-trigger hoverable circle" href="#modal1">  <i class="large material-icons">add</i></a></center>
-                   
+                    </ul>
+                    {% endfor %}
+                    <center>
+                        <a class=" btn-floating btn-large waves-effect waves-light blue modal-trigger hoverable circle hide-on-med-and-down" href="#modal1"> <i class="large material-icons">add</i></a>
+                    </center>
                 </div>
                 <!-- end of bucketlist iter -->
             </div>

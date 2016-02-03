@@ -20,18 +20,11 @@ def login_required(handler):
         data = {'token': self.request.session['token']}
         verify = requests.post(DOMAIN + '/api/api-token-verify/', data)
         # verify if the token is still valid
-        # Refresh the token
         if verify.status_code == 200:
-            token_data = requests.post(
-                DOMAIN + '/api/api-token-refresh/', data)
-            new_token = token_data.json()
-            if 'token' in new_token:
-                token = 'JWT {}'.format(new_token['token'])
-                self.request.session['Authorization'] = token
-                return handler(self, *args, **kwargs)
-            # else if no token was returned
+            return handler(self, *args, **kwargs)
+        # else if no token was returned
         return redirect('/login/', abort=False)
-        # Token has expired return user to login
+    # Token has expired return user to login
     return check_login
 
 
@@ -196,7 +189,7 @@ class UpdateItem(View):
         done = False
         name = request.POST.get('name')
         res_done = request.POST.get('done')
-        if res_done =='on':
+        if res_done == 'on':
             done = True
         url = DOMAIN + "/api/bucketlists/{0}/items/{1}/".format(id, item)
         item_details = requests.get(url, headers=request.session)
@@ -212,13 +205,9 @@ class Logout(View):
     """logs out a user from the system"""
     @login_required
     def get(self, request):
-        try:
-            del request.session['Authorization']
-            del request.session['username']
-            return render(request, 'index.html')
-        except:
-            return render(request, 'index.html')
-            # handles an attempt to logout session is available
+        del request.session['Authorization']
+        del request.session['username']
+        return render(request, 'index.html')
 
 
 class SearchView(View):
@@ -241,4 +230,5 @@ class SearchView(View):
             buckets = paginator.page(paginator.num_pages)
         return render(request, 'bucketlist.html',
                       {'lists': buckets,
+                       'search': search,
                        "header": request.session['username']})

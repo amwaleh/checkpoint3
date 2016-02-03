@@ -170,8 +170,9 @@ button[type=submit].modal input[type=submit].modal {
 }
 
 .logo {
-  width: 100%;
-  transform: translate(50%, -3%);
+  width: 20%;
+  text-shadow: 1px 1px  #000;
+  transform: translate(20%, -3%);
 }
 
 .inner-log {
