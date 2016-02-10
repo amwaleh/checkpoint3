@@ -14,7 +14,7 @@
                         <i class="material-icons">close</i>
                     </div>
                 </form>
-            </div>
+            </div>           
             <!-- pagination  -->
             <div class="pagination chip center">
                 <span class="step-links">
@@ -28,26 +28,27 @@
                 <a href="/bucketlists/?page={{ lists.next_page_number }}">next</a> {% endif %}
                 </span>
             </div>
-            <div>
+            <div> {{args}}
                 <!-- collapsible bucket list start -->
                 {% for key in lists%}
-                <div class="gg  l6 s12 m12 " onload='random_imglink(img-{{forloop.counter0}})' style="display:block">
+                <div class="collar  l6 s12 m12 " onload='random_imglink(img-{{forloop.counter0}})' style="display:block">
                     <ul class="collapsible popout s12 m6 l6 " data-collapsible="accordion">
                         <li class='curve z-depth-2'>
                             <!-- check if the bucketlist has any items in it and create a notifictation -->
                             <div class="curve  blue darken-1 hoverable ">&nbsp;
                                 <!-- end icon menu -->
                                 <div class="img-collapsible  lighten-1  z-depth-0 " id="img-{{forloop.counter0}}">
-                                    <div class=" waves-effect waves-light kello center circle white-text  accent-1   tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
+                                    <div class=" dotted waves-effect waves-light kello center circle white-text  accent-1   tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{key.name}}">
                                         <a href="/bucketlists/{{key.id}}/items/" class='white-text'>{{key.name.0}}</a>
                                     </div>
                                     <center>
                                         <h5 class="valign left-align truncate white-text"> {{key.name }}</h5></center>
                                     <!-- create icon menu to edit bucketlist -->
-                                    <center>
+                                    <div class="icon-menu"><center>
                                         <a href="#deletelist" onclick="myApp.deletelist({{key.id}}, '{{key.name}}')" class="chip btn blue hoverable modal-trigger z-depth-0"><i class=" small  fa fa-ban white-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="delete Bucketlist"></i></a>
                                         <a href="#modal3" class="chip btn  modal-trigger light-blue hoverable z-depth-0" onclick="myApp.editbucketlist({{key.id}}, '{{key.name}}')"><i class=" small fa fa-pencil-square-o tooltipped white-text " data-position="bottom" data-delay="50" data-tooltip="edit a Bucketlist"></i></a>
                                     </center>
+                                    </div>
                                 </div>
                             </div>
                             <!-- bucketlist header -->
@@ -107,5 +108,6 @@
                 <!-- end of bucketlist iter -->
             </div>
         </div>
+        
         {% endblock %}
         

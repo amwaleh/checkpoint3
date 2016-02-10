@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponseRedirect
 from django.views.generic import View
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 import requests
 import os
@@ -47,9 +48,11 @@ class Signup(View):
             "email": request.POST.get('email')}
         user = requests.post(DOMAIN + '/api/users/', data)
         if user.status_code == 201:
+            messages.success(request, 'Signup success. Login now')
             form = {"info": "Log in"}
             return render(request, 'signin.html', {'form': form})
         form = {"info": user.text}
+        messages.error(request, user.text)
         return redirect(reverse('login'),)
 
 
@@ -71,7 +74,8 @@ class Login(View):
             request.session['content_type'] = 'application/json'
             request.session['username'] = request.POST.get('username')
             request.session['token'] = form['token']
-            return redirect(reverse('detail'), )
+            messages.success(request, 'login success')
+            return redirect(reverse('detail'))
         form = {"info": " Wrong password or Username"}
         return render(request, 'signin.html', {'form': form})
 
@@ -81,7 +85,7 @@ class ListCreateBucketlists(View):
 
     @login_required
     def get(self, request):
-
+     
         url = DOMAIN + '/api/bucketlists/'
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
@@ -106,7 +110,8 @@ class ListCreateBucketlists(View):
         url = DOMAIN + '/api/bucketlists/'
         data = {"name": name, "creator": creator}
         requests.post(url, data, headers=request.session)
-        return redirect(reverse('detail'), )
+        messages.success(request, 'List created')
+        return redirect(reverse('detail'),)
 
 
 class DeleteList(View):
@@ -117,6 +122,7 @@ class DeleteList(View):
     def post(self, request, id=None):
         url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         requests.delete(url, headers=request.session)
+        messages.success(request, 'List deleted')
         return redirect(reverse('detail'), )
 
 
@@ -131,6 +137,7 @@ class UpdateList(View):
         update_data = bucketlist.json()
         update_data['name'] = name
         requests.put(url, update_data, headers=request.session)
+        messages.success(request, 'List updated')
         return redirect(reverse('detail'))
 
 
@@ -154,6 +161,7 @@ class CreateListItems(View):
         data = {"name": name}
         url = DOMAIN + '/api/bucketlists/{}/items/'.format(id)
         requests.post(url, data, headers=request.session)
+        messages.success(request, 'item created')
         result_url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         bucketlist = requests.get(result_url, headers=request.session)
         list_items = bucketlist.json()
@@ -171,6 +179,7 @@ class DeleteItem(View):
         # Delete an item
         url = DOMAIN + '/api/bucketlists/{0}/items/{1}/'.format(id, item)
         requests.delete(url, headers=request.session)
+        messages.success(request, 'item Deleted')
         return redirect(reverse('detail'))
 
 
@@ -193,6 +202,7 @@ class UpdateItem(View):
         data['name'] = name
         data['done'] = done
         requests.put(url, data, headers=request.session)
+        messages.success(request, 'item updated')
         return redirect(reverse('items', args=[id]))
 
     def get(self, request, id=None, item=None):
@@ -206,6 +216,7 @@ class Logout(View):
     def get(self, request):
         del request.session['Authorization']
         del request.session['username']
+        messages.success(request, 'You have been logged out')
         return render(request, 'index.html')
 
 

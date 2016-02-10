@@ -1,9 +1,8 @@
 .centered {
   width: 400px;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-70%, -90%)
+  left:50%;
+  transform: translate(-60%, 0)
 }
 
 .centered-index {
@@ -213,8 +212,13 @@ button[type=submit].modal input[type=submit].modal {
   text-align: center;
 }
 
-.gg {
+.collar {
   border-radius: 100%;
+}
+
+.collar h5 .icon-menu div.dotted{
+  transform: translate(-15%, 50%)
+  clear:both;
 }
 .collapsible-header:focus{
   clear:both;
@@ -277,7 +281,7 @@ button[type=submit].modal input[type=submit].modal {
 @media (max-width: 480px) {
   .login-wrapper {
     float: none;
-    top: 25%;
+    top: 50px;
     right: 25% !important;
     left: 25% !important;
     bottom: 25%;
@@ -287,6 +291,15 @@ button[type=submit].modal input[type=submit].modal {
     transform: translate(0%, -0%);
     text-align: center;
   }
+
+
+.slider li h5 {
+  color:red;
+  transform:translate(20%, 100%);
+}
+
+
+
 }
 
 body,

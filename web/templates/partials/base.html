@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"> {% load staticfiles %}
+    {% load staticfiles %}
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon' />
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
@@ -44,6 +46,14 @@
 
                     </ul>
                 </div>
+                {% if messages %}
+                {% for message in messages %}
+            <script>
+  
+     Materialize.toast('{{message}}', 3000, 'rounded');
+
+ 
+        </script>{% endfor %}{% endif %}
                 {% block content %}{% endblock %} {%include 'modal.html'%}
             </div>
         </div>

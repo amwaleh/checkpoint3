@@ -13,8 +13,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>bucketlist</title>
 </head>
-
 <body class="sign-container blue">
+{% if messages %} {% for message in messages %}
+<script>
+Materialize.toast('{{message}}', 3000, 'rounded');
+</script>{% endfor %}{% endif %}
+
     <div class=" centered intro  light3-blue accent-4 s12" >
         <div class="">
             <form method='POST' action='/login/' class="curve blue inner-log z-depth-2 valign  col s12  offset-s6">
@@ -39,10 +43,10 @@
                             <label for="password">password</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn blue waves-effect waves-light"><i class="material-icons right">send</i> sign in</button>
-                    <div class="divider"></div>
-                    <br/>
-                    <a href="#modal1" class="cyan waves-effect waves-light btn modal-trigger" style="opacity: 1;"><small>sign-up</small></a>
+                    <button type="submit" class="btn blue waves-effect waves-light" width='70%'><i class="material-icons right">send</i> sign in</button>
+                    <div >
+                    <br/> <label> Not a Member ? </label>
+                    <a href="#modal1" class=" waves-effect waves-light modal-trigger" style="opacity: 1;" width='70%'> Register </a></div>
             </form>
             </div>
         </div>
@@ -50,7 +54,7 @@
 </body>
 <div id="modal1" class="modal fixed curve2" style="width:400px">
     <div class="blue row">
-        <h5 class="white-text center"><i class="material-icons large">account_circle</i><br>Sign Up </h5>
+        <Button class="white-text center"><i class="material-icons large">account_circle</i> Register  </Button>
     </div>
     <div class=" ">
         <div class="row">
@@ -84,5 +88,19 @@
         </div>
     </div>
 </div>
+<style>
+    
+     button {
+    cursor: pointer;
+    background: $accent;
+   
+    border: 0;
+    padding: 10px 15px;
+    color: $white;
+    @include transition(.3s ease);
+    &:hover {
+      background: darken($accent, 15%);
+    }
+</style>
 <script> $('.modal-trigger').leanModal();</script>
 {% endblock %}
