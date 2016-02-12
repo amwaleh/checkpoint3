@@ -1,29 +1,29 @@
-
 <!-- delete  list -->
-<div id="deletelist" class="modal curve">
-    <div class="blue darken-1">&nbsp;
+<div id="deletelist" class="modal">
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> Delete List</label>
     </div>
-    <div class="modal-content">
-     {% include 'deletelist.html' %}
+    <div >
+        {% include 'deletelist.html' %}
     </div>
 </div>
 <!-- delete  items -->
-<div id="deletelitem" class="modal curve">
-    <div class="blue darken-1">&nbsp;
+<div id="deletelitem" class="modal">
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> Delete Item</label>
     </div>
-    <div class="modal-content">
-     {% include 'deleteitem.html' %}
+    <div >
+        {% include 'deleteitem.html' %}
     </div>
 </div>
 <!-- search form -->
-<div id="modal6" class="modal curve">
-    <div class="blue darken-1">&nbsp;
+<div id="modal6" class="modal">
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> search</label>
     </div>
-    <div class="modal-content">
-        <form action="/bucketlists?search=" method="get">
+    <div >
+        <form action="/search/" method="POST">
+            {% csrf_token %} <br><br>
             <div class="input-field">
                 <input id="search" type="search" name="search" required>
                 <label for="search"><i class="material-icons">search</i> search</label>
@@ -34,25 +34,25 @@
 </div>
 <!-- add bucketlist -->
 <div id="modal1" class="modal">
-    <div class="blue darken-1">&nbsp;
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> Add a Bucketlist</label>
     </div>
-    <div class="modal-content">
+    <div >
         {% include 'addbucketlist.html' %}
     </div>
 </div>
 <!-- add items -->
 <div id="modal2" class="modal">
-    <div class="blue darken-1">&nbsp;
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> Add an item</label>
     </div>
-    <div class="modal-content">
+    <div >
         {% include 'additems.html' %}
     </div>
 </div>
 <!-- edit bucketlist-->
 <div id="modal3" class="modal ">
-    <div class="blue darken-1">&nbsp;
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> Update Bucketlist</label>
     </div>
     <div>
@@ -60,11 +60,11 @@
     </div>
 </div>
 <!-- edit items -->
-<div id="modal4" class="modal curve2">
-    <div class="blue darken-1">&nbsp;
+<div id="modal4" class="modal">
+    <div class="cyan darken-2">&nbsp;
         <label class='white-text'> Update item</label>
     </div>
-    <div class="modal-content">
+    <div >
         {% include 'edititem.html' %}
     </div>
 </div>

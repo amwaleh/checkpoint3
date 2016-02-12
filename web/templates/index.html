@@ -15,48 +15,29 @@
     <title>bucketlist</title>
     <script src="{% static "js/script.js" %}"></script>
 </head>
-
-<body>
+<body class="cyan">
     {% load staticfiles %}
-    <div class="curve-index  centered-index   z-depth-5" style="z-index:999999; bodrde: 1px solid" height='600px'>
-        <center><img src="{%static "images/logo.png" %}" width='128'> <span class="blue-text"> bucketlist</span>
+    <div class="curve-index  centered-index   z-depth-0" style="z-index:999999; border: 1px solid #FFF" height='600px'>
+        <center><img src="{%static "images/logo.png"%}" width='128'>
             <br>
-            <p class="z-depth-5"><a class="btn blue large show" href="/login/"> Join the<i class="large material-icons"> touch_app </i> movement</a></p>
+            <h5 class="white-text"> bucketlist</h5>
+            <p class="z-depth-0"><a class="btn cyan darken-2 large show" href="/login/"> Join the<i class="large material-icons"> touch_app </i> movement</a></p>
             <br/>
             <label> © 2016 Copyright Andela </label>
             <br/>
         </center>
     </div>
-    <div class="slider fullscreen intro-slider">
-    <ul class="slides">
-        
-        
-        <li>
-            <img src="{% static " images/dine.jpeg " %}">
-            <!-- random image -->
-        </li>
-        
-    </ul>
-</div>
+    <div class="homepage-hero-module">
+        <div class="video-container">
+            <div class="filter"></div>
+            <video autoplay loop class="fillWidth">
+                <source src="{%static "images/Major-Tom.mp4" %}" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                <source src="PATH_TO_WEBM" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            </video>
+            <div class="poster hidden">
+                <img src="PATH_TO_JPEG" alt="">
+            </div>
+        </div>
+    </div>
 </body>
-
-<script>
-$('.slider').slider({
-    full_width: true,
-    indicators: false,
-
-});
-</script>
-<style>
-    
-     .show {
-    background: $accent;
-    height: 70px;
-    width:100%;
-    border: 0;
-    padding: 20px 15px;
-    color: white;
-    font-size: 2.2em;
-    }
-</style>
 </html>

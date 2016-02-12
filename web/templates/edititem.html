@@ -4,13 +4,9 @@
         {% csrf_token %}
         <input type="hidden" name="update">
         <div class="row  ">
-            <i class="material-icons large blue-grey-text text-lighten-1">add_box</i>
         </div>
         <div class="row ">
-            <div class="input-field">
-                <span class="help-block"></span>
-                <textarea id="textarea1" class="materialize-textarea"  name='name'></textarea>
-            </div>
+        <p>&nbsp;</p>
             <div class="switch grey-text">
                 completed:
                 <label>
@@ -19,11 +15,20 @@
                     <span class="lever"></span> yes
                 </label>
             </div>
+            </div>
+            <div class="row ">
+            <div class="input-field">
+                <span class="help-block"></span>
+                <textarea id="textarea1" class="materialize-textarea" name='name'></textarea>
+            </div>
             <div class="">
                 <p>
-                    <button type="submit" class="btn  blue darken-1 right">update<i class="material-icons right">send</i></button>
+                    <center>
+                        <button type="submit" class="btn  cyan darken-1 ">update<i class="material-icons right">send</i></button>
+                    </center>
                 </p>
             </div>
+        </div>
     </form>
-    </div>
-    {% endblock %}
+</div>
+{% endblock %}

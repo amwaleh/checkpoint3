@@ -85,7 +85,6 @@ class ListCreateBucketlists(View):
 
     @login_required
     def get(self, request):
-     
         url = DOMAIN + '/api/bucketlists/'
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
@@ -150,9 +149,7 @@ class CreateListItems(View):
         url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
-        return render(request, 'list.html',
-                      {'key': lists,
-                       "header": request.session['username']})
+        return redirect(reverse('detail'))
 
     @login_required
     def post(self, request, id=None):
@@ -162,12 +159,7 @@ class CreateListItems(View):
         url = DOMAIN + '/api/bucketlists/{}/items/'.format(id)
         requests.post(url, data, headers=request.session)
         messages.success(request, 'item created')
-        result_url = DOMAIN + '/api/bucketlists/{}/'.format(id)
-        bucketlist = requests.get(result_url, headers=request.session)
-        list_items = bucketlist.json()
-        return render(request, 'list.html',
-                      {'key': list_items,
-                       "header": request.session['username']})
+        return redirect(reverse('detail'))
 
 
 class DeleteItem(View):
@@ -190,7 +182,6 @@ class UpdateItem(View):
     @login_required
     def post(self, request, id=None, item=None):
         # update edits made to an item
-
         done = False
         name = request.POST.get('name')
         res_done = request.POST.get('done')

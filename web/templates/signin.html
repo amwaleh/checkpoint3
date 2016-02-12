@@ -13,37 +13,36 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>bucketlist</title>
 </head>
-<body class="sign-container blue">
+<body class="sign-container cyan darken-2">
 {% if messages %} {% for message in messages %}
 <script>
 Materialize.toast('{{message}}', 3000, 'rounded');
 </script>{% endfor %}{% endif %}
-
-    <div class=" centered intro  light3-blue accent-4 s12" >
+    <div class=" centered intro   s12" style="z-index:999999;">
         <div class="">
-            <form method='POST' action='/login/' class="curve blue inner-log z-depth-2 valign  col s12  offset-s6">
+            <form method="POST" action="/login/" class="curve blue inner-log z-depth-0 valign  col s12  offset-s6">
                 {% csrf_token %}
-                <div class=" z-depth-2" Style="background-color:rgba(255,255,255,0.9)">
-                    <div class="blue">
+                <div class=" z-depth-0" Style="background-color:rgba(255,255,255,1)">
+                    <div class="cyan darken-1">
                         <h4><i class="material-icons  large white-text prefix">account_circle</i></h4>
                         <h4 class="grey-text text-lighten-5 " style="text-shadow: 1px 1px #000"> Bucketlist</h4> {% block content %}</div>
                     <div class="error"> {% for r, k in form.items%} {{k}} {% endfor %}
                     </div>
                     <div class="row">
                         <div class="input-field col s12 ">
-                            <i class="material-icons  blue-text prefix">account_circle</i>
+                            <i class="material-icons  cyan-text text-darken-4 prefix">account_circle</i>
                             <input id="username" type="text" class="validate" name='username'>
                             <label for="username">username</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 ">
-                            <i class="material-icons blue-text prefix">lock_outline</i>
+                            <i class="material-icons cyan-text text-darken-3 prefix">lock_outline</i>
                             <input id="password" type="password" class="validate" name="password">
                             <label for="password">password</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn blue waves-effect waves-light" width='70%'><i class="material-icons right">send</i> sign in</button>
+                    <button type="submit" class="btn cyan darken-3 waves-effect waves-light" width='70%'><i class="material-icons right">send</i> sign in</button>
                     <div >
                     <br/> <label> Not a Member ? </label>
                     <a href="#modal1" class=" waves-effect waves-light modal-trigger" style="opacity: 1;" width='70%'> Register </a></div>
@@ -51,10 +50,21 @@ Materialize.toast('{{message}}', 3000, 'rounded');
             </div>
         </div>
     </div>
-</body>
-<div id="modal1" class="modal fixed curve2" style="width:400px">
-    <div class="blue row">
-        <Button class="white-text center"><i class="material-icons large">account_circle</i> Register  </Button>
+<div class="homepage-hero-module">
+    <div class="video-container">
+        <div class="filter"></div>
+        <video autoplay loop class="fillWidth">
+            <source src="{%static "images/Major-Tom.mp4" %}" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            <source src="PATH_TO_WEBM" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+        </video>
+        <div class="poster hidden">
+            <img src="PATH_TO_JPEG" alt="">
+        </div>
+    </div>
+</div>
+<div id="modal1" class="modal fixed " >
+    <div class="cyan darken-2 row">
+        <Button class="white-text center"><i class="material-icons ">account_circle</i> Register  </Button>
     </div>
     <div class=" ">
         <div class="row">
@@ -62,38 +72,38 @@ Materialize.toast('{{message}}', 3000, 'rounded');
                 {% csrf_token %}
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="tiny material-icons blue-text prefix">account_circle</i>
+                        <i class="tiny material-icons cyan-text darken-2 prefix">account_circle</i>
                         <input id="username" name="username" type="text" class="validate" required>
                         <label for="username">username</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="material-icons blue-text prefix">lock_outline</i>
+                        <i class="material-icons cyan-text darken-2 prefix">lock_outline</i>
                         <input id="password" type="password" name="password" class="validate" required>
                         <label for="password">password</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="material-icons blue-text prefix">email</i>
+                        <i class="material-icons cyan-text darken-2 prefix">email</i>
                         <input id="email" type="email" class="validate" name="email" required>
                         <label for="email">Email</label>
                     </div>
                 </div>
                 <center>
-                    <button type="submit" class="blue btn waves-effect waves-light "><i class="material-icons right">send</i>submit</button>
+                    <button type="submit" class="cyan darken-3 btn waves-effect waves-light "><i class="material-icons right">send</i>submit</button>
                 </center>
             </form>
         </div>
     </div>
 </div>
+
+</body>
 <style>
     
      button {
     cursor: pointer;
-    background: $accent;
-   
     border: 0;
     padding: 10px 15px;
     color: $white;
@@ -101,6 +111,9 @@ Materialize.toast('{{message}}', 3000, 'rounded');
     &:hover {
       background: darken($accent, 15%);
     }
+}
 </style>
-<script> $('.modal-trigger').leanModal();</script>
+<script>
+ $('.modal-trigger').leanModal();
+ </script>
 {% endblock %}
