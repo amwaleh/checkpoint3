@@ -15,7 +15,7 @@
     <link href="{% static "css/flat-ui.min.css"%}" rel="stylesheet">
     <link href="{% static "css/materialize.css"%}" rel="stylesheet"> 
     <link rel="stylesheet" href="{% static "css/style.css" %}">
-    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+    <link rel="shortcut icon" href="{%static "images/logo.png" %}">
     <script src="{% static "js/vendor/jquery.min.js"%}"></script>
     <script src="{% static "js/vendor/video.js"%}"></script>
     <script src="{% static "js/flat-ui.min.js"%}"></script>
@@ -29,7 +29,7 @@
 <body>
     <nav class="navbar-wrapper  cyan darken-1 z-depth-0" role="navigation" style="margin-bottom:0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img src="{%static "images/logo.png" %}" width='32'> bucketlist</a>
+            <a class="navbar-brand" href="{% url 'detail'%}"><img src="{%static "images/logo.png" %}" width='32'> bucketlist</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
             <center>
@@ -53,10 +53,10 @@
     <!-- /navbar -->
     <div class="row">
         <!-- colum1 -->
-        <div class="hide-on-med-and-down collection  lighten-4 box-content left z-depth-0 col-lg-2 col-xs-2" style="margin:0; padding:0; overflow: None; height:100vh; background-color:rgba(00,00,00,.6)"> 
+        <div class="hide-on-med-and-down collection grey lighten-4  box-content left z-depth-0 col-lg-2 col-xs-2" style="margin:0; padding:0; overflow: None; height:100vh; background-color:rgba(200,200,200,1)"> 
             <div class="fixed-action-btn" style="">
                 <a class="btn-floating btn-large cyan">
-                    <i class="large material-icons">mode_edit</i>
+                    <i class="small fa fa-bars white-text fa-6"></i>
                 </a>
                 <ul>
                     <li><a class="btn-floating btn-large waves-effect waves-light teal" href="/bucketlists/"><i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Home">home</i></a></li>
@@ -68,12 +68,12 @@
             </div>
         </div>
         <!-- colum2 -->
-        <div class="box-content grey lighten-4 left col-lg-8 col-xs-12 col-md-12 z-depth-0" style="overflow-x:None;overflow-y: scroll;height:100vh; background-color:rgba(200,200,200,.8)"> &nbsp;
+        <div class="box-content grey lighten-4 left col-lg-8 col-xs-12 col-md-12 z-depth-0" style="overflow-x:None;overflow-y: scroll;height:100vh; background1-color:rgba(200,200,200,.8)"> &nbsp;
             
             {% block content %}{% endblock %}
         </div>
         <!-- col3 -->
-        <div class="hide-on-med-and-down collection with-header  lighten-4 box-content left z-depth-0 col-lg-2 col-xs-2 col-md-2" style="margin:0; padding:0; overflow: None; height:100vh; background-color:rgba(00,00,00,.6)">
+        <div class="hide-on-med-and-down collection with-header  grey lighten-4  box-content left z-depth-0 col-lg-2 col-xs-2 col-md-2" style="margin:0; padding:0; overflow: None; height:100vh; background1-color:rgba(00,00,00,1)">
         </div>
     </div>
     {%include 'modal.html'%}

@@ -123,8 +123,8 @@ myApp = {
         $("#textarea1").val(name);
         $("#textarea1").trigger("autoresize");
         var checked = false
-        done = $("#complete").prop("checked");
-        if (done == true) {
+        console.log(done)
+        if (done == 'True') {
             checked = true;
         };
         $("[name='done']").prop("checked", checked);
@@ -132,24 +132,23 @@ myApp = {
             "/bucketlists/" + id + "/items/" + item + "/update");
 
     },
-    autoEditItem: function(id, item, name) {
-        $(".collection-item").on('click', function(event) {
-            $(this).find('#complete').val()
-            done = $(this).find('#complete').prop("checked");
-
+    autoEditItem: function(id, item, name, done) {
+            var lid=id
+           $("[name='form_edititem'] [name='name']").val(name);
             $("[name='name']").val(name);
             $("#textarea1").val(name);
-            $("#textarea1").trigger("autoresize");
+           
             var checked = false
 
-            if (done == true) {
+            if (done === 'False') {
                 checked = true;
             }
+            console.log(lid)
             $("[name='done']").prop("checked", checked);
             $("[name='form_edititem']").prop("action",
-                "/bucketlists/" + id + "/items/" + item + "/update");
+                "/bucketlists/" + lid + "/items/" + item + "/update");
             $("[name='form_edititem']").submit();
-        })
+        
     },
 
     // delete lists

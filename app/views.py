@@ -26,7 +26,7 @@ class BucketlistViewset(viewsets.ModelViewSet):
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('name',)
+    search_fields = ('name','id')
 
     def get_queryset(self):
         # Override method to restrict query to current user

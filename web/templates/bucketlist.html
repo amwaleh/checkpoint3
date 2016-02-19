@@ -4,7 +4,7 @@
    <!-- page start -->
 {% for key in lists%}
 <div class="container ">
-    <div class="row">
+    <div class=" ">
         <ul class="collapsible z-depth-0 " data-collapsible="expandable">
             <li>
                 <div class="col s12 m12 l12 cyan accent-4">
@@ -29,7 +29,7 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">format_list_numbered</i> view items ... {% if key.items|length > 0 %}
+                <div class="collapsible-header {% if not lists.paginator.num_pages  %} active {% endif %}"><i class="material-icons">format_list_numbered</i> view items ... {% if key.items|length > 0 %} 
                     <span class="tiny chip grey lighten-2" style="position:absolute;left:50%;transform:translateY(25%)">{{key.items|length}}</span> {%endif%}
                     <a class="btn-floating btn-large z-depth-0 waves-effect waves-light amber lighten-4" style="position:absolute;left:73%; transform:translateY(-50%);"><i class="fa fa-angle-double-down  arrow-img rotate-reset cyan-text text-darken-3  right"></i></a>
                 </div>
@@ -39,19 +39,24 @@
                         <li class="collection-item">
                             <div>
                                 <!-- done check box -->
-                                <div class="switch left">
-                                    <a href="#" onclick="myApp.autoEditItem('{{key.id}}','{{item.id}}','{{item.name}}')" class="  light-blue-text ligten-text-1">
-                                        <label>
+                               <div class="left" onclick="myApp.autoEditItem('{{key.id}}','{{item.id}}','{{item.name}}','{{item.done}}')">
+                                    <a href="#"  class=" light-blue-text ligten-text-1">
+                                       
                                             {% if item.done %}
-                                            <input id="complete" type="checkbox" checked> {%else%}
-                                            <input id="complete" type="checkbox"> {% endif%}
-                                            <span class="lever"></span> &nbsp
-                                        </label>
-                                    </a>
+                                            <input id="{{item.id}}"  name='complete' type="checkbox" checked> {%else%}
+                                            <input id="{{item.id}}"  type="checkbox"  name='complete'> {% endif%}
+                                            <label for="{{item.id}}"></label>
+                                         
+                                    </a>  
                                 </div>
+                                {% if item.done %} 
+                                <strike class="amber-text" >{{item.name}}</strike>
+                                {% else %} 
                                 {{item.name}}
+                                 {% endif%} 
+
                                 <!-- item name -->
-                                <a href="#!" class=" dropdown-button  secondary-content " data-activates='item{{item.id}}'><i class="material-icons">settings</i></a>
+                                <a href="#!" class=" dropdown-button  secondary-content " data-activates='item{{item.id}}'><i class="fa fa-ellipsis-v"></i></a>
                             </div>
                         </li>
                         <ul id='item{{item.id}}' class='dropdown-content' style="transform:translate(-100%, -20%);">
@@ -82,6 +87,7 @@
     <div class="divider"></div>
 </div>
 {% endfor %}
+{% if lists.paginator.num_pages %}
 <div class="pagination  col-lg-12">
     <center>
         <span class="step-links">
@@ -97,11 +103,14 @@
         </span>
     </center>
 </div>
+{% endif%}
 <script>
+
 $('.collapsible-header').on("click", function(event) {
     $(this).find('.arrow-img').toggleClass('rotate');
     $(this).find('.arrow-img').toggleClass('rotate-reset');
 
 });
+$('.collapsible').trigger('click')
 </script>
 {% endblock %}

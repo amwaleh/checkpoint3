@@ -18,7 +18,7 @@
 <script>
 Materialize.toast('{{message}}', 3000, 'rounded');
 </script>{% endfor %}{% endif %}
-    <div class=" centered intro   s12" style="z-index:999999;">
+    <div class=" centered intro   s12" style="z-index:999;">
         <div class="">
             <form method="POST" action="/login/" class="curve blue inner-log z-depth-0 valign  col s12  offset-s6">
                 {% csrf_token %}
@@ -45,7 +45,7 @@ Materialize.toast('{{message}}', 3000, 'rounded');
                     <button type="submit" class="btn cyan darken-3 waves-effect waves-light" width='70%'><i class="material-icons right">send</i> sign in</button>
                     <div >
                     <br/> <label> Not a Member ? </label>
-                    <a href="#modal1" class=" waves-effect waves-light modal-trigger" style="opacity: 1;" width='70%'> Register </a></div>
+                    <a href="#modallog1" class=" waves-effect waves-light modal-trigger" style="opacity: 1;" width='70%'> Register </a></div>
             </form>
             </div>
         </div>
@@ -55,14 +55,13 @@ Materialize.toast('{{message}}', 3000, 'rounded');
         <div class="filter"></div>
         <video autoplay loop class="fillWidth">
             <source src="{%static "images/Major-Tom.mp4" %}" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-            <source src="PATH_TO_WEBM" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
-        </video>
+            
         <div class="poster hidden">
-            <img src="PATH_TO_JPEG" alt="">
+            
         </div>
     </div>
 </div>
-<div id="modal1" class="modal fixed " >
+<div id="modallog1" class="modal fixed " style="z-index:999999;">
     <div class="cyan darken-2 row">
         <Button class="white-text center"><i class="material-icons ">account_circle</i> Register  </Button>
     </div>
@@ -113,7 +112,5 @@ Materialize.toast('{{message}}', 3000, 'rounded');
     }
 }
 </style>
-<script>
- $('.modal-trigger').leanModal();
- </script>
+
 {% endblock %}

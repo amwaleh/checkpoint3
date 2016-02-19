@@ -139,6 +139,21 @@ class UpdateList(View):
         messages.success(request, 'List updated')
         return redirect(reverse('detail'))
 
+class GetList(View):
+    """retrieves a single list"""
+
+    @login_required
+    def get(self, request, id=None):
+        url = DOMAIN + '/api/bucketlists/{}/'.format(id)
+        bucketlist = requests.get(url, headers=request.session)
+        if bucketlist.status_code != 200:
+             messages.info(request, 'an error occured')
+             return redirect(reverse('detail'))
+        lists = bucketlist.json()
+        return render(request, 'bucketlist.html',
+                      {'lists': [lists,],
+                       "header": request.session['username']})
+
 
 class CreateListItems(View):
     """handles Creation and listing of items."""
@@ -149,7 +164,7 @@ class CreateListItems(View):
         url = DOMAIN + '/api/bucketlists/{}/'.format(id)
         bucketlists = requests.get(url, headers=request.session)
         lists = bucketlists.json()
-        return redirect(reverse('detail'))
+        return redirect(reverse('getlist',args=[id]))
 
     @login_required
     def post(self, request, id=None):
@@ -159,7 +174,7 @@ class CreateListItems(View):
         url = DOMAIN + '/api/bucketlists/{}/items/'.format(id)
         requests.post(url, data, headers=request.session)
         messages.success(request, 'item created')
-        return redirect(reverse('detail'))
+        return redirect(reverse('getlist',args=[id]))
 
 
 class DeleteItem(View):
@@ -172,7 +187,7 @@ class DeleteItem(View):
         url = DOMAIN + '/api/bucketlists/{0}/items/{1}/'.format(id, item)
         requests.delete(url, headers=request.session)
         messages.success(request, 'item Deleted')
-        return redirect(reverse('detail'))
+        return redirect(reverse('getlist',args=[id]))
 
 
 class UpdateItem(View):
