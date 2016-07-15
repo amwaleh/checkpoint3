@@ -8,6 +8,7 @@ import views
 router = DefaultRouter()
 
 router.register(r'users', views.UserViewSet)
+
 router.register(r'bucketlists', views.BucketlistViewset, "bucketlists-detail")
 router.register(r'bucketlists/(?P<id>\d+)/items', views.ItemsViewSet, )
 
