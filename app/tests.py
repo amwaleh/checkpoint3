@@ -42,11 +42,6 @@ class BucketlistTest(TestCase):
         data = {"username": "admintest2", "password": "password"}
         response = self.client.post('/api/users/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        # Test if user has been added and can be retrieved
-        url = '/api/users/'
-        response = self.client.get(url, format='json')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), 2)
 
         # check if user is unique
         data = {"username": "admintest2", "password": "password"}
