@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_swagger import urls
+
 from rest_framework_jwt.views import verify_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework.routers import DefaultRouter
@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^api-token/', obtain_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
-    url(r'^docs/', include(urls)),
+    #url(r'^docs/', views.schema_view),
     url(r'^', include(router.urls)),
 
 ]

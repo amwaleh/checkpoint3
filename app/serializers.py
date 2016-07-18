@@ -62,4 +62,4 @@ class BucketlistSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'name', 'created_on',
             'modified_on', 'creator', 'items')
-        read_only_fields = ('creator')
+        read_only_fields = ('creator',)

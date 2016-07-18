@@ -7,24 +7,15 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from models import Bucketlist, Bucketitems
 from serializers import (UserSerializer, BucketlistSerializer,
                          BucketitemSerializer)
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 
 
-class UserViewSet(mixins.RetrieveModelMixin,
-                  mixins.CreateModelMixin,
-                  mixins.DestroyModelMixin,
-                  viewsets.GenericViewSet):
-
+class UserViewSet(viewsets.ModelViewSet):
     """This viewset automatically provides `list` and `detail` actions."""
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-
-    def get_permissions(self):
-        # allow non-authenticated user to create via POST
-        return (permissions.AllowAny() if self.request.method == 'POST'
-                else permissions.IsAuthenticatedOrReadOnly()),
+    permission_classes = ()
 
 
 class BucketlistViewset(viewsets.ModelViewSet):
@@ -44,7 +35,7 @@ class BucketlistViewset(viewsets.ModelViewSet):
         return bucketlist
 
     def create(self, request):
-        # Override to Restrict creator to current user
+        # Override to Ristrict creator to current user
 
         request.POST._mutable = True
         request.data['creator'] = request.user.id

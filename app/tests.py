@@ -119,8 +119,8 @@ class BucketlistTest(TestCase):
         """Test editing of items"""
 
         self._get_token()
-        data = {'name': 'bucketlist1', 'creator': self.user.id}
-        item = {'name': 'item'}
+        data = '{"name": "bucketlist1", "creator_id": self.user.id}'
+        item = '{"name": "item"}'
         response = self.client.post("/api/bucketlists/", data, format='json')
         self.assertEqual(response.status_code, 201)
         # create Item
