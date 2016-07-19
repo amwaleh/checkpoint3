@@ -1,10 +1,10 @@
-$(document).ready(function () {
+$(document).ready(function() {
     myApp.init();
 });
 var myApp = {};
 myApp = {
     //initialize the dom
-    init: function () {
+    init: function() {
         $('.slider').slider({
             full_width: true
         });
@@ -40,7 +40,7 @@ myApp = {
         $('.collapsible').collapsible({
             accordion: true
         });
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             scaleVideoContainer();
 
@@ -48,7 +48,7 @@ myApp = {
             initBannerVideoSize('.video-container .filter');
             initBannerVideoSize('.video-container video');
 
-            $(window).on('resize', function () {
+            $(window).on('resize', function() {
                 scaleVideoContainer();
                 scaleBannerVideoSize('.video-container .poster img');
                 scaleBannerVideoSize('.video-container .filter');
@@ -67,7 +67,7 @@ myApp = {
 
         function initBannerVideoSize(element) {
 
-            $(element).each(function () {
+            $(element).each(function() {
                 $(this).data('height', $(this).height());
                 $(this).data('width', $(this).width());
             });
@@ -84,7 +84,7 @@ myApp = {
                 videoHeight;
 
 
-            $(element).each(function () {
+            $(element).each(function() {
                 var videoAspectRatio = $(this).data('height') / $(this).data('width');
 
                 $(this).width(windowWidth);
@@ -107,18 +107,18 @@ myApp = {
 
     },
     // Add items
-    addItem: function (id) {
+    addItem: function(id) {
         $("[name='form_additem']").prop("action",
             "/bucketlists/" + id + "/items/");
     },
     // edit lists
-    editBucketlist: function (id, sname) {
+    editBucketlist: function(id, sname) {
         $("[name='name']").val(sname)
         $("[name='form_editbucketlist']").prop("action",
             "/bucketlists/" + id + "/update");
     },
     // update items
-    editItem: function (id, item, name, done) {
+    editItem: function(id, item, name, done) {
         $("[name='form_edititem'] [name='name']").val(name);
         $("#textarea1").val(name);
         $("#textarea1").trigger("autoresize");
@@ -126,41 +126,40 @@ myApp = {
         console.log(done)
         if (done == 'True') {
             checked = true;
-        }
-        ;
+        };
         $("[name='done']").prop("checked", checked);
         $("[name='form_edititem']").prop("action",
             "/bucketlists/" + id + "/items/" + item + "/update");
 
     },
-    autoEditItem: function (id, item, name, done) {
-        var lid = id
-        $("[name='form_edititem'] [name='name']").val(name);
-        $("[name='name']").val(name);
-        $("#textarea1").val(name);
+    autoEditItem: function(id, item, name, done) {
+            var lid=id
+           $("[name='form_edititem'] [name='name']").val(name);
+            $("[name='name']").val(name);
+            $("#textarea1").val(name);
+           
+            var checked = false
 
-        var checked = false
-
-        if (done === 'False') {
-            checked = true;
-        }
-        console.log(lid)
-        $("[name='done']").prop("checked", checked);
-        $("[name='form_edititem']").prop("action",
-            "/bucketlists/" + lid + "/items/" + item + "/update");
-        $("[name='form_edititem']").submit();
-
+            if (done === 'False') {
+                checked = true;
+            }
+            console.log(lid)
+            $("[name='done']").prop("checked", checked);
+            $("[name='form_edititem']").prop("action",
+                "/bucketlists/" + lid + "/items/" + item + "/update");
+            $("[name='form_edititem']").submit();
+        
     },
 
     // delete lists
-    deleteList: function (id, sname) {
+    deleteList: function(id, sname) {
         $("h5[name='name']").text("Delete: " + sname + " ?");
         $("[name='form_deletelist']").prop("action",
             "/bucketlists/" + id + "/delete");
 
     },
     // deleteitem
-    deleteItem: function (id, item, sname) {
+    deleteItem: function(id, item, sname) {
         $("h5[name='itemname']").text("Delete: " + sname + " ?");
         $("[name='form_deleteitem']").prop("action",
             "/bucketlists/" + id + "/items/" + item + "/delete");

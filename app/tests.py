@@ -42,6 +42,11 @@ class BucketlistTest(TestCase):
         data = {"username": "admintest2", "password": "password"}
         response = self.client.post('/api/users/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        # Test if user has been added and can be retrieved
+        url = '/api/users/'
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 2)
 
         # check if user is unique
         data = {"username": "admintest2", "password": "password"}
@@ -119,8 +124,8 @@ class BucketlistTest(TestCase):
         """Test editing of items"""
 
         self._get_token()
-        data = '{"name": "bucketlist1", "creator_id": self.user.id}'
-        item = '{"name": "item"}'
+        data = {'name': 'bucketlist1', 'creator': self.user.id}
+        item = {'name': 'item'}
         response = self.client.post("/api/bucketlists/", data, format='json')
         self.assertEqual(response.status_code, 201)
         # create Item

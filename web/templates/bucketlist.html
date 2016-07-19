@@ -2,112 +2,107 @@
     <!-- pagination  -->
 
     <!-- page start -->
+  {% for key in lists %}
+<div class="grid container " data-packery='{ "itemSelector": ".grid-item", "gutter": 10 }'>
+    <div class="card grid-item col-xs-12 col-sm-12 col-md-6 col-lg-5">
+        <!--right edit menu-->
+        <div class="pull-right right">
+            <a class='dropdown-button' href='#' data-activates='{{ key.id }}'>
+                <i class="small fa fa-bars white-text fa-6"></i>
+            </a>
+            <ul id='{{ key.id }}' class='dropdown-content'>
+                <!-- edit button -->
 
-    <div class="grid  container" data-packery='{ "itemSelector": ".grid-item", "gutter": 10 }'>
-        {% for key in lists %}
-            <div class="card grid-item col-xs-12 col-sm-12 col-md-6 col-lg-5">
-                <!--right edit menu-->
-                <div class="pull-right right">
-                    <a class='dropdown-button' href='#' data-activates='{{ key.id }}'>
-                        <i class="small fa fa-bars  fa-6"></i>
-                    </a>
-                    <ul id='{{ key.id }}' class='dropdown-content'>
-                        <!-- edit button -->
+                <li class=" cyan-text"><a href="#modal3" class="cyan-text  modal-trigger z-depth-0"
+                                          onclick="myApp.editBucketlist({{ key.id }}, '{{ key.name }}')"><i
+                        class="small material-icons cyan-text">edit</i> edit</a></li>
+                <!-- delete button -->
+                <li class="cyan-text"><a href="#deletelist"
+                                         onclick="myApp.deleteList({{ key.id }}, '{{ key.name }}')"
+                                         class=" cyan-text modal-trigger z-depth-0"><i
+                        class=" small cyan-text  fa fa-times-circle fa-6"></i> delete</a>
+                </li>
+            </ul>
+        </div>
+        <!--end edit right menu-->
+        <div class="card-block"><a href="#" class="card-link pull-right"><i class="fa fa-edit fa-2x"></i></a>
+            <h4 class="card-title text-center">
+                {{ key.name }}
+            </h4>
+            <div class="card-block text-right">
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item active"> Items <a href="#" class="card-link pull-right"><i
+                        class="fa fa-plus-square-o fa-2x"></i></a></li>
+                {% if key.items %}
+                {% for item in key.items %}
+                <!-- beggin list items-->
+                <li class="list-group-item">
 
-                        <li class=" cyan-text"><a href="#modal3" class="cyan-text  modal-trigger z-depth-0"
-                                                  onclick="myApp.editBucketlist({{ key.id }}, '{{ key.name }}')"><i
-                                class="small material-icons cyan-text">edit</i> edit</a></li>
-                        <!-- delete button -->
-                        <li class="cyan-text"><a href="#deletelist"
-                                                 onclick="myApp.deleteList({{ key.id }}, '{{ key.name }}')"
-                                                 class=" cyan-text modal-trigger z-depth-0"><i
-                                class=" small cyan-text  fa fa-times-circle fa-6"></i> delete</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--end edit right menu-->
-                <div class="card-block">
-                    <h4 class="card-title ">
-                        {{ key.name }}
-                    </h4>
-                    <div class="card-block text-right">
+                    <div>
+                        <!-- done check box -->
+                        <div class="left"
+                             onclick="myApp.autoEditItem('{{ key.id }}','{{ item.id }}','{{ item.name }}','{{ item.done }}')">
+                            <a href="#" class=" light-blue-text ligten-text-1">
+                                {% if item.done %}
+                                <input id="{{ item.id }}" name='complete' type="checkbox" checked>
+                                {% else %}
+                                <input id="{{ item.id }}" type="checkbox" name='complete'>
+                                {% endif %}
+                                <label for="{{ item.id }}"></label>
+                            </a>
+                        </div>
+
+                        {% if item.done %}
+                        <strike class="amber-text">{{ item.name }}</strike>
+                        {% else %}
+                        {{ item.name }}
+                        {% endif %}
+                        <!-- item name -->
+                        <a href="#!" class=" dropdown-button  secondary-content "
+                           data-activates='item{{ item.id }}'><i class="fa fa-ellipsis-v"></i></a>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item active"> Items <a href="#" class="card-link pull-right">
-                        {% if key.items %}
-                            {% for item in key.items %}
-                                <!-- beggin list items-->
-                                <li class="list-group-item">
-
-                                    <div>
-                                        <!-- done check box -->
-                                        <div class="left"
-                                             onclick="myApp.autoEditItem('{{ key.id }}','{{ item.id }}','{{ item.name }}','{{ item.done }}')">
-                                            <a href="#" class=" light-blue-text ligten-text-1">
-                                                {% if item.done %}
-                                                    <input id="{{ item.id }}" name='complete' type="checkbox" checked>
-                                                {% else %}
-                                                    <input id="{{ item.id }}" type="checkbox" name='complete'>
-                                                {% endif %}
-                                                <label for="{{ item.id }}"></label>
-                                            </a>
-                                        </div>
-
-                                        {% if item.done %}
-                                            <strike class="amber-text">{{ item.name }}</strike>
-                                        {% else %}
-                                            {{ item.name }}
-                                        {% endif %}
-                                        <!-- item name -->
-                                        <a href="#!" class="dropdown-button  secondary-content "
-                                           data-activates='item{{item.id }}'><i class="fa fa-ellipsis-v"></i></a>
-                                    </div>
-                                    <!--menu-->
-                                <ul id='item{{item.id}}' class='dropdown-content' style="transform:translate(-100%, -20%);">
-                            <li> <a href="#modal4" onclick="myApp.editItem('{{key.id}}','{{item.id}}','{{item.name}}', '{{item.done}}')" class="  modal-trigger secondary-content cyan-text ligten-text-1"><i class="material-icons left">mode_edit</i>edit</a>
-                            </li>
-                            <li>
-                                <a href="#deletelitem" onclick="myApp.deleteItem('{{key.id}}','{{item.id}}','{{item.name}}')" class="modal-trigger secondary-content"> <i class="material-icons hoverable  cyan-text ligten-text-1 tooltipped  left" data-position="bottom" data-delay="50" data-tooltip="delete item">clear</i>delete</a>
-                            </li>
-                        </ul>
-                             </li>
+                    <!--menu-->
 
 
-                                </li>
-                            {% endfor %}{% endif %}
-                        <!-- end list items-->
-                        <li class="list-group-item">
-                            <div>
-                                <center><a href="#modal2" id='additem' class="modal-trigger btn  cyan darken-2 "
-                                           onclick='myApp.addItem({{ key.id }})'><i
-                                        class="material-icons tooltipped" data-position="bottom" data-delay="50"
-                                        data-tooltip="add an item">add</i> add item</a>
-                            </div>
-                        </li>
+                    <a href="#" class="card-link pull-right"><i class="fa fa-ellipsis-v "></i></a></li>
 
-                    </ul>
-                </div>
-            </div>
-        {% empty %}
+                </li>
+                {%endfor%}
+                <!-- end list items-->
+                <li class="list-group-item">
+                    <div>
+                        <center><a href="#modal2" id='additem' class="modal-trigger btn  cyan darken-2 "
+                                   onclick='myApp.addItem({{ key.id }})'><i
+                                class="material-icons tooltipped" data-position="bottom" data-delay="50"
+                                data-tooltip="add an item">add</i> add item</a>
+                    </div>
+                </li>
 
-            <div style="margin-top:30%;">
-                <center>
-                    <span>Sorry, currently  no list found.<br>click button to add a list.</span>
-                    <br>
-                    <a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text "
-                       href="#modal1"><i class=" large material-icons tooltipped" data-position="bottom" data-delay="50"
-                                         data-tooltip="Add a Bucketlist">add</i></a>
-                </center>
-                <div class="divider"></div>
-            </div>
-        {% endfor %}
- </div>
-        {% if lists.paginator.num_pages %}
-            <div class="pagination  col-lg-12 text-center bottom ">
-                <center>
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    {% empty %}
+        <div style="margin-top:30%;">
+            <center>
+                <span>Sorry, currently  no list found.<br>click button to add a list.</span>
+                <br>
+                <a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text "
+                   href="#modal1"><i class=" large material-icons tooltipped" data-position="bottom" data-delay="50"
+                                     data-tooltip="Add a Bucketlist">add</i></a>
+            </center>
+            <div class="divider"></div>
+        </div>
+    {% endfor %}
+    {% if lists.paginator.num_pages %}
+        <div class="pagination  col-lg-12">
+            <center>
         <span class="step-links">
         {% if lists.has_previous %}
-            <a href="/bucketlists/?page={{ lists.previous_page_number }}">previous</a>
+            <a href="/bucketlists/page={{ lists.previous_page_number }}">previous</a>
         {% endif %}
             {% if lists %}
 
@@ -116,11 +111,16 @@
             </span> {% if lists.has_next %}
             <a href="/bucketlists/?page={{ lists.next_page_number }}">next</a> {% endif %}
         </span>
-                </center>
-            </div>
-        {% endif %}
+            </center>
+        </div>
+    {% endif %}
+    <script>
 
+        $('.collapsible-header').on("click", function (event) {
+            $(this).find('.arrow-img').toggleClass('rotate');
+            $(this).find('.arrow-img').toggleClass('rotate-reset');
 
-
-    </div>
+        });
+        $('.collapsible').trigger('click')
+    </script>
 {% endblock %}

@@ -1,10 +1,11 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponseRedirect
 from django.views.generic import View
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 import requests
 import os
+
 
 PORT = int(os.environ.get("PORT", 8000))
 DOMAIN = 'http://0.0.0.0:{}'.format(PORT)
