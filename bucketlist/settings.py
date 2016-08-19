@@ -123,8 +123,9 @@ USE_TZ = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 # Static files (CSS, JavaScript, Images)
-STATIC_ROOT = "staticfiles"
-STATIC_URL = "/static/"
+
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )

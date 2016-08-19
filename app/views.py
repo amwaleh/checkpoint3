@@ -7,15 +7,33 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from models import Bucketlist, Bucketitems
 from serializers import (UserSerializer, BucketlistSerializer,
                          BucketitemSerializer)
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
+# from rest_framework.decorators import api_view, renderer_classes
+# from rest_framework import response, schemas
+# from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
 
 
-class UserViewSet(viewsets.ModelViewSet):
+# @api_view()
+# @renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
+# def schema_view(request):
+#     generator = schemas.SchemaGenerator(title='Bucketlist API')
+#     return response.Response(generator.get_schema(request=request),)
+
+class UserViewSet(mixins.RetrieveModelMixin,
+                  mixins.CreateModelMixin,
+                  mixins.DestroyModelMixin,
+                  viewsets.GenericViewSet):
+
     """This viewset automatically provides `list` and `detail` actions."""
-
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = ()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+    def get_permissions(self):
+        # allow non-authenticated user to create via POST
+        return (permissions.AllowAny() if self.request.method == 'POST'
+                else permissions.IsAuthenticatedOrReadOnly()),
 
 
 class BucketlistViewset(viewsets.ModelViewSet):
@@ -35,7 +53,7 @@ class BucketlistViewset(viewsets.ModelViewSet):
         return bucketlist
 
     def create(self, request):
-        # Override to Ristrict creator to current user
+        # Override to Restrict creator to current user
 
         request.POST._mutable = True
         request.data['creator'] = request.user.id

@@ -1,85 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
- {% load staticfiles %}
+{% load staticfiles %}
 <head>
     <meta charset="utf-8">
     <title>bucketlist</title>
-    <link rel='shortcut icon' href= "{% static "images/logo.png" %}" type='image/x-icon' />
+    <link rel='shortcut icon' href="{% static "images/logo.png" %}" type='image/x-icon'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href= "https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Loading Bootstrap -->
-    <link href="{% static "css/vendor/bootstrap/css/bootstrap.min.css"%}" rel="stylesheet">
+    <link href="{% static "css/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Loading Flat UI --> 
-    <link href="{% static "css/flat-ui.min.css"%}" rel="stylesheet">
-    <link href="{% static "css/materialize.css"%}" rel="stylesheet"> 
+    <!-- Loading Flat UI -->
+    <link href="{% static "css/flat-ui.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/materialize.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
-    <link rel="shortcut icon" href="{%static "images/logo.png" %}">
-    <script src="{% static "js/vendor/jquery.min.js"%}"></script>
-    <script src="{% static "js/vendor/video.js"%}"></script>
-    <script src="{% static "js/flat-ui.min.js"%}"></script>
-    <script src="{% static "js/materialize.min.js"%}"></script>
+    <link rel="shortcut icon" href="{% static "images/logo.png" %}">
+    <script src="{% static "js/vendor/jquery.min.js" %}"></script>
+    <script src="{% static "js/vendor/video.js" %}"></script>
+    <script src="{% static "js/flat-ui.min.js" %}"></script>
+    <script src="{% static "js/materialize.min.js" %}"></script>
+     <script src="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}"></script>
+    <script src="{% static "bower_components/packery/dist/packery.pkgd.min.js" %}"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.js"></script>
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
-    <nav class="navbar-wrapper  cyan darken-1 z-depth-0" role="navigation" style="margin-bottom:0">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'detail'%}"><img src="{%static "images/logo.png" %}" width='32'> bucketlist</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse-01">
-            <center>
-                <div class="col-lg-offset-2 col-lg-4 ">
-                    <form action="/search/" method="POST">
-                        {% csrf_token %}
-                        <div class="input-field">
-                            <input id="search" type="text" required placeholder="Search" name="search" id="search">
-                            <label for="search"><i class="material-icons">search</i></label>
-                        </div>
-                    </form>
-                </div>
-            </center>
-            <a href="/logout" class="circle right toogle tooltipped" data-position="bottom" data-delay="50" data-tooltip="logout"><i class="medium fa fa-sign-out right"></i><small>logout</small></a>
-        </div>{% if messages %} {% for message in messages %}
-        <script>
-            Materialize.toast('{{message}}', 3000, 'rounded');
-            </script>{% endfor %}{% endif %} bucketlists
-        <!-- /.navbar-collapse -->
-    </nav>
-    <!-- /navbar -->
-    <div class="row">
-        <!-- colum1 -->
-        <div class="hide-on-med-and-down collection grey lighten-4  box-content left z-depth-0 col-lg-2 col-xs-2" style="margin:0; padding:0; overflow: None; height:100vh; background-color:rgba(200,200,200,1)"> 
-            <div class="fixed-action-btn" style="">
-                <a class="btn-floating btn-large cyan">
-                    <i class="small fa fa-bars white-text fa-6"></i>
-                </a>
-                <ul>
-                    <li><a class="btn-floating btn-large waves-effect waves-light teal" href="/bucketlists/"><i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Home">home</i></a></li>
-                    <li><a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text " href="#modal1"><i class=" large material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add a Bucketlist" >add</i></a></li>
-                    <li><a class="btn-floating yellow darken-1 modal-trigger" href="#modal6"><i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="search for lists">search</i></a></li>
-                    <li><a class="btn-floating btn-large waves-effect waves-light cyan" href="https://github.com/andela-amwaleh/checkpoint3"><i class="small teal-text fa fa-github tooltipped" data-position="bottom" data-delay="50" data-tooltip="Github repo"></i> Github</a>
-                    </li>
-                </ul>
+<nav class="navbar-wrapper  cyan darken-1 z-depth-0" role="navigation" style="margin-bottom:0">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'detail' %}"><img src="{% static "images/logo.png" %}" width='32'>
+            bucketlist</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <center>
+            <div class="col-lg-offset-2 col-lg-4 ">
+                <form action="/search/" method="POST">
+                    {% csrf_token %}
+                    <div class="input-field">
+                        <input id="search" type="text" required placeholder="Search" name="search" id="search">
+                        <label for="search"><i class="material-icons">search</i></label>
+                    </div>
+                </form>
             </div>
-        </div>
-        <!-- colum2 -->
-        <div class="box-content grey lighten-4 left col-lg-8 col-xs-12 col-md-12 z-depth-0" style="overflow-x:None;overflow-y: scroll;height:100vh; background1-color:rgba(200,200,200,.8)"> &nbsp;
-            
-            {% block content %}{% endblock %}
-        </div>
-        <!-- col3 -->
-        <div class="hide-on-med-and-down collection with-header  grey lighten-4  box-content left z-depth-0 col-lg-2 col-xs-2 col-md-2" style="margin:0; padding:0; overflow: None; height:100vh; background1-color:rgba(00,00,00,1)">
+        </center>
+        <a href="/logout" class="circle right toogle tooltipped" data-position="bottom" data-delay="50"
+           data-tooltip="logout"><i class="medium fa fa-sign-out right"></i>
+            <small>logout</small>
+        </a>
+    </div>{% if messages %} {% for message in messages %}
+    <script>
+        Materialize.toast('{{message}}', 3000, 'rounded');
+    </script>{% endfor %}{% endif %} bucketlists
+    <!-- /.navbar-collapse -->
+</nav>
+<!-- /navbar -->
+<div class="row">
+    <!-- colum1 -->
+    <div class="hide-on-med-and-down collection grey lighten-4  box-content left z-depth-0 col-lg-2 col-xs-2"
+         style="margin:0; padding:0; overflow: None; height:100vh; background-color:rgba(200,200,200,1)">
+        <div class="fixed-action-btn" style="">
+            <a class="btn-floating btn-large cyan">
+                <i class="small fa fa-bars white-text fa-6"></i>
+            </a>
+            <ul>
+                <li><a class="btn-floating btn-large waves-effect waves-light teal" href="/bucketlists/"><i
+                        class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Home">home</i></a>
+                </li>
+                <li><a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text "
+                       href="#modal1"><i class=" large material-icons tooltipped" data-position="bottom" data-delay="50"
+                                         data-tooltip="Add a Bucketlist">add</i></a></li>
+                <li><a class="btn-floating yellow darken-1 modal-trigger" href="#modal6"><i
+                        class="material-icons tooltipped" data-position="bottom" data-delay="50"
+                        data-tooltip="search for lists">search</i></a></li>
+                <li><a class="btn-floating btn-large waves-effect waves-light cyan"
+                       href="https://github.com/andela-amwaleh/checkpoint3"><i
+                        class="small teal-text fa fa-github tooltipped" data-position="bottom" data-delay="50"
+                        data-tooltip="Github repo"></i> Github</a>
+                </li>
+            </ul>
         </div>
     </div>
-    {%include 'modal.html'%}
+    <!-- colum2 -->
+    <div class=" left col-lg-10 col-xs-12 col-md-12 z-depth-0"> &nbsp;
+
+        {% block content %}{% endblock %}
+    </div>
+    <!-- col3 -->
+
+</div>
+{% include 'modal.html' %}
 </body>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{% static "js/script.js"%}"></script>
+<script src="{% static "js/script.js" %}"></script>
+<script>
+
+    // initialize Packery
+var $grid = $('.grid').packery({
+  itemSelector: '.grid-item',
+  // columnWidth helps with drop positioning
+  columnWidth: 100
+});
+
+// make all items draggable
+var $items = $grid.find('.grid-item').draggable();
+// bind drag events to Packery
+$grid.packery( 'bindUIDraggableEvents', $items );
+
+</script>
 
 </HTML>
 

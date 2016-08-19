@@ -1,9 +1,3 @@
-.box - content {
-  display: inline-block;
-  padding: 10px;
-  border-left: 1px solid #ccc;
-  height: 100vh;
-}
 
 .bottom {
   border-bottom: 1px solid #ccc;
@@ -121,7 +115,7 @@ input[type='search'] {
 }
 
 body {
-  background-image: url("../images/dine.jpeg");
+  /*background-image: url("../images/dine.jpeg");*/
   background-repeat: no-repeat;
   background-size: cover;
 }
