@@ -1,0 +1,125 @@
+{% extends 'partials/base.html' %} {% block content %} {% load staticfiles %}
+    <!-- pagination  -->
+
+    <!-- page start -->
+
+    <div class="grid " data-packery='{ "itemSelector": ".grid-item", "gutter": 10 }'>
+        {% for key in lists %}
+            <div class="card grid-item col-xs-12 col-sm-12 col-md-6 col-lg-5  ">
+                <!--right edit menu-->
+                <div class="pull-right right">
+                    <a class='dropdown-button' href='#' data-activates='{{ key.id }}'>
+                        <i class="fa fa-edit fa-2x"></i>
+                    </a>
+                    <ul id='{{ key.id }}' class='dropdown-content'>
+                        <!-- edit button -->
+
+                        <li class=" cyan-text"><a href="#modal3" class="cyan-text  modal-trigger z-depth-0"
+                                                  onclick="myApp.editBucketlist({{ key.id }}, '{{ key.name }}')"><i
+                                class="small material-icons cyan-text">edit</i> edit</a></li>
+                        <!-- delete button -->
+                        <li class="cyan-text"><a href="#deletelist"
+                                                 onclick="myApp.deleteList({{ key.id }}, '{{ key.name }}')"
+                                                 class=" cyan-text modal-trigger z-depth-0"><i
+                                class=" small cyan-text  fa fa-times-circle fa-6"></i> delete</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--end edit right menu-->
+                <div class="card-block">
+                    <h4 class="card-title ">
+                        {{ key.name }}
+                    </h4>
+                    <div class="card-block text-right">
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item active"> Items <a href="#" class="card-link pull-right"><i
+                                class="fa fa-plus-square-o fa-2x"></i></a></li>
+                        {% if key.items %}
+                            {% for item in key.items %}
+                                <!-- begin list items-->
+                                <li class="list-group-item">
+
+                                <div>
+                                    <!-- done check box -->
+                                    <div class="left"
+                                         onclick="myApp.autoEditItem('{{ key.id }}','{{ item.id }}','{{ item.name }}','{{ item.done }}')">
+                                        <a href="#" class=" light-blue-text ligten-text-1">
+                                            {% if item.done %}
+                                                <input id="{{ item.id }}" name='complete' type="checkbox" checked>
+                                            {% else %}
+                                                <input id="{{ item.id }}" type="checkbox" name='complete'>
+                                            {% endif %}
+                                            <label for="{{ item.id }}"></label>
+                                        </a>
+                                    </div>
+
+                                    {% if item.done %}
+                                        <strike class="amber-text">{{ item.name }}</strike>
+                                    {% else %}
+                                        {{ item.name }}
+                                    {% endif %}
+                                    <!-- item menu trigger -->
+                                    <a class='dropdown-button  pull-right' href='#'
+                                       data-activates='itemMenu-{{ item.id }}'> <i class="fa fa-ellipsis-v "></i></a>
+                                </div>
+                                <!--item menu-->
+                                <ul id='itemMenu-{{ item.id }}' class='dropdown-content right'>
+                                    <li><a href="/web/bucketlists/{{ key.id }}/items/{{ item.id }}/?delete=1">
+                                        <i class="material-icons hoverable  text-lighten-4  tooltipped"
+                                                data-position="bottom" data-delay="50"
+                                                data-tooltip="delete item">clear</i> delete</a></li>
+                                    <!-- edit item -->
+                                    <li><a href="#modal4"
+                                           onclick="edititem('{{ key.id }}','{{ item.id }}','{{ item.name }}', '{{ item.done }}')"
+                                           class="modal-trigger">
+                                        <i class="material-icons hoverable  blue-text text-lighten-4  tooltipped"
+                                            data-position="bottom" data-delay="50"
+                                            data-tooltip="edit item">mode_edit</i></a></li>
+                                </ul>
+                            {% endfor %}{% endif %}
+
+                        <!-- end list items-->
+                        <li class="list-group-item">
+                            <div>
+                                <center><a href="#modal2" id='additem' class="modal-trigger btn  cyan darken-2 "
+                                           onclick='myApp.addItem({{ key.id }})'><i
+                                        class="material-icons tooltipped" data-position="bottom" data-delay="50"
+                                        data-tooltip="add an item">add</i> add item</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% empty %}
+            <div style="margin-top:30%;">
+                <center>
+                    <span>Sorry, currently  no list found.<br>click button to add a list.</span>
+                    <br>
+                    <a class="btn-floating btn-large waves-effect waves-light cyan modal-trigger blue-grey-text "
+                       href="#modal1"><i class=" large material-icons tooltipped" data-position="bottom" data-delay="50"
+                                         data-tooltip="Add a Bucketlist">add</i></a>
+                </center>
+                <div class="divider"></div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if lists.paginator.num_pages %}
+        <div class="pagination  col-lg-12">
+            <center>
+        <span class="step-links">
+        {% if lists.has_previous %}
+            <a href="/bucketlists/?page={{ lists.previous_page_number }}">previous</a>
+        {% endif %}
+            {% if lists %}
+                <span class="current">
+                Page {{ lists.number }} of {{ lists.paginator.num_pages }}.{% endif %}
+            </span> {% if lists.has_next %}
+            <a href="/bucketlists/?page={{ lists.next_page_number }}">next</a> {% endif %}
+        </span>
+            </center>
+        </div>
+    {% endif %}
+    <script>
+    </script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% block content %}
+<form action="" method="POST" name="form_deleteitem">
+    {% csrf_token %}
+    <div class="input-field">
+        <div class="form-group">
+            <center>
+                <p>
+              
+                    <br>
+                    <br>
+                    <h5 name='itemname' class="blue-grey-text"> 
+                         Do you want to delete  this item?
+                    </h5>
+                </p>
+            </center>
+        </div>
+        <div class="divider"></div>
+    </div>
+    <center>
+  
+        <br>
+        <button type="submit" class="btn">yes</button>
+        <a href="exit()" type="reset" class="btn" onclick="closeModal()">no</a>
+    </center>
+
+</form>{% endblock %}

@@ -1,0 +1,181 @@
+
+.bottom {
+  border-bottom: 1px solid #ccc;
+}
+
+.row {
+  max-width: 100%;
+  margin: auto;
+}
+
+.cards {
+  min-height: 100px;
+}
+
+.cards p {
+  vertical-align: middle;
+  text-align: center;
+  margin-top: 15%;
+  font-weight: 100;
+  font-size: 1.4em;
+}
+
+ul.collapsible {
+  height: 100px;
+ 
+}
+
+body {
+  font-weight: 100;
+  font-variant: normal;
+}
+
+.centered {
+  width: 400px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-60%, 0)
+}
+
+.centered-index {
+  width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%)
+}
+
+.centered2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro {
+  height: 70%;
+  text-align: center;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  margin-bottom: 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.intro h1 {
+  font-weight: 900;
+  text-transform: uppercase;
+  transform: translate(-20%, -0%);
+}
+
+.intro h5 {
+  text-transform: lowercase;
+  background-color: #f5f5f5;
+  padding: 10px;
+  color: #333333;
+  display: inline-block;
+  font-size: 2em;
+}
+
+.sign-container {
+  background-position: center;
+  background-size: cover;
+}
+
+.main {
+  clear: both;
+}
+
+.modal {
+  max-width: 400px;
+  max-height: 400px;
+  padding: 20px;
+}
+
+.collapsible {
+  display: inline;
+}
+
+.dropdown-content li {
+  font-weight: 100;
+}
+
+.rotate {
+  transform: rotate(-180deg);
+  /*transform: rotate(180deg);*/
+  transition: .3s;
+  color: teal;
+}
+
+.rotate-reset {
+  transform: rotate(0deg);
+  transition: .3s;
+}
+
+input[type='search'] {
+  border-bottom: white;
+}
+
+body {
+  /*background-image: url("../images/dine.jpeg");*/
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homepage-hero-module {
+  border-right: none;
+  border-left: none;
+  position: relative;
+}
+
+.no-video .video-container video,
+.touch .video-container video {
+  display: none;
+}
+
+.no-video .video-container .poster,
+.touch .video-container .poster {
+  display: block !important;
+}
+
+.video-container {
+  position: relative;
+  bottom: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-container .poster img {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+
+.video-container .filter {
+  z-index: 100;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
+
+.video-container video {
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+}
+
+.video-container video.fillWidth {
+  width: 100%;
+}
+
+.show {
+  height: 70px;
+  width: 100%;
+  border: 0;
+  padding: 20px 15px;
+  color: white;
+  font-size: 2em;
+  font-weight: 300;
+}
+a:hover{ color:grey; }

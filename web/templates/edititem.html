@@ -1,0 +1,31 @@
+{% block content %}
+<div class="">
+    <form action="" method="POST" name="form_edititem">
+        {% csrf_token %}
+        <input type="hidden" name="update">
+        <div class="row  ">
+        </div>
+        <div class="row ">
+        <p>&nbsp;</p>
+           
+            </div>
+            <div class="row "><div class="left">
+                <input id='completed' type="checkbox" name='done'>
+                    
+                <label for=completed> completed</label>
+            </div>
+            <div class="input-field">
+                <span class="help-block"></span>
+                <textarea id="textarea1" class="materialize-textarea" name='name'></textarea>
+            </div>
+            <div class="">
+                <p>
+                    <center>
+                        <button type="submit" class="btn  cyan darken-1 ">update<i class="material-icons right">send</i></button>
+                    </center>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

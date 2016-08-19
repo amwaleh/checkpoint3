@@ -1,0 +1,23 @@
+{% block content %}
+<div class="col l12 s12">
+    <form action="" method="POST" name="form_additem">
+        {% csrf_token %}
+      
+        <div class="row">
+            <div class="col">
+                <br><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field ">
+                
+                <textarea id="textarea1" class="materialize-textarea" length="254" name='name' col='30'></textarea>
+                <label for="textarea1">Item description</label>
+            </div>
+        </div>
+        <center>
+            <button type="submit" class="btn cyan darken-1 "><i class="material-icons "> add_box</i> add</button>
+        </center>
+    </form>
+</div>
+{% endblock %}

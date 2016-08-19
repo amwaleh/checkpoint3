@@ -1,0 +1,22 @@
+{% block content %}
+<div class="row">
+    <form action="/bucketlists/" method="POST">
+        {% csrf_token %}
+        <legend></legend>
+        <div class=" form-group ">
+            <i class="material-icons large blue-grey-text text-lighten-1">shopping_basket</i>
+        </div>
+        <div class="row">
+            <div class="col s12 form-group ">
+                <div class="input-field">
+                    <input type="text" class="form-control" id="" placeholder="Bucketlist Name" name="name">
+                </div>
+            </div>
+        </div>
+        <center>
+            <button type="submit" class="btn  cyan darken-1  ">add</button>
+        </center>
+    </form>
+</div>
+
+{% endblock %}

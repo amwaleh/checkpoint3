@@ -1,0 +1,431 @@
+.centered {
+  width: 400px;
+  position: fixed;
+  left:50%;
+  transform: translate(-60%, 0)
+}
+
+.centered-index {
+  width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%)
+}
+
+.centered2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dropdown-content {
+  font-size: 1em;
+  opacity: 0.1;
+}
+
+.card {
+  width: 80%;
+}
+
+@media (min-width:992px) {
+  .tabs-wrapper {
+    width: 250px;
+  }
+}
+
+@media (max-width:992px) {
+  .tabs-wrapper.pinned,
+  #aside.pin-bottom {
+    #position: static !important;
+    top: auto !important;
+    float: right;
+  }
+}
+
+.modal {
+  max-width: 500px;
+  min-width: 400px;
+  overflow-y: auto;
+  max-height: 500px;
+
+}
+
+button[type=submit].modal input[type=submit].modal {
+  float: left;
+}
+
+.tooltipped data-tooltip {
+  font-size: 9px;
+}
+
+.backdrop {
+  background-color: #00acc1;
+}
+
+.input-field #search {
+  background-color: #f5f5f5;
+  font-size: 2em;
+  color: teal;
+  border-color: #03a9f4;
+  border-radius: 5px;
+}
+
+.input-field textarea {
+  background-color: #e3ffff;
+  border-radius: 5px;
+}
+
+
+/* label color */
+
+.input-field label {
+  color: #607d8b;
+}
+
+
+/* label focus color */
+
+.input-field input[type=text]:focus + label {
+  color: #607d8b;
+}
+
+.input-field input[type=text] {
+  color: #1565c0;
+}
+
+.input-field textarea {
+  color: #546e7a;
+  border: 1px #607d8b;
+}
+
+
+/* label underline focus color */
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid blue;
+  box-shadow: 0 1px 0 0 blue;
+  color: #1565c0;
+}
+
+
+/* valid color */
+
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #1565c0;
+}
+
+
+/* invalid color */
+
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+
+
+/* icon prefix focus color */
+
+.input-field .prefix.active {
+  color: #1565c0;
+}
+
+.intro {
+  height: 70%;
+  text-align: center;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  margin-bottom: 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.intro h1 {
+  font-weight: 900;
+  text-transform: uppercase;
+  transform: translate(-20%, -0%);
+}
+
+.intro h5 {
+  text-transform: lowercase;
+  background-color: #f5f5f5;
+  padding: 10px;
+  color: #333333;
+  display: inline-block;
+  font-size: 2em;
+}
+
+.sidemenu {
+  width: 200px;
+  display: block;
+  height: 100vh;
+  position: fixed;
+}
+
+.main {
+  min-width: 400px;
+}
+
+.logo-intro {
+  transform: translate(100%, -25%)
+}
+
+.logo {
+  width: 20%;
+  text-shadow: 1px 1px  #000;
+  transform: translate(20%, -3%);
+}
+
+.inner-log {
+  transform: translate(5%, -10%);
+}
+
+.collapsible {
+  width: 400px;
+  float: left;
+  box-shadow: 0;
+}
+
+.badge {
+  float: left;
+}
+
+.img-collapsible {
+  height: 130px;
+  font-size: 2.5em;
+}
+
+.img-collapsible h5 {
+  font-size: .5em;
+  font-family: 'roboto';
+  text-transform: lowercase;
+  text-align: center;
+  transform: translate(-5%, +50%)
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 10%;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.collar {
+  border-radius: 100%;
+}
+
+.collar h5 .icon-menu div.dotted{
+  transform: translate(-15%, 50%)
+  clear:both;
+}
+.collapsible-header:focus{
+  clear:both;
+  background-color: #F00;
+}
+.kello {
+  text-transform: uppercase;
+  border: dashed 1px #fff;
+  text-align: center;
+  width: 64px;
+  height: 62px;
+  transform: translate(200%, 20%)
+}
+
+.circle__content {
+  display: table-cell;
+  padding: 1em;
+  vertical-align: middle;
+}
+
+.login-wrapper {
+  width: 400px;
+  min-width: 400px;
+  float: right;
+  transform: translate(-30%, -20%)
+}
+
+.curve {
+  border-radius: 10px;
+  height: 200px;
+}
+
+.curve2 {
+  border-radius: 10px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.dropdown-content {
+  width: 300px;
+  font-size: 10px;
+}
+
+@media (min-width: 480px) {
+  .circle__content {
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 768px) {
+  .circle__content {
+    font-size: 4em;
+  }
+  .intro h1 {
+    transform: translate(-10%, -100%);
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-wrapper {
+    float: none;
+    top: 50px;
+    right: 25% !important;
+    left: 25% !important;
+    bottom: 25%;
+    position: fixed;
+  }
+  .intro h1 {
+    transform: translate(0%, -0%);
+    text-align: center;
+  }
+
+
+.slider li h5 {
+  color:red;
+  transform:translate(20%, 100%);
+}
+
+
+
+}
+
+body,
+.modal {
+  -webkit-animation: fadein 1s;
+  /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s;
+  /* Firefox < 16 */
+  -ms-animation: fadein 1s;
+  /* Internet Explorer */
+  -o-animation: fadein 1s;
+  /* Opera < 12.1 */
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* Firefox < 16 */
+
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* Safari, Chrome and Opera > 12.1 */
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* Internet Explorer */
+
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* Opera < 12.1 */
+
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.intro-slider {
+  z-index: -999999;
+}
+
+.slider h5 {
+  max-width: 500px;
+  z-index: -9999999;
+  padding: 1px;
+  border-radius: 10px;
+  text-shadow: 1px 1px 1px #000;
+  transform: translate(50%, 100%);
+}
+
+.slider h3 {
+  text-align: center;
+  z-index: -9999999;
+  padding: 1px;
+  border-radius: 10px;
+  text-shadow: 2px 2px 1px #000;
+}
+
+.slider {
+  background-color: rgba(20, 20, 20, 0.4);
+}
+
+.slider img {
+  background: #000;
+}
+
+.slider .indicators .indicator-item {
+  background-color: #666666;
+  border: 3px solid #ffffff;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.slider .indicators .indicator-item.active {
+  background-color: #ffffff;
+}
+
+.slider {
+  width: 900px;
+  margin: 0 auto;
+}
+
+.slider .indicators {
+  bottom: 60px;
+  z-index: 100;
+  /* text-align: left; */
+}
+
+.sign-container {
+  background-image: url('../images/road.jpeg');
+  background-position: center;
+  background-size: cover;
+}
